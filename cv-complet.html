@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haythem Rehouma, Ph.D. - Complete CV</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --heading: #58a6ff;
+      --accent: #238636;
+      --accent2: #f78166;
+      --highlight: #ffa657;
+      --link: #58a6ff;
+      --nav-bg: #0d1117;
+      --nav-hover: #21262d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Navigation */
+    nav {
+      width: 280px;
+      background: var(--nav-bg);
+      border-right: 1px solid var(--border);
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    nav h2 {
+      color: var(--heading);
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    nav ol {
+      list-style: none;
+      padding: 0 10px;
+    }
+    nav li {
+      margin: 2px 0;
+    }
+    nav a {
+      display: block;
+      padding: 8px 15px;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    nav a:hover {
+      background: var(--nav-hover);
+      color: var(--heading);
+    }
+    nav a.active {
+      background: var(--accent);
+      color: white;
+    }
+    
+    /* Main content */
+    .content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 30px 50px;
+      max-width: 1000px;
+    }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      color: var(--heading);
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+    .header .subtitle {
+      color: var(--accent2);
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    .header .contact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+    }
+    .header .contact a {
+      color: var(--link);
+      text-decoration: none;
+    }
+    .header .contact a:hover {
+      text-decoration: underline;
+    }
+    .header .languages {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+      color: var(--highlight);
+    }
+    
+    /* Sections */
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+    section h2 {
+      color: var(--heading);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+    }
+    section h3 {
+      color: var(--accent2);
+      font-size: 1.1rem;
+      margin: 20px 0 10px 0;
+    }
+    section h4 {
+      color: var(--highlight);
+      font-size: 1rem;
+      margin: 15px 0 8px 0;
+    }
+    
+    /* Lists */
+    ul, ol {
+      padding-left: 25px;
+      margin: 10px 0;
+    }
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Job entries */
+    .job {
+      border-left: 3px solid var(--accent);
+      padding-left: 20px;
+      margin: 20px 0;
+    }
+    .job-title {
+      color: var(--heading);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .job-company {
+      color: var(--accent2);
+      font-size: 0.95rem;
+    }
+    .job-date {
+      color: var(--highlight);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .skill-card h4 {
+      color: var(--heading);
+      margin: 0 0 10px 0;
+      font-size: 0.95rem;
+    }
+    .skill-card p {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    
+    /* Certifications */
+    .cert-group {
+      margin: 15px 0;
+    }
+    .cert-group h4 {
+      color: var(--accent2);
+      margin-bottom: 10px;
+    }
+    
+    /* Publications */
+    .pub {
+      background: var(--bg);
+      border-left: 3px solid var(--heading);
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+    }
+    .pub-journal {
+      border-left-color: var(--accent);
+    }
+    .pub-conf {
+      border-left-color: var(--accent2);
+    }
+    .pub-patent {
+      border-left-color: var(--highlight);
+    }
+    
+    /* Highlights */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(35, 134, 54, 0.1) 0%, rgba(13, 17, 23, 0.5) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px 0;
+    }
+    
+    /* Keywords */
+    .kw {
+      color: var(--highlight);
+      font-weight: 600;
+    }
+    .hl {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    /* Back to top */
+    .back {
+      text-align: right;
+      margin-top: 15px;
+    }
+    .pill {
+      display: inline-block;
+      background: var(--border);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .pill:hover {
+      background: var(--accent);
+      color: white;
+    }
+    
+    /* Floating button */
+    .topbtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+    }
+    .topbtn button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 15px rgba(35, 134, 54, 0.4);
+      transition: all 0.3s;
+    }
+    .topbtn button:hover {
+      background: #2ea043;
+      transform: translateY(-2px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .content { margin-left: 0; padding: 20px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="container">
+    <nav>
+      <h2>CV Navigation</h2>
+      <ol>
+        <li><a href="#contact">Contact Info</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#backend-profile">Backend Engineering Profile</a></li>
+        <li><a href="#positioning">Positioning</a></li>
+        <li><a href="#skills">Key Skills</a></li>
+        <li><a href="#backend-highlights">Backend Highlights</a></li>
+        <li><a href="#highlights">Selected Highlights</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#backend-experience">Backend Experience</a></li>
+        <li><a href="#research">Academic & Research</a></li>
+        <li><a href="#industry">Industry Experience</a></li>
+        <li><a href="#teaching">Teaching Experience</a></li>
+        <li><a href="#leadership">Leadership & Management</a></li>
+        <li><a href="#core-tech-skills">Core Tech Skills (Java)</a></li>
+        <li><a href="#technical">Technical Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#backend-projects">Backend Projects</a></li>
+        <li><a href="#projects">Academic Projects</a></li>
+        <li><a href="#presentations">Presentations</a></li>
+        <li><a href="#conf-publications">Conference Publications</a></li>
+        <li><a href="#journal-publications">Journal Publications</a></li>
+        <li><a href="#patents">Patent Applications</a></li>
+        <li><a href="#outreach">Online Science & Outreach</a></li>
+        <li><a href="#service">Academic Service</a></li>
+        <li><a href="#references">References</a></li>
+      </ol>
+    </nav>
+
+    <div class="content">
+      <!-- Header / Contact -->
+      <header class="header" id="contact">
+        <h1>Haythem Rehouma, Ph.D., M.Sc., B.Eng.</h1>
+        <div class="subtitle">Canadian Citizen | 18+ Years of Engineering Experience | 11 Years Canadian Experience</div>
+        <div class="subtitle">Senior Java / Spring Boot Backend Engineer | Cloud Native Systems | API Architecture</div>
+        <div class="subtitle">Data Scientist | Applied AI & Computer Vision | Cloud/DevOps (CI/CD, Kubernetes) | Biomedical & Clinical AI</div>
+        
+        <div class="contact">
+          <div><strong>Location:</strong> Montreal, QC, Canada</div>
+          <div><strong>Tel:</strong> +1 438 350 4391</div>
+          <div><strong>Email:</strong> <a href="mailto:rhoumahaythem@gmail.com">rhoumahaythem@gmail.com</a></div>
+          <div><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/haythemrehouma" target="_blank">linkedin.com/in/haythemrehouma</a></div>
+          <div><strong>Google Scholar:</strong> <a href="https://scholar.google.com/citations?user=DvrZsZIAAAAJ" target="_blank">scholar.google.com/citations?user=DvrZsZIAAAAJ</a></div>
+          <div><strong>ORCID:</strong> <a href="https://orcid.org/0000-0002-2617-5912" target="_blank">0000-0002-2617-5912</a></div>
+          <div><strong>IEEE Xplore:</strong> <a href="https://ieeexplore.ieee.org/author/37085641665" target="_blank">ieeexplore.ieee.org/author/37085641665</a></div>
+          <div><strong>SciProfiles:</strong> <a href="https://sciprofiles.com/profile/haythemrehouma" target="_blank">sciprofiles.com/profile/haythemrehouma</a></div>
+        </div>
+        
+        <div class="languages">
+          <strong>Languages:</strong> English (Fluent) | Arabic (Native) | French (Fluent)
+        </div>
+      </header>
+
+      <!-- Profile -->
+      <section id="profile">
+        <h2>Profile</h2>
+        <p>Engineering Ph.D. graduate offering a blend of <span class="kw">academic</span>, <span class="kw">teaching</span>, and <span class="kw">industry experience</span> across applied AI, data science, computer vision, and clinical/biomedical engineering.</p>
+        <p style="margin-top: 15px;">Strong record of delivering <span class="hl">end-to-end machine learning pipelines</span>, from data acquisition and protocol design to preprocessing, feature engineering, model training, rigorous evaluation, and validated prototypes in real-world constraints.</p>
+        <p style="margin-top: 15px;">Experienced in <span class="kw">multimodal sensing</span> and <span class="kw">video-based analytics</span> (RGB-D / pose / 3D motion), with a track record of research outputs (peer-reviewed publications and a U.S. patent application) as well as hands-on engineering work spanning software development, data engineering, and automation.</p>
+        <p style="margin-top: 15px;">Motivating mentor and educator recognized for <span class="hl">simplifying complex concepts</span> and building challenging, industry-relevant curriculum for post-secondary learners. Delivered and designed hands-on training in topics spanning programming, Big Data, AI/ML, computer vision, and modern engineering practices including CI/CD, DevOps workflows, Docker, Kubernetes fundamentals, and secure delivery foundations.</p>
+        <p style="margin-top: 15px;">Digital-savvy with strong awareness of industry practices, trends, and quality expectations; committed to continuous improvement in learning outcomes, operational methods, documentation, and delivery processes. Familiar with <span class="kw">Generative AI fundamentals</span> (LLMs, prompt engineering basics, RAG concepts) and practical patterns for integrating foundation models into modern applications.</p>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Backend Engineering Profile -->
+      <section id="backend-profile">
+        <h2>Backend Engineering Profile (Java / Spring Boot)</h2>
+        <div class="highlight-box">
+          <p style="font-size: 1.1rem; color: var(--heading);"><strong>Senior Java / Spring Boot Backend Engineer | Cloud Native Systems | API Architecture</strong></p>
+        </div>
+        <p style="margin-top: 15px;"><span class="kw">Backend / API engineer</span> specialising in Java and Spring Boot, with strong hands-on experience designing, building, and operating <span class="hl">production-grade REST APIs</span>, <span class="hl">microservices</span>, and <span class="hl">cloud-native backend systems</span>.</p>
+        <p style="margin-top: 15px;">Skilled across the full SDLC from requirements analysis and system design through implementation, testing, performance optimisation, and deployment.</p>
+        <p style="margin-top: 15px;">Strong foundation in <span class="kw">relational data modelling</span> and <span class="kw">query optimisation</span> on PostgreSQL and MySQL using JPA/Hibernate, with practical experience running services in Linux environments, automating CI/CD pipelines, and deploying containerised applications across <span class="hl">AWS, Azure, and GCP</span>.</p>
+        <p style="margin-top: 15px;">Brings an advanced <span class="kw">applied AI background</span> to integrate ML and LLM capabilities into backend services, including data ingestion pipelines, model inference integration, and intelligent automation.</p>
+        <p style="margin-top: 15px;">Focused on building <span class="hl">RAG-oriented architectures</span> exposed through secure APIs to deliver reliable, grounded, and scalable user-facing features.</p>
+        
+        <h3>Experience Summary</h3>
+        <ul>
+          <li><strong>Total Years of Experience:</strong> 18 years</li>
+          <li><strong>Canadian Experience:</strong> 11 years</li>
+          <li><strong>Current Location:</strong> Montreal, Quebec, Canada</li>
+          <li><strong>Nationality:</strong> Canadian Citizen</li>
+        </ul>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Positioning -->
+      <section id="positioning">
+        <h2>Positioning</h2>
+        <p><span class="kw">Senior AI and Data Science professional</span> with the ability to operate both as a technical expert and as a team-oriented leader.</p>
+        <p style="margin-top: 15px;">Open to roles spanning:</p>
+        <ul>
+          <li>Senior / Lead Data Scientist</li>
+          <li>Applied AI Engineer</li>
+          <li>Computer Vision Engineer</li>
+          <li>AI Research Lead</li>
+          <li>Technical Program roles within industry or academia</li>
+        </ul>
+        <p style="margin-top: 15px;">Recognized for coordinating complex initiatives, mentoring diverse technical profiles, and driving projects from concept to delivery under real-world constraints.</p>
+        <p style="margin-top: 15px;">Comfortable guiding teams, structuring execution roadmaps, aligning stakeholders, and promoting engineering rigor across the development lifecycle.</p>
+        <p style="margin-top: 15px;"><strong>Primary interests:</strong></p>
+        <ul>
+          <li>Multimodal machine learning systems</li>
+          <li>Production-grade AI pipelines</li>
+          <li>Clinical and biomedical AI</li>
+          <li>Scalable engineering environments integrating CI/CD, reproducibility, deployment strategy, and operational reliability</li>
+        </ul>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Key Skills -->
+      <section id="skills">
+        <h2>Key Skills</h2>
+        <ul>
+          <li><span class="kw">Data Science & Analytics:</span> data mining, feature engineering, statistical analysis, experimental design, metrics, reporting</li>
+          <li><span class="kw">Machine Learning & Deep Learning:</span> supervised/unsupervised learning, model selection, training/validation, reproducible experimentation</li>
+          <li><span class="kw">Computer Vision & Multimodal AI:</span> video analytics, pose/landmark pipelines, RGB-D/3D sensing, temporal modeling, sensor fusion</li>
+          <li><span class="kw">Big Data & Data Engineering:</span> Spark/Scala, SQL, ETL principles, pipeline concepts, BI foundations</li>
+          <li><span class="kw">Generative AI foundations:</span> LLM concepts, prompt engineering basics, RAG concepts, integration patterns for modern applications</li>
+          <li><span class="kw">Cloud/DevOps foundations:</span> Git workflows, CI/CD concepts, automation discipline, containerization, Kubernetes fundamentals</li>
+          <li><span class="kw">Research & Communication:</span> scientific writing, peer review, grant/protocol writing, public speaking, stakeholder communication</li>
+          <li><span class="kw">Teaching & Mentorship:</span> curriculum design, lesson planning, learning facilitation, student support, critical thinking development</li>
+        </ul>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Backend Highlights -->
+      <section id="backend-highlights">
+        <h2>Backend Engineering Highlights</h2>
+        <div class="highlight-box">
+          <ul>
+            <li>Expertise in <span class="hl">Java, Spring Boot</span>, production-grade REST API development, microservices, JPA/Hibernate, and SQL</li>
+            <li>Scalable backend services delivered with <span class="kw">Docker, Kubernetes, Git, GitHub Actions</span>, and CI/CD pipelines</li>
+            <li><span class="kw">API-first architectures</span> and integrations across web, mobile, and ML service layers, including event-driven and webhook-based workflows</li>
+            <li>Automation and integration workflows implemented using <span class="hl">n8n</span>, connecting third-party APIs, orchestrating business processes, and triggering notifications and data synchronization</li>
+            <li><span class="kw">Cloud-native deployments</span> and runtime operations across AWS (EC2, S3, Lambda), Azure, and GCP in Linux environments</li>
+            <li>Engineering rigor maintained through testing (<span class="kw">JUnit/Mockito</span>), refactoring, and active participation in code reviews</li>
+            <li>Applied AI background supporting <span class="hl">ML and LLM integration</span>, sensor data pipelines, and intelligent automation through secure APIs</li>
+          </ul>
+        </div>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Selected Highlights -->
+      <section id="highlights">
+        <h2>Selected Highlights</h2>
+        <div class="highlight-box">
+          <ul>
+            <li>Published author with <span class="hl">30+ peer-reviewed papers</span> (IEEE/MDPI) and inventor on a <span class="hl">U.S. patent application</span> (clinical AI / respiratory distress assessment).</li>
+            <li>Built <span class="kw">end-to-end AI pipelines</span> for biomedical and multimodal sensing systems (data acquisition, modeling, validation, prototype delivery).</li>
+            <li>Designed and delivered <span class="kw">post-secondary technical curricula</span> across AI/ML, Big Data, programming, and cloud-native/DevOps fundamentals.</li>
+            <li>Early <span class="kw">DevOps exposure since 2010</span> through a multi-stack continuous integration platform automating build/test/deploy across J2EE, .NET, PHP, and C++.</li>
+          </ul>
+        </div>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Education -->
+      <section id="education">
+        <h2>Education</h2>
+        
+        <div class="job">
+          <div class="job-title">Ph.D. in Applied Engineering (Biomedical/Clinical AI focus)</div>
+          <div class="job-company">École de technologie supérieure (ÉTS), Montreal, Canada</div>
+          <p style="margin-top: 10px;">End-to-end ML/computer vision pipeline for biomedical use; validated prototype; peer-reviewed publications and a U.S. patent application (US App. 17/763,319; Pub. US20220378321A1, pending).</p>
+        </div>
+
+        <div class="job">
+          <div class="job-title">M.Sc. in Computer Science — Artificial Intelligence Concentration (Program 2284)</div>
+          <div class="job-company">Université du Québec à Montréal (UQAM), Montreal, Canada</div>
+          <p style="margin-top: 10px;">Part-time program; final stage dedicated to report completion.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Specialized Certificate in Machine Learning Methods (90 hours)</div>
+          <div class="job-company">UC San Diego, San Diego, USA</div>
+          <p style="margin-top: 10px;">Core courses: Linear Algebra; Statistics for Deep Learning; TensorFlow.</p>
+        </div>
+
+        <div class="job">
+          <div class="job-title">M.Sc. in Communication Systems (SYSCOM)</div>
+          <div class="job-company">National Engineering School of Tunis (ENIT), Tunis, Tunisia</div>
+        </div>
+
+        <div class="job">
+          <div class="job-title">National Engineering Diploma (Telecommunications Engineering) — 5-year program</div>
+          <div class="job-company">National Engineering School of Tunis (ENIT), Tunis, Tunisia</div>
+        </div>
+
+        <div class="job">
+          <div class="job-title">WES Verified International Academic Qualifications (VIAQ)</div>
+          <div class="job-company">World Education Services (WES)</div>
+          <p style="margin-top: 10px;">Digital credential verification.</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Backend Professional Experience -->
+      <section id="backend-experience">
+        <h2>Backend Professional Experience (Java / Spring Boot)</h2>
+        
+        <div class="job">
+          <div class="job-title">Lead Researcher & Backend Developer (Java / Spring Boot Integration)</div>
+          <div class="job-company">UQAM, Montreal, Canada</div>
+          <div class="job-date">2023 – Present</div>
+          <p style="margin-bottom: 10px;"><em>A backend-focused role supporting an intelligent fall-detection platform. While the ML layer handles detection, the system required backend services for data ingestion, device communication, API endpoints, model serving and deployment.</em></p>
+          <ul>
+            <li>Designed <span class="kw">Spring Boot microservices</span> enabling ingestion of IMU and video metadata, secure API access, and integration of ML inference outputs</li>
+            <li>Built <span class="hl">RESTful APIs</span> for event streaming, device session management and health monitoring</li>
+            <li>Implemented <span class="kw">JPA/Hibernate repositories</span> for structured experiment storage and metadata retrieval</li>
+            <li>Containerised backend services using <span class="kw">Docker</span> and orchestrated development with <span class="kw">Kubernetes</span></li>
+            <li>Developed automated <span class="hl">CI/CD pipelines (GitHub Actions)</span> to streamline builds, testing and deployment</li>
+            <li>Created backend validation tools in Java to benchmark inference performance and latency</li>
+            <li>Ensured backend services met real-time requirements and scaled effectively on CPU-only environments</li>
+            <li>Collaborated across ML, software and data teams to maintain production-ready code quality</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Senior Lecturer & Instructor — Java, Backend Engineering, Cloud Services | AWS re/Start Instructor</div>
+          <div class="job-company">Multiple Institutions: Maisonneuve College | Bois-de-Boulogne College | CDI College | Universal College | Rosemont College | Canada College | MCIT | ÉTS</div>
+          <div class="job-date">2019 – Present</div>
+          <p style="margin-bottom: 10px;"><em>Multi-Certified AWS Professional. Served as an AWS re/Start Instructor at Collège de Bois-de-Boulogne and as an AWS-authorized instructor.</em></p>
+          <ul>
+            <li>Taught <span class="kw">Java, Spring Boot, OOP</span>, software architecture, RESTful API design, and backend engineering fundamentals</li>
+            <li>Led modules on <span class="hl">microservices, Docker containerisation, Kubernetes orchestration</span>, and CI/CD workflows</li>
+            <li>Designed end-to-end projects integrating Java, Spring Boot, SQL databases, API gateways, and technical documentation</li>
+            <li>Built virtualised lab environments using Docker, Git, Jenkins, and cloud-hosted deployments</li>
+            <li>Supervised engineering projects using Java, Maven, Spring Boot, <span class="kw">PostgreSQL</span>, and <span class="kw">MySQL</span></li>
+            <li>Coached learners toward backend and software engineering roles, emphasising professional engineering standards and delivery discipline</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">AWS re/Start Instructor — Service de calcul infonuagique (420-N11-BB)</div>
+          <div class="job-company">Collège de Bois-de-Boulogne (CEGEP), Montreal, QC — Program: Spécialiste en solutions infonuagiques</div>
+          <div class="job-date">2025 – Present</div>
+          <p style="margin-bottom: 10px;"><em>Official AWS re/Start program requiring AWS certification and AWS authorization to teach. Only validated instructors can deliver this curriculum.</em></p>
+          <ul>
+            <li>Deliver official <span class="kw">AWS re/Start curriculum</span> for cloud computing services (60 hours)</li>
+            <li>Teach full AWS compute stack: <span class="tech">EC2, VPC, EBS, Load Balancing, Auto Scaling, Route 53, Lambda, CloudWatch, CloudFormation</span></li>
+            <li>Completed <span class="hl">AWS Preparedness Course</span> required for instructor authorization</li>
+            <li>Use official <span class="kw">AWS re/Start Canvas platform</span> with hands-on AWS labs</li>
+            <li>Emphasize <span class="hl">Infrastructure as Code</span> with CloudFormation for reproducible deployments</li>
+            <li>Teach <span class="kw">security, monitoring, cost optimization</span>, and enterprise-grade practices</li>
+            <li>Prepare students for <span class="tech">AWS certification exams</span> (CloudOps Engineer Associate)</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Postdoctoral Fellow – Backend Engineering for Clinical Systems</div>
+          <div class="job-company">École de Technologie Supérieure (ÉTS), Montreal, Canada</div>
+          <div class="job-date">December 2019 – July 2021</div>
+          <p style="margin-bottom: 10px;"><em>Although research-centred, significant backend system development supported the medical AI prototype.</em></p>
+          <ul>
+            <li>Developed <span class="kw">Java-based backend modules</span> for device communication, data pipelines and real-time streaming</li>
+            <li>Built <span class="hl">REST endpoints</span> enabling communication between depth sensors, backend services and clinician dashboards</li>
+            <li>Implemented data storage strategies using <span class="kw">SQL databases</span> for structured respiratory metadata</li>
+            <li>Supported deployment of backend components on cloud VMs (AWS & Azure) for remote clinical testing</li>
+            <li>Integrated logging, monitoring and system diagnostics to support clinical reliability and uptime</li>
+            <li>Contributed to end-to-end engineering: backend, model integration and system validation</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Doctorate Researcher – Software Development & System Engineering</div>
+          <div class="job-company">ÉTS and CHU Sainte Justine, Montreal, Canada</div>
+          <div class="job-date">2014 – 2019</div>
+          <p style="margin-bottom: 10px;"><em>Expanded backend system components to support prototypes used in ICUs.</em></p>
+          <ul>
+            <li>Developed core backend utilities in <span class="kw">Java and Python</span> enabling imaging pipelines and data processing flows</li>
+            <li>Designed <span class="hl">API-driven components</span> to ingest multi-sensor data and serve computed respiratory metrics</li>
+            <li>Implemented SQL-based storage, feature retrieval systems and reusable backend modules</li>
+            <li>Contributed to development of a clinical decision-support backend enabling real-time alerts</li>
+            <li>Authored system specifications, backend documentation and technical validation procedures</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Early Career Engineering and Teaching Experience</div>
+          <div class="job-company">Tunisia and Canada</div>
+          <div class="job-date">2010 – 2015</div>
+          <ul>
+            <li>Java development across web and mobile applications</li>
+            <li>Built backend logic using object-oriented design, REST principles and early CI environments</li>
+            <li>Supported COBOL and telecom systems development for enterprise clients</li>
+            <li>Worked on Android applications using Java and SDK tools</li>
+            <li>Contributed to research involving data security, encryption and digital signal workflows</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Academic & Research Experience -->
+      <section id="research">
+        <h2>Academic & Research Experience</h2>
+        
+        <div class="job">
+          <div class="job-title">Postdoctoral Fellow — Medical AI & Clinical Systems Engineering</div>
+          <div class="job-company">École de technologie supérieure (ÉTS), Department of Electrical Engineering</div>
+          <ul>
+            <li>Spearheaded a research project on a <span class="kw">Respiratory Distress Monitoring System (RDMS)</span> using artificial intelligence in pediatric ICU settings.</li>
+            <li>Objective: deliver a proof-of-concept autonomous surveillance system for respiratory distress in critically ill children.</li>
+            <li>Developed computer vision and ML components to detect severe situations from chest-wall deformities captured with a depth camera installed in PICU.</li>
+            <li>Collaborated with clinical stakeholders and engineering teams; supported experimental validation and rapid troubleshooting during evaluation phases.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Ph.D. Researcher (Student) — Computer Vision, 3D Sensing & Clinical AI</div>
+          <div class="job-company">École de technologie supérieure (ÉTS) & CHU Sainte-Justine ICU (partnership)</div>
+          <ul>
+            <li>Designed and developed a <span class="kw">Computerized Clinical Decision Support System (CCDSS)</span> for respiratory distress detection.</li>
+            <li>Project objective: detect respiratory failure in critically ill children using non-contact imaging and machine intelligence.</li>
+            <li>Built a <span class="kw">3D surface reconstruction pipeline</span> using two Microsoft Kinect sensors to estimate respiratory rate, tidal volume, and minute ventilation.</li>
+            <li>Used 3D motion reconstruction to characterize thoraco-abdominal asynchrony (TAA) and derive clinically meaningful indicators.</li>
+            <li>Delivered validated prototypes aligned with clinical constraints; produced peer-reviewed publications and contributed to a U.S. patent application.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Research Assistant (part-time) & Game Developer</div>
+          <div class="job-company">TELUQ</div>
+          <ul>
+            <li>Designed and developed <span class="kw">game-based learning applications</span> to supplement school teaching, targeting Mathematics and English concepts.</li>
+            <li>Implemented the game on a tablet using Unity3D and Android SDK, applying pedagogical patterns and interaction strategies.</li>
+            <li>Supported content design and development iteration to optimize engagement and learning effectiveness.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Research & Teaching Assistant — GELE 2012 (Electronic Circuits)</div>
+          <div class="job-company">University of Moncton, Department of Electrical Engineering</div>
+          <ul>
+            <li>Worked on data security methods using <span class="kw">steganography</span> with high hiding capacity by combining LSB and DCT approaches.</li>
+            <li>Objective: propose an image-hiding scheme offering improved computational efficiency and practical robustness.</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Industry Experience -->
+      <section id="industry">
+        <h2>Industry Experience</h2>
+        
+        <div class="job">
+          <div class="job-title">Business Intelligence Consultant (Contract)</div>
+          <div class="job-company">Desjardins Group, Canada</div>
+          <div class="job-date">2022</div>
+          <ul>
+            <li>Supported business intelligence and analytics initiatives in a large-scale financial services environment.</li>
+            <li>Contributed to reporting and decision-support workflows with attention to reliability, traceability, and stakeholder alignment.</li>
+            <li>Helped structure analytical outputs for operational follow-up (dashboards, extracts, reporting logic, quality checks).</li>
+            <li>Operated within enterprise practices emphasizing documentation, controlled delivery, and quality expectations.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Engineering Consultant</div>
+          <div class="job-company">HR Access (now Sopra HR), Tunisia</div>
+          <div class="job-date">2011</div>
+          <ul>
+            <li>Served as a consultant for an HR software company supporting high-profile clients, including government entities in Europe and Africa.</li>
+            <li>Implemented customized functions using COBOL; delivered preventative and corrective maintenance services.</li>
+            <li>Worked within enterprise constraints (quality expectations, change control, client-specific customization).</li>
+            <li>Participated in issue triage and resolution cycles aligned with operational delivery needs.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Web & Mobile Developer (Full Stack)</div>
+          <div class="job-company">Paradoxe Communication, Laval, QC, Canada</div>
+          <ul>
+            <li>Assisted in building websites and features using object-oriented programming and REST APIs.</li>
+            <li>Identified and resolved bugs; supported iterative feature delivery under time constraints.</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Teaching Leadership & Professional Instruction -->
+      <section id="teaching">
+        <h2>Teaching Leadership & Professional Instruction</h2>
+        
+        <h3>Summary of Teaching Impact</h3>
+        <p>Multi-institution instructor delivering applied, industry-aligned training across <span class="kw">software engineering</span>, <span class="kw">data engineering/BI</span>, <span class="kw">AI/ML</span>, <span class="kw">computer vision</span>, <span class="kw">cybersecurity</span>, and <span class="kw">cloud/DevOps foundations</span>.</p>
+        <p style="margin-top: 10px;">Recognized for designing hands-on curricula, structuring progressive lab pathways, building evaluation frameworks, mentoring learners toward employability, and translating complex topics into clear learning sequences.</p>
+        <p style="margin-top: 10px;">Experience spans course planning, lab architecture, assessment design, project-based learning, and coordination across parallel teaching assignments.</p>
+
+        <h3>Core Teaching Domains</h3>
+        <ul>
+          <li><span class="kw">Software Engineering:</span> OOP (Java/C#), REST APIs, clean implementation habits, testing foundations, code review habits, and documentation discipline.</li>
+          <li><span class="kw">Cloud / DevOps / CI/CD:</span> Git workflows, CI/CD concepts, delivery mindset, Docker fundamentals, Kubernetes fundamentals, and automation/pipeline reasoning.</li>
+          <li><span class="kw">Data Engineering & BI:</span> SQL, data modeling foundations, ETL concepts, reporting discipline, Spark foundations, and analytics workflows.</li>
+          <li><span class="kw">AI/ML & Computer Vision:</span> ML workflow foundations, evaluation metrics, applied computer vision concepts, and experimentation discipline.</li>
+          <li><span class="kw">Cybersecurity Foundations:</span> secure practices, risk awareness, and applied defensive concepts for developers and IT profiles.</li>
+          <li><span class="kw">Generative AI Foundations:</span> LLM concepts, prompt engineering fundamentals, RAG concepts, and application-level integration patterns.</li>
+        </ul>
+
+        <h3>Teaching Positions</h3>
+
+        <div class="job">
+          <div class="job-title">Instructor — Software / Application Development (Continuing Education)</div>
+          <div class="job-company">Collège de Maisonneuve (CEGEP), Montreal, QC</div>
+          <div class="job-date">Nov 2022 – Present</div>
+          <ul>
+            <li>Deliver applied software development courses emphasizing practice, structure, and professional execution standards.</li>
+            <li>Design progressive lab sequences and end-to-end projects that reinforce real implementation discipline.</li>
+            <li>Build evaluation rubrics aligned with measurable competency (implementation quality, debugging, documentation, delivery).</li>
+            <li>Mentor learners through full delivery cycles: requirements, implementation, iteration, troubleshooting, and final deliverables.</li>
+            <li>Reinforce professional habits: clear naming, modularity, separation of concerns, and consistent formatting practices.</li>
+            <li>Encourage a quality mindset: basic test thinking, reproducible steps, and structured verification of outputs.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Instructor — Big Data; AI & Programming (Continuing Education)</div>
+          <div class="job-company">Collège de Bois-de-Boulogne (CEGEP), Montreal, QC</div>
+          <div class="job-date">Nov 2023 – Present</div>
+          <ul>
+            <li>Deliver applied Big Data and AI foundations with focus on structured reasoning and industry-aligned workflows.</li>
+            <li>Reinforce pipeline thinking: data cleaning, transformations, sanity checks, and explanation of assumptions/limits.</li>
+            <li>Guide learner teams in hands-on assignments and mini-projects with professional deliverable expectations.</li>
+            <li>Emphasize reproducibility: step-by-step procedures, consistent file organization, and clear reporting outputs.</li>
+            <li>Coach learners on practical communication: describing results, interpreting metrics, and documenting decisions.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Instructor (Weekends), Part-time — Artificial Intelligence; Programming</div>
+          <div class="job-company">CDI College, Montreal, QC</div>
+          <div class="job-date">Dec 2020 – Present</div>
+          <ul>
+            <li>Deliver AI and programming modules for adult learners with project-driven learning and employability emphasis.</li>
+            <li>Build course materials and practical assignments bridging concepts to implementation (data prep, workflow, evaluation).</li>
+            <li>Support diverse learning backgrounds via structured feedback cycles, remediation plans, and progressive competence building.</li>
+            <li>Reinforce disciplined execution: clear objectives, incremental steps, checkpoints, and final integration tasks.</li>
+            <li>Encourage maintainability: modular code, meaningful variable names, and readable organization.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Independent Contractor (Instructor) — Cybersecurity</div>
+          <div class="job-company">Collège Universel, Montreal, QC</div>
+          <div class="job-date">May 2024 – Sep 2024</div>
+          <ul>
+            <li>Deliver cybersecurity foundations with practical orientation and risk-aware mindset for applied IT profiles.</li>
+            <li>Reinforce secure practices for developers and IT learners using concrete examples and professional discipline.</li>
+            <li>Highlight common security pitfalls, basic defensive approaches, and responsible handling of data and credentials.</li>
+            <li>Emphasize the mindset: threat awareness, least privilege, and careful validation of inputs and actions.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Instructor — Big Data & Programming (Continuing Education)</div>
+          <div class="job-company">Collège de Rosemont (CEGEP), Montreal, QC</div>
+          <div class="job-date">Feb 2021 – Dec 2023</div>
+          <ul>
+            <li>Deliver structured training in Big Data and programming with step-by-step learning progression and practice-based evaluation.</li>
+            <li>Support learners with structured remediation pathways and competence-building labs.</li>
+            <li>Reinforce fundamentals: correctness, clarity, and consistent execution of tasks.</li>
+            <li>Encourage a professional workflow: file organization, reproducible steps, and clear submission standards.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Sessional Lecturer — ELE747 Digital Image Processing</div>
+          <div class="job-company">École de technologie supérieure (ÉTS), Montreal, QC</div>
+          <div class="job-date">Jan 2021 – Mar 2021</div>
+          <ul>
+            <li>Delivered computer vision and digital image processing concepts with applied assignments and evaluation criteria.</li>
+            <li>Provided structured explanations and practical tasks aligned with engineering-level expectations.</li>
+            <li>Reinforced mathematical and implementation connections (signals/images to code-level operations).</li>
+            <li>Emphasized rigorous reporting: describing methods, parameters, and limitations.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Instructor — Computer Science & Programming</div>
+          <div class="job-company">Canada College, Montreal, QC</div>
+          <div class="job-date">Feb 2019 – Mar 2021</div>
+          <ul>
+            <li>Taught computer science foundations through applied practice and structured assignments.</li>
+            <li>Reinforced disciplined implementation habits and progressive complexity management.</li>
+            <li>Supported learners through iterative feedback and project milestones.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Instructor — Mobile Programming</div>
+          <div class="job-company">Cégep de la Gaspésie et des Îles (MTL Campus), Montreal, QC</div>
+          <div class="job-date">Feb 2019 – Nov 2022</div>
+          <ul>
+            <li>Delivered mobile programming training with project-driven evaluation and delivery constraints.</li>
+            <li>Guided learners through end-to-end mobile features, debugging strategies, and structured deliverables.</li>
+            <li>Reinforced engineering habits: incremental builds, validation, and maintainable design choices.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Instructor — Web & Mobile Programming (Android)</div>
+          <div class="job-company">Montreal College of Information Technology (MCIT), Montreal, QC</div>
+          <div class="job-date">Feb 2016 – Apr 2019</div>
+          <ul>
+            <li>Delivered Android-focused training emphasizing maintainable implementations and project-based learning.</li>
+            <li>Reinforced practical development workflow habits: iteration, debugging, and stable delivery.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Sessional Lecturer — ELE116 Software Dev Environment (Java)</div>
+          <div class="job-company">École de technologie supérieure (ÉTS), Montreal, QC</div>
+          <div class="job-date">Sep 2018 – Dec 2018</div>
+          <ul>
+            <li>Taught Java software development environment practices and structured workflow foundations.</li>
+            <li>Reinforced good development habits: organization, build/run discipline, and clean code expectations.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Programming Professor</div>
+          <div class="job-company">ESPRIT — Private School of Engineering, Tunisia</div>
+          <div class="job-date">2012 – Dec 2013</div>
+          <ul>
+            <li>Taught programming courses with structured lessons, practical labs, and competence-based evaluation.</li>
+            <li>Prepared learning materials and guided students through incremental exercises toward complete implementations.</li>
+            <li>Emphasized clarity, correctness, and disciplined problem decomposition (step-by-step coding and verification).</li>
+            <li>Supported learners with coaching, feedback cycles, and improvement plans aligned with course objectives.</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Leadership & Management -->
+      <section id="leadership">
+        <h2>Leadership & Management</h2>
+        <ul>
+          <li><span class="kw">Program-level delivery across institutions:</span> managed parallel teaching mandates across multiple colleges, ensuring consistent execution quality, clear progression, and reliable learner outcomes under tight academic timelines.</li>
+          <li><span class="kw">Curriculum architecture:</span> designed course structures, lab roadmaps, assignment pipelines, and evaluation rubrics aligned with industry expectations (software engineering, data engineering/BI, AI/ML, computer vision, cybersecurity, cloud/DevOps foundations).</li>
+          <li><span class="kw">Project-based learning leadership:</span> supervised end-to-end student projects with delivery constraints (requirements interpretation, milestones, implementation standards, debugging discipline, documentation, and final presentation).</li>
+          <li><span class="kw">Technical mentorship and coaching:</span> supported diverse cohorts (adult learners, re-skilling profiles, engineering students) using structured feedback cycles and practical competence-building pathways.</li>
+          <li><span class="kw">Operational rigor and continuous improvement:</span> refined teaching delivery methods, course assets, and evaluation processes; introduced reusable workflows for consistency, traceability, and measurable improvement in learning outcomes.</li>
+          <li><span class="kw">Industry alignment mindset:</span> integrated modern engineering practices into learning delivery, including Git discipline, CI/CD reasoning, container fundamentals (Docker), Kubernetes fundamentals, and production-aware thinking for AI systems.</li>
+          <li><span class="kw">Communication and stakeholder alignment:</span> maintained clear communication with academic stakeholders; ensured expectations, evaluation standards, and course pacing were transparent and consistent.</li>
+        </ul>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Core Technical Skills (Java/Spring Boot) -->
+      <section id="core-tech-skills">
+        <h2>Core Technical Skills (Java / Spring Boot)</h2>
+        
+        <h3>Primary Stack</h3>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>Java & Spring Ecosystem</h4>
+            <p>Java | Spring Boot | Spring Web | Spring MVC | Spring Data JPA | Hibernate | Spring Validation | Spring Actuator | Spring Security | Spring Cloud | Config | Gateway | Service Discovery | WebFlux | Reactive APIs</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>API Development</h4>
+            <p>REST API Design | OpenAPI | Swagger | Postman | Microservices | Clean Architecture | Distributed Systems | Webhooks | Third-party API Integration</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Databases & SQL</h4>
+            <p>SQL | PostgreSQL | MySQL | Schema Design | Query Optimisation | Indexing | Transactions | JSON | YAML | Database Migrations | Flyway | Liquibase</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>DevOps & CI/CD</h4>
+            <p>Git | GitHub | GitHub Actions | GitLab CI | CI/CD | Docker | Docker Compose | Kubernetes | Helm | Linux | Bash</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Testing</h4>
+            <p>Unit Testing | JUnit | Mockito | Integration Testing | Testcontainers</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Cloud Platforms</h4>
+            <p>AWS | Azure | GCP | Systems Integration | Observability | Logging | Monitoring | Metrics</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Security</h4>
+            <p>Spring Security | JWT | OAuth2 | RBAC | CORS | Rate Limiting</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Caching & Messaging</h4>
+            <p>Caching | Redis | Message Queues | Kafka | RabbitMQ</p>
+          </div>
+        </div>
+
+        <h3>Secondary Tech Skills (AI & Data)</h3>
+        <div class="highlight-box">
+          <p><span class="kw">Python</span> | <span class="kw">TensorFlow</span> | <span class="kw">PyTorch</span> | MLflow | Model Serving | Computer Vision | Sensor Fusion | Data Engineering | Feature Extraction | Performance Optimisation | Applied Research | <span class="hl">LLM Integration</span> | <span class="hl">RAG Concepts</span></p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Technical Skills -->
+      <section id="technical">
+        <h2>Technical Skills</h2>
+        
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>Business Intelligence & Analytics Engineering</h4>
+            <p>Power BI (data modeling, DAX, dashboards), KPI design, executive reporting, SQL-based ETL/validation, and data governance practices for reliable decision-support analytics.</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Data Warehouse & Reporting</h4>
+            <p>Dimensional/relational modeling, SSIS ETL orchestration, and OLAP-style analytics unified in one governed BI workflow. Dashboard lifecycle management and KPI framework design ensure clear, consistent business metrics. SQL quality controls enforce validated logic, performance, and reproducible reporting outputs.</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Data Integration & ETL</h4>
+            <p>Extract, transform, and load workflows across heterogeneous sources; reconciliation checks, transformation logic, and validation routines to ensure consistency and traceability.</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>KPI & Executive Dashboards</h4>
+            <p>Design of KPI trees, scorecards, management dashboards, drill-down views, and periodic reporting assets aligned with operational and strategic decision-making.</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Data Science & Machine Learning</h4>
+            <p>Python (NumPy, Pandas, scikit-learn), TensorFlow/Keras, PyTorch, feature engineering, evaluation, experiment tracking discipline</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Computer Vision & Multimodal</h4>
+            <p>OpenCV, MediaPipe, pose/landmark pipelines, video analytics, RGB-D / 3D sensing foundations, temporal modeling concepts</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Big Data / BI / ETL</h4>
+            <p>Spark/Scala, SQL, Hadoop ecosystem (HDFS/YARN; Hive/Pig/Sqoop), ETL concepts, Microsoft BI foundations, Azure Data Factory, Databricks foundations</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Research & Scientific Workflows</h4>
+            <p>Applied R&D, scientific writing/reviewing, protocol/grant writing, project management, public presentations</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>DevOps / CI/CD</h4>
+            <p>Git workflows, CI/CD concepts, build automation, release discipline, pipeline foundations, reproducibility mindset for ML</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Containers & Kubernetes</h4>
+            <p>Docker fundamentals, Kubernetes fundamentals, containerized workloads, deployment patterns foundations</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Software Engineering</h4>
+            <p>OOP (Java/C#), REST/JSON, web development foundations (HTML5/CSS3/JS; Angular basics), testing strategies for web/mobile</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Databases</h4>
+            <p>Oracle (11g/12c/18c), SQL Server, MongoDB, DynamoDB foundations, data modeling foundations</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Mobile</h4>
+            <p>Android (Java/Kotlin), SQLite/Room, Retrofit/Volley, Firebase; iOS (Swift) foundations</p>
+          </div>
+          
+          <div class="skill-card">
+            <h4>Generative AI Foundations</h4>
+            <p>LLM concepts, prompt engineering basics, RAG concepts, agent/workflow integration patterns foundations</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Certifications -->
+      <section id="certifications">
+        <h2>Certifications</h2>
+        
+        <div class="cert-group">
+          <h4>Machine Learning & Data Science</h4>
+          <ul>
+            <li>Specialized Certificate in Machine Learning Methods (UC San Diego) — Core courses: Linear Algebra; Statistics for Deep Learning; TensorFlow</li>
+            <li>Deep Learning Specialization (DeepLearning.AI / Andrew Ng / Coursera) — Certificate Ref: 6PWB3WUEAAT2</li>
+            <li><span class="kw">Machine Learning (Stanford University / Andrew Ng / Coursera)</span></li>
+            <li>Introduction to Data Science with Python (University of Michigan / Coursera) — Certificate No.: 26XAJ5GEBVB4</li>
+          </ul>
+        </div>
+        
+        <div class="cert-group">
+          <h4>Amazon Web Services (AWS)</h4>
+          <ul>
+            <li><span class="hl">AWS Certified Solutions Architect — Professional</span></li>
+            <li><span class="hl">AWS Certified DevOps Engineer — Professional</span></li>
+            <li>AWS Certified Developer — Associate</li>
+            <li>AWS Certified Solutions Architect — Associate</li>
+            <li><span class="kw">AWS re/Start Instructor</span> (Collège de Bois-de-Boulogne)</li>
+            <li>AWS-Authorized Instructor</li>
+          </ul>
+        </div>
+        
+        <div class="cert-group">
+          <h4>Cisco</h4>
+          <ul>
+            <li>Cisco Certified Specialist — Network Security VPN Implementation</li>
+          </ul>
+        </div>
+        
+        <div class="cert-group">
+          <h4>Microsoft Development</h4>
+          <ul>
+            <li>Windows Application Development with Microsoft .NET Framework 4</li>
+            <li>Microsoft Certified Solutions Developer (MCSD) and specialist certifications (Azure/Web Services; ASP.NET MVC; HTML5/CSS3/JavaScript)</li>
+          </ul>
+        </div>
+        
+        <div class="cert-group">
+          <h4>Language Proficiency</h4>
+          <ul>
+            <li>TFI: Test de Français International</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Selected Backend Projects -->
+      <section id="backend-projects">
+        <h2>Selected Backend Projects</h2>
+        
+        <div class="job">
+          <div class="job-title">Multimodal Fall Detection System (Vision + IMU)</div>
+          <div class="job-company">UQAM</div>
+          <div class="job-date">2023 – 2025</div>
+          <ul>
+            <li>Designed <span class="kw">Spring Boot backend services</span> to handle device registration, data ingestion and results serving</li>
+            <li>Built <span class="hl">REST APIs</span> enabling integration with ML inference modules and monitoring dashboards</li>
+            <li>Implemented <span class="kw">Dockerised microservices</span> for reproducible deployments on low-resource devices</li>
+            <li>Managed system performance, ensuring stable throughput and real-time response requirements</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">ICU Respiratory Distress Monitoring System (RGB-D)</div>
+          <div class="job-company">ÉTS and CHU Sainte Justine</div>
+          <div class="job-date">2014 – 2019</div>
+          <ul>
+            <li>Built <span class="kw">backend modules in Java and Python</span> supporting streaming, storage and alerting components</li>
+            <li>Developed <span class="hl">SQL database schemas</span> for respiratory metrics and patient data</li>
+            <li>Created <span class="kw">API endpoints</span> enabling external systems to retrieve respiratory measurements and timelines</li>
+            <li>Deployed backend prototypes on clinical servers for multi-day evaluation</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Academic Projects -->
+      <section id="projects">
+        <h2>Academic Projects</h2>
+        
+        <div class="job">
+          <div class="job-title">Master's Artificial Intelligence Research Project — Fall Detection (Bimodal Late-Fusion)</div>
+          <div class="job-company">Université du Québec à Montréal (UQAM), Montreal, Canada</div>
+          <div class="job-date">2023 – 2025</div>
+          <ul>
+            <li>Designed an end-to-end ML pipeline combining vision (Transformer) and IMU (LSTM) with late fusion for night-time fall detection.</li>
+            <li>Led data collection, preprocessing, training, and evaluation; delivered a validated prototype with production-aware constraints in mind.</li>
+            <li><span class="hl">Outcomes:</span> Sensors (MDPI), accepted for publication, 2025 (to appear); IEEE ICECS 2025, accepted (to appear).</li>
+            <li><strong>Stack:</strong> Python, PyTorch/TensorFlow, MediaPipe/OpenCV, scikit-learn; experimentation discipline and CI concepts for model iterations.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Ph.D. Research — Computerized Clinical Decision Support for Respiratory Distress</div>
+          <div class="job-company">ÉTS (Department of Electrical Engineering) & CHU Sainte-Justine ICU, Montreal, Canada</div>
+          <div class="job-date">2014 – 2019</div>
+          <ul>
+            <li>Designed and developed a CCDSS to detect respiratory failure in critically ill children using non-contact RGB-D/3D video analysis.</li>
+            <li>Built a 3D surface reconstruction pipeline using two Microsoft Kinect sensors to estimate respiratory rate, tidal volume, and minute ventilation.</li>
+            <li>Applied 3D motion analysis to characterize thoraco-abdominal asynchrony and derive clinically interpretable indicators.</li>
+            <li>Produced peer-reviewed publications and a U.S. patent application (US App. 17/763,319; Pub. US20220378321A1).</li>
+            <li><span class="hl">Selected presentations:</span> Réanimation 2020 (Paris); Innovative Technologies Symposium (CHU Sainte-Justine); SRLF Congress (Paris).</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Master's Project — Communication Systems Laboratory</div>
+          <div class="job-company">ENIT (National Engineering School of Tunis), Tunis, Tunisia</div>
+          <div class="job-date">2011</div>
+          <ul>
+            <li>Designed and modeled a fiber-laser loop using microstructured optical fibers (MOF) to realize coupling schemes from impulse-response functions.</li>
+            <li>Tuned loop parameters to explore operating regimes and optimize average output power.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Graduation Engineering Project — Continuous Integration Platform (J2EE/.NET/PHP/C++)</div>
+          <div class="job-company">IP-Tech, Tunis, Tunisia</div>
+          <div class="job-date">2010</div>
+          <ul>
+            <li>Built a continuous integration (CI) platform automating build/test/deploy for J2EE, .NET, PHP, and C++ across web and desktop apps.</li>
+            <li>Standardized delivery pipelines to reduce integration effort and recurring build errors.</li>
+            <li>Early DevOps exposure: replaced manual hand-offs with automation and version-controlled build steps.</li>
+            <li><strong>Stack examples:</strong> Ant/Maven (J2EE), MSBuild (.NET), PHP toolchain, C++ compilers, version control.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Engineering Internship — Embedded VoIP Mobile Application</div>
+          <div class="job-company">Tunisair (AISA Tunisia), Tunis, Tunisia</div>
+          <div class="job-date">2009</div>
+          <ul>
+            <li>Implemented an embedded VoIP mobile application with J2ME.</li>
+            <li>Integrated SIP/RTP/RTCP; handled signaling, media session setup, and basic QoS considerations.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">End-of-Year Project — Optical Simulation and Automation</div>
+          <div class="job-company">ENIT, Tunis, Tunisia</div>
+          <div class="job-date">2008</div>
+          <ul>
+            <li>Analyzed optical properties of microstructured air/silica fibers; automated simulation and data analysis workflows.</li>
+            <li>Quantified coupling sensitivity for microstructured fiber designs to inform design tolerances.</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Consortiums & Presentations -->
+      <section id="presentations">
+        <h2>Consortiums & Presentations</h2>
+        <ul>
+          <li><span class="kw">Proceedings of Réanimation 2020</span>, French Intensive Care Society International Congress, Paris, Feb 5–7, 2020</li>
+          <li><span class="kw">Oral Presentation</span> — Innovative Technologies Symposium, CHU Sainte-Justine, Montreal: "Video analysis of respiratory distress and artificial intelligence" (Session: Bioinformatics / Modeling & AI)</li>
+          <li><span class="kw">Oral Presentation</span> — SRLF (Société de Réanimation de Langue Française) Congress, Paris: RETRACT system for monitoring respiratory retraction signs in children</li>
+          <li><span class="kw">Oral Presentation</span> — Respiratory Research Day, Brussels: RETRACT system and clinical video analytics for respiratory monitoring</li>
+          <li><span class="kw">Presentation</span> — 1st Symposium on Applications of AI in Medicine (AIM), Montreal: detection of respiratory distress in neonates from video sequences</li>
+          <li><span class="kw">Presentation</span> — Provincial Congress of Mother-Child Research (2nd edition), Montreal: video-based respiratory distress detection in neonates</li>
+          <li><span class="kw">Presentation</span> — Provincial Congress of Mother-Child Research (1st edition), Sherbrooke: respiration quantification in PICU using video imaging</li>
+          <li><span class="kw">Consortium</span> — International consortium on mechanical ventilation in children, Montreal: computer vision method for tidal volume calculation in spontaneous breathing infants</li>
+          <li><span class="kw">Student research conference</span> (CAEC), ÉTS: imaging method for respiratory monitoring in spontaneous breathing patients</li>
+          <li><span class="kw">Conference contribution</span> — JNOG (National Day Guided Optics), Lyon, France: "Influence of the collapse of air holes on the weld between loss fiber optic microstructured" (2012)</li>
+        </ul>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Conference Publications -->
+      <section id="conf-publications">
+        <h2>Conference Publications</h2>
+        
+        <div class="pub pub-conf">
+          <strong>Rehouma, H.; Boukadoum, M.</strong> Fall Detection by Bimodal Sensing with Late Fusion. <em>Proc. IEEE International Conference on Electronics, Circuits and Systems (ICECS 2025)</em>, Marrakech, Morocco, accepted (to appear).
+        </div>
+        
+        <div class="pub pub-conf">
+          <strong>Rehouma, H.; Noumeir, R.; Jouvet, P.; Bouachir, W.; Essouri, S.</strong> A Computer Vision Method for Respiratory Monitoring in Intensive Care Environment Using RGB-D Cameras. <em>In IPTA 2017</em>, IEEE.
+        </div>
+        
+        <div class="pub pub-conf">
+          <strong>Pradhan, P.; Sengupta, D.; Rehouma, H.; Francois, V.; Tremblay, C.; Ung, B.</strong> Excitation of Vector Modes in Few-Mode Fiber Using Wire-Based Mechanical Long Period Fiber Grating. <em>Photonics North 2015</em>, IEEE.
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Journal Publications -->
+      <section id="journal-publications">
+        <h2>Journal Publications (Selected)</h2>
+        
+        <div class="pub pub-journal">
+          <strong>Rehouma, H.; Boukadoum, M.</strong> Fall Detection by Deep Learning-Based Bimodal Movement and Pose Sensing with Late Fusion. <em>Sensors (MDPI)</em>, accepted for publication, 2025 (to appear).
+        </div>
+        
+        <div class="pub pub-journal">
+          <strong>Rehouma, H.; Noumeir, R.; Essouri, S.; Jouvet, P.</strong> Advancements in Methods and Camera-Based Sensors for the Quantification of Respiration. <em>Sensors</em>, 2020, 20(24), 7252.
+        </div>
+        
+        <div class="pub pub-journal">
+          <strong>Rehouma, H.; Noumeir, R.; Essouri, S.; Jouvet, P.</strong> Quantitative Assessment of Spontaneous Breathing in Children: Evaluation of a Depth Camera System. <em>IEEE Transactions on Instrumentation and Measurement</em>, 2019.
+        </div>
+        
+        <div class="pub pub-journal">
+          <strong>Rehouma, H.; Noumeir, R.; Masson, G.; Essouri, S.; Jouvet, P.</strong> Visualizing and Quantifying Thoraco-Abdominal Asynchrony in Children From Motion Point Clouds: A Pilot Study. <em>IEEE Access</em>, 2019, 7, 163341–163357.
+        </div>
+        
+        <div class="pub pub-journal">
+          <strong>Rehouma, H.; Noumeir, R.; Bouachir, W.; Jouvet, P.; Essouri, S.</strong> 3D Imaging System for Respiratory Monitoring in Pediatric Intensive Care Environment. <em>Computerized Medical Imaging and Graphics</em>, 2018, 70, 17–28.
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Patent Applications -->
+      <section id="patents">
+        <h2>Patent Applications</h2>
+        
+        <div class="pub pub-patent">
+          <strong>Rehouma, H.; Noumeir, R.; Jouvet, P.; Essouri, S.</strong> Methods and Systems for Assessing Severity of Respiratory Distress of a Patient. <em>U.S. Patent Application 17/763,319</em>; Publication US 2022/0378321 A1 (Dec 1, 2022). <span class="hl">Status: Pending.</span>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Online Science & Outreach -->
+      <section id="outreach">
+        <h2>Online Science & Outreach</h2>
+        
+        <div class="highlight-box">
+          <p><strong>Rehouma, H.; Noumeir, R.; Jouvet, P.; Essouri, S.</strong> Saving Children through Xbox Cameras. <em>Substance ÉTS</em> (online article).</p>
+        </div>
+        
+        <h3>Online Profiles</h3>
+        <ul>
+          <li><a href="https://scholar.google.com/citations?user=DvrZsZIAAAAJ" target="_blank">Google Scholar</a></li>
+          <li><a href="https://ieeexplore.ieee.org/author/37085641665" target="_blank">IEEE Xplore Author Page</a></li>
+          <li><a href="https://orcid.org/0000-0002-2617-5912" target="_blank">ORCID</a></li>
+          <li><a href="https://sciprofiles.com/profile/haythemrehouma" target="_blank">SciProfiles</a></li>
+        </ul>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Academic Service & Review Panels -->
+      <section id="service">
+        <h2>Academic Service & Review Panels</h2>
+        
+        <div class="highlight-box">
+          <p><span class="hl">More than 30 peer-reviews</span>, including 27 verified reviews on Publons: <a href="https://publons.com/researcher/2408680/haythem-rehouma" target="_blank">publons.com/researcher/2408680/haythem-rehouma</a></p>
+        </div>
+        
+        <h3>Reviewer / Sub-reviewer roles (examples)</h3>
+        <ul>
+          <li>IEEE Access</li>
+          <li>Biomedical Signal Processing and Control</li>
+          <li>Transactions on Biomedical Engineering</li>
+          <li>Journal of Biomechanics</li>
+          <li>International Journal of Medical Informatics</li>
+          <li>Transactions on Neural Systems and Rehabilitation Engineering</li>
+          <li>Conference peer-review activities</li>
+        </ul>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- References -->
+      <section id="references">
+        <h2>References</h2>
+        <p style="font-size: 1.1rem; text-align: center; padding: 20px;">Available upon request.</p>
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Floating back to top button -->
+  <div class="topbtn" id="topbtn">
+    <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+  </div>
+
+  <script>
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('nav a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

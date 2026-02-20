@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Introduction - Sonar Interview</title>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --line: #1f2937;
+      --accent: #60a5fa;
+      --accent2: #34d399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: linear-gradient(180deg, #050810 0%, var(--bg) 50%, #050810 100%);
+      color: var(--text);
+      line-height: 2;
+      min-height: 100vh;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+      gap: 20px;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      nav.sidebar {
+        position: relative !important;
+        top: 0 !important;
+      }
+    }
+
+    /* Sidebar Navigation */
+    nav.sidebar {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 16px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+    nav.sidebar h3 {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    nav.sidebar ul {
+      list-style: none;
+    }
+    nav.sidebar li {
+      margin-bottom: 8px;
+    }
+    nav.sidebar a {
+      display: block;
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+      background: rgba(31, 41, 55, 0.4);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    nav.sidebar a:hover {
+      background: rgba(96, 165, 250, 0.15);
+      border-color: rgba(96, 165, 250, 0.3);
+    }
+    nav.sidebar .home-link {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+    nav.sidebar .home-link a {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: rgba(52, 211, 153, 0.2);
+    }
+    nav.sidebar .home-link a:hover {
+      background: rgba(52, 211, 153, 0.2);
+    }
+
+    /* Main Content */
+    main {
+      min-width: 0;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 24px;
+      background: rgba(17, 24, 39, 0.6);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-family: system-ui, sans-serif;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 14px;
+      font-family: system-ui, sans-serif;
+    }
+
+    section {
+      margin-bottom: 24px;
+      padding: 28px;
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    section:last-child {
+      margin-bottom: 0;
+    }
+    section h2 {
+      font-size: 18px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-family: system-ui, sans-serif;
+    }
+    .script {
+      font-size: 18px;
+      line-height: 2.2;
+    }
+    .script p {
+      margin-bottom: 18px;
+      text-indent: 28px;
+    }
+    .script p:last-child {
+      margin-bottom: 0;
+    }
+    .hl {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .kw {
+      color: var(--accent2);
+      font-weight: 500;
+    }
+
+    .top-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 16px;
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 10px;
+      color: var(--text);
+      cursor: pointer;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .top-btn.show { opacity: 1; }
+    .top-btn:hover { background: rgba(52, 211, 153, 0.25); }
+  </style>
+</head>
+<body>
+  <a id="top"></a>
+
+  <div class="layout">
+    <!-- Left Sidebar Navigation -->
+    <nav class="sidebar">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="#about-me">1. About Me</a></li>
+        <li><a href="#about-sonar">2. About Sonar</a></li>
+        <li><a href="#why-sonar">3. Why Sonar</a></li>
+        <li><a href="#java-experience">4. Java Experience</a></li>
+        <li><a href="#react-experience">5. React Experience</a></li>
+        <li><a href="#aws-expertise">6. AWS Expertise</a></li>
+        <li><a href="#teamwork">7. Teamwork</a></li>
+        <li><a href="#weaknesses">8. My Weaknesses</a></li>
+        <li><a href="#conflict">9. Conflict Handling</a></li>
+        <li><a href="#why-hire">10. Why Hire Me</a></li>
+        <li><a href="#sonar-impression">11. Why Sonar Impresses Me</a></li>
+        <li><a href="#closing">12. Closing</a></li>
+      </ul>
+      <div class="home-link">
+        <a href="index.html">Back to Home</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <header>
+        <h1>My Introduction for Sonar Interview</h1>
+        <p>February 16, 2026 - Geneva Position</p>
+      </header>
+
+      <!-- Section 1 -->
+      <section id="about-me">
+        <h2>1. About Me</h2>
+        <div class="script">
+          <p>Hello, my name is <span class="hl">Haythem Rehouma</span>. I hold a Ph.D. in Applied Engineering from ETS Montreal, and I have a broad background spanning programming, engineering, and education. I'm passionate about developing robust software solutions and sharing knowledge to empower the next generation. It's great to introduce myself to you today.</p>
+          <p>I am a <span class="kw">Canadian citizen</span> based in Montreal, with <span class="hl">18 years</span> of professional experience in the technology field. My academic journey includes a Master's degree in Artificial Intelligence from UQAM and another Master's in Communication Systems. This diverse education has given me a strong foundation in both theory and practice.</p>
+          <p>Throughout my career, I've worked as a <span class="kw">software engineer</span>, a <span class="kw">researcher</span>, and an <span class="kw">educator</span>. I believe that the best engineers are those who can not only write code, but also communicate clearly, collaborate effectively, and continuously learn. These are values I try to embody every day.</p>
+        </div>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="about-sonar">
+        <h2>2. About Sonar</h2>
+        <div class="script">
+          <p><span class="hl">SonarSource</span> is known for tools that help ensure code quality and security. Their most popular product is <span class="kw">SonarQube</span>, which analyzes source code to detect bugs, vulnerabilities, and code smells. It supports a wide range of programming languages and integrates seamlessly into CI/CD pipelines, helping teams continuously maintain high-quality code.</p>
+          <p>In short, Sonar is all about <span class="hl">clean, maintainable, and secure code</span>. The company was founded with a simple but powerful mission: to help developers write better code. Today, their products are used by over <span class="kw">7 million developers</span> worldwide, including teams at Microsoft, NASA, and MasterCard.</p>
+          <p>What I find particularly inspiring is Sonar's commitment to the <span class="kw">open source community</span>. SonarQube started as an open source project, and this spirit of transparency and collaboration remains at the heart of the company's culture.</p>
+        </div>
+      </section>
+
+      <!-- Section 3 -->
+      <section id="why-sonar">
+        <h2>3. Why I Want to Join Sonar</h2>
+        <div class="script">
+          <p>I want to join Sonar because I genuinely believe in the mission. I have been using <span class="hl">SonarQube</span> in my own projects for years, and I've seen firsthand how it improves code quality and helps teams catch issues early. The idea of contributing to a product that I already use and trust is incredibly motivating.</p>
+          <p>I'm also drawn to Sonar's <span class="kw">CODE culture</span>, which stands for <span class="hl">Smarter Together, Excellence, Innovation, and Delivery</span>. These values resonate deeply with me. I believe that no one is as smart as all of us working together, and I strive for excellence in everything I do.</p>
+          <p>Finally, Sonar wants to be a <span class="kw">human enterprise</span>, a place where people come first. That's the kind of company I want to work for. I'm looking for a place where I can grow professionally while also contributing to something meaningful.</p>
+        </div>
+      </section>
+
+      <!-- Section 4 -->
+      <section id="java-experience">
+        <h2>4. My Java Experience</h2>
+        <div class="script">
+          <p>On the <span class="hl">backend</span>, I have extensive experience with <span class="kw">Java</span> and <span class="kw">Spring Boot</span>. I've built REST APIs, microservices architectures, and integrated various AWS services. I follow clean code principles and design patterns like Repository, Service, and Controller to keep my code maintainable and testable.</p>
+          <p>I write <span class="kw">unit tests</span> with JUnit and Mockito, and I write integration tests for my APIs. I use Maven and Gradle for build management. I integrate <span class="kw">SonarQube</span> into my Java projects to track code coverage and catch issues early.</p>
+          <p>For <span class="hl">databases</span>, I have experience with <span class="kw">PostgreSQL</span>, MySQL, and NoSQL databases like DynamoDB. I understand how to design efficient schemas, write optimized queries, and ensure data integrity. I also have experience with database migrations and versioning.</p>
+        </div>
+      </section>
+
+      <!-- Section 5 -->
+      <section id="react-experience">
+        <h2>5. My React Experience</h2>
+        <div class="script">
+          <p>I've been teaching <span class="hl">React</span> since before 2019, so I experienced the era of <span class="kw">class components</span> and <span class="kw">lifecycle methods</span>. After 2019, the shift to functional components and hooks, like <span class="kw">useState</span> and <span class="kw">useEffect</span>, brought a more streamlined, declarative approach. I've guided students through that transition—from class-based patterns to the modern, hook-based paradigm we rely on today.</p>
+          <p>I work with <span class="kw">TypeScript</span> for type safety. I build <span class="hl">responsive</span> and <span class="hl">accessible</span> user interfaces. I follow component-based architecture and understand state management patterns. I write unit tests for my React components.</p>
+          <p>I work closely with <span class="kw">UX designers</span> to implement features. I understand the importance of a good user experience and focus on delivering polished products. I've taught React to hundreds of students, which has deepened my understanding of the framework and its best practices.</p>
+        </div>
+      </section>
+
+      <!-- Section 6 -->
+      <section id="aws-expertise">
+        <h2>6. My AWS Expertise</h2>
+        <div class="script">
+          <p>I have solid experience with <span class="hl">AWS</span>, where I've designed and deployed robust cloud architectures. I've worked with services like <span class="kw">EC2</span>, <span class="kw">S3</span>, and <span class="kw">Lambda</span>, and I've automated infrastructure through IaC tools like <span class="kw">CloudFormation</span> and <span class="kw">Terraform</span>. This hands-on experience has given me a deep understanding of cloud-native development.</p>
+          <p>I hold <span class="kw">four AWS certifications</span>, including Solutions Architect Professional and DevOps Professional. But more than certifications, I have real-world experience building and deploying production applications on AWS.</p>
+          <p>I am also an <span class="hl">AWS-Authorized Instructor</span>. This is a restricted certification from Amazon—only qualified professionals who meet strict requirements can obtain it. I teach official AWS courses, which has deepened my understanding of the platform and best practices.</p>
+          <p>In my projects, I've used services like <span class="kw">VPC</span>, <span class="kw">RDS</span>, <span class="kw">Elastic Beanstalk</span>, <span class="kw">SQS</span>, <span class="kw">SNS</span>, and <span class="kw">API Gateway</span>. I set up <span class="kw">CI/CD pipelines</span> with CodePipeline and implement security best practices with IAM and KMS. I understand how to build secure, scalable, and cost-effective cloud architectures.</p>
+          <p>This experience with AWS aligns well with Sonar's cloud offerings. I understand how to deploy, monitor, and scale applications in the cloud, and I can contribute to building robust cloud-native solutions.</p>
+        </div>
+      </section>
+
+      <!-- Section 7 -->
+      <section id="teamwork">
+        <h2>7. Teamwork</h2>
+        <div class="script">
+          <p>I am a <span class="hl">strong team player</span>. I believe that the best results come from collaboration, not isolation. When I work on a project, I make sure to communicate clearly with my teammates, share knowledge, and support others when they need help.</p>
+          <p>I understand that in a team, <span class="kw">prioritization</span> is essential. Even though I am a perfectionist by nature, I have learned that we cannot do everything at once. We need to focus on what brings the most value first. I always ask myself: what is the most important task right now? What will have the biggest impact?</p>
+          <p>I also believe in <span class="kw">transparency</span>. If I am stuck or if something is taking longer than expected, I communicate early. I don't wait until the last minute. This way, the team can adjust and we avoid surprises.</p>
+          <p>For me, being a good team player means putting the <span class="hl">team's success</span> above personal achievements. When the team wins, we all win.</p>
+        </div>
+      </section>
+
+      <!-- Section 8 -->
+      <section id="weaknesses">
+        <h2>8. My Weaknesses</h2>
+        <div class="script">
+          <p>One area I'm working on is my tendency to be a <span class="hl">perfectionist</span>. Sometimes I spend too much time trying to make something perfect when "good enough" would be acceptable. I've learned to balance quality with delivery. I now set clear deadlines for myself and focus on what truly matters.</p>
+          <p>Another thing I'm improving is <span class="kw">delegation</span>. In the past, I sometimes took on too much because I wanted to make sure everything was done correctly. I've learned that trusting my teammates and letting them take ownership is better for everyone. It helps the team grow and prevents burnout.</p>
+          <p>I can also be <span class="kw">too direct</span> in my communication. I value honesty, but I've learned to balance directness with diplomacy. I now take more time to consider how my words might be received, especially in written communication.</p>
+          <p>I see these as areas for <span class="hl">continuous improvement</span>. I'm aware of them, and I actively work on getting better every day.</p>
+        </div>
+      </section>
+
+      <!-- Section 9 -->
+      <section id="conflict">
+        <h2>9. Conflict Handling</h2>
+        <div class="script">
+          <p>Let me share how I would handle a difficult situation. Imagine a colleague goes on vacation and leaves some work unfinished. The deadline is approaching, and we need to deliver.</p>
+          <p>First, I would <span class="hl">not call them during their vacation</span>. Everyone deserves to disconnect and rest. Interrupting their time off would damage trust and morale.</p>
+          <p>Instead, I would <span class="kw">assess the situation</span>. What exactly needs to be done? Is there documentation? Can I understand the work from the code or notes they left behind?</p>
+          <p>Then, I would <span class="kw">take ownership</span> of the task. If it's within my capabilities, I would complete it myself or ask a teammate for help. The goal is to meet the deadline without creating stress for the person on vacation.</p>
+          <p>When my colleague returns, I would have a <span class="hl">calm conversation</span>. I would explain what happened, not to blame them, but to understand how we can prevent this in the future. Maybe we need better handoff processes. Maybe we need to plan better before vacations.</p>
+          <p>The key is to focus on <span class="kw">solutions</span>, not blame. We're all human, and things happen. What matters is how we handle them as a team.</p>
+        </div>
+      </section>
+
+      <!-- Section 10 -->
+      <section id="why-hire">
+        <h2>10. Why You Should Hire Me</h2>
+        <div class="script">
+          <p>You should hire me because I bring a <span class="hl">rare combination</span> of deep academic expertise and practical experience. I've built robust solutions, led teams, and taught future professionals, so I know how to both <span class="kw">deliver results</span> and <span class="kw">empower others</span>. I'll contribute not just with technical depth, but also with a commitment to quality and innovation.</p>
+          <p>I have the technical expertise you're looking for—over four years of <span class="kw">Java</span> experience, over three years of <span class="kw">React</span> and <span class="kw">TypeScript</span>, and deep <span class="kw">AWS</span> knowledge with certifications and teaching experience. I understand the full stack, from database design to user interface.</p>
+          <p>Beyond technical skills, I bring <span class="hl">communication abilities</span> that come from years of teaching. I can explain complex concepts clearly, mentor junior engineers, and collaborate effectively with cross-functional teams. I understand the importance of documentation and knowledge sharing.</p>
+          <p>I also bring a genuine passion for <span class="hl">code quality</span>. I don't just write code that works—I write code that is clean, maintainable, and well-tested. I've used SonarQube extensively, and I understand its value. I would be proud to contribute to a product that helps millions of developers write better code.</p>
+          <p>Finally, I am <span class="kw">committed and reliable</span>. When I take on a project, I see it through to completion. I take ownership of my work and hold myself to high standards. I'm ready to make a strong commitment to Sonar and contribute to the team's success.</p>
+        </div>
+      </section>
+
+      <!-- Section 11 -->
+      <section id="sonar-impression">
+        <h2>11. Why Sonar Impresses Me</h2>
+        <div class="script">
+          <p>I am genuinely impressed by <span class="hl">SonarSource</span>. In the era of artificial intelligence, where tools like Copilot and ChatGPT can generate code in seconds, the need for <span class="kw">clean and secure code</span> has never been more important.</p>
+          <p>AI can write code quickly, but it cannot fully replace <span class="hl">human expertise</span> when it comes to verifying quality and security. That's where Sonar comes in. Your tools help developers catch bugs, vulnerabilities, and code smells that AI might introduce. This is critical in today's fast-paced development environment.</p>
+          <p>I believe Sonar is positioned at the <span class="kw">intersection of AI and human expertise</span>. As more code is generated by AI, the demand for quality analysis will only grow. Sonar's mission to help developers write better code is more relevant than ever.</p>
+          <p>What also impresses me is your commitment to the <span class="kw">developer community</span>. Over 7 million developers trust your tools. Companies like Microsoft, NASA, and MasterCard use SonarQube. That's a remarkable achievement.</p>
+          <p>I want to be part of a company that is <span class="hl">shaping the future of software development</span>. Sonar is doing exactly that, and I would be honored to contribute.</p>
+        </div>
+      </section>
+
+      <!-- Section 12 -->
+      <section id="closing">
+        <h2>12. Closing</h2>
+        <div class="script">
+          <p>Thank you for taking the time to learn about me. I'm genuinely excited about this opportunity to join <span class="hl">Sonar</span> and contribute to the Storefront team in Geneva.</p>
+          <p>I believe my skills, experience, and values align perfectly with what you're looking for. I bring <span class="kw">technical depth</span> in Java, React, and AWS. I bring <span class="kw">teaching experience</span> that translates into mentorship and clear communication. And I bring a genuine <span class="kw">passion for code quality</span>.</p>
+          <p>What excites me most is the opportunity to work on products that help <span class="hl">millions of developers</span> write better code. In a world where AI is changing how we develop software, Sonar's mission is more important than ever. I want to be part of that mission.</p>
+          <p>I am ready to make a <span class="kw">strong commitment</span> to Sonar. I am ready to learn, to contribute, and to grow with the company. I look forward to the next steps in the process.</p>
+          <p>Thank you again for this opportunity. I hope to speak with you soon.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</button>
+
+  <script>
+    const btn = document.getElementById('topBtn');
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('show', window.scrollY > 300);
+    });
+  </script>
+</body>
+</html>

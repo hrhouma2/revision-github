@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sonar Interview - Full Script</title>
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#1f2937;
+      --accent:#60a5fa;
+      --accent2:#34d399;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:linear-gradient(180deg, #070a12 0%, var(--bg) 55%, #070a12 100%);
+      color:var(--text);
+      line-height:1.8;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 16px 80px;
+    }
+    header{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.6);
+      backdrop-filter: blur(10px);
+      border-radius:16px;
+      padding:20px 18px;
+    }
+    header h1{
+      margin:0 0 8px;
+      font-size:22px;
+    }
+    header p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    nav{
+      position:sticky;
+      top:12px;
+      align-self:start;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.55);
+      border-radius:16px;
+      padding:14px 12px;
+      max-height:90vh;
+      overflow-y:auto;
+    }
+    nav .title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:0 0 10px;
+      padding:6px 8px;
+      border-radius:12px;
+      background:rgba(31,41,55,.55);
+      border:1px solid rgba(31,41,55,.9);
+    }
+    nav .title strong{font-size:14px}
+    nav .title span{color:var(--muted); font-size:12px}
+    nav ol{
+      margin:0;
+      padding-left:18px;
+      font-size:13px;
+    }
+    nav li{margin:6px 0}
+    nav a{display:inline-block; padding:2px 0}
+    nav .back-link{
+      display:block;
+      margin-top:16px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      font-size:13px;
+    }
+
+    main{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.45);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    section{
+      border:1px solid rgba(31,41,55,.9);
+      background:rgba(17,24,39,.65);
+      border-radius:16px;
+      padding:20px;
+      margin:0 0 16px;
+    }
+    section:last-child{margin-bottom:0}
+    section h2{
+      margin:0 0 16px;
+      font-size:18px;
+      color:var(--accent);
+      border-bottom:1px solid var(--line);
+      padding-bottom:10px;
+    }
+
+    .script{
+      font-size:17px;
+      line-height:2.2;
+    }
+    .script p{
+      margin:0 0 12px;
+      padding-left:20px;
+      position:relative;
+    }
+    .script p::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:12px;
+      width:6px;
+      height:6px;
+      background:var(--accent2);
+      border-radius:50%;
+    }
+    .script p:last-child{
+      margin-bottom:0;
+    }
+    .hl{
+      color:var(--accent);
+      font-weight:600;
+    }
+    .kw{
+      color:var(--accent2);
+      font-weight:500;
+    }
+
+    .back{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      margin-top:16px;
+      padding-top:12px;
+      border-top:1px solid rgba(31,41,55,.5);
+      font-size:13px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid rgba(96,165,250,.35);
+      background:rgba(96,165,250,.10);
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{background:rgba(96,165,250,.16); text-decoration:none}
+
+    .topbtn{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      opacity:0;
+      transform:translateY(10px);
+      transition: opacity .2s ease, transform .2s ease;
+      pointer-events:none;
+    }
+    .topbtn.show{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .topbtn button{
+      cursor:pointer;
+      border:1px solid rgba(52,211,153,.35);
+      background:rgba(52,211,153,.12);
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:600;
+    }
+    .topbtn button:hover{background:rgba(52,211,153,.18)}
+  </style>
+</head>
+
+<body>
+  <a id="top"></a>
+
+  <div class="wrap">
+    <header>
+      <h1>Sonar Interview - Complete Script</h1>
+      <p>Senior Full Stack Engineer (Java, React) - Geneva</p>
+    </header>
+
+    <div class="grid">
+      <nav>
+        <div class="title">
+          <strong>20 Chapters</strong>
+          <span>Click to jump</span>
+        </div>
+        <ol>
+          <li><a href="#ch1">Tell me about yourself</a></li>
+          <li><a href="#ch2">Technical vision</a></li>
+          <li><a href="#ch3">Code quality vision</a></li>
+          <li><a href="#ch4">Good engineer qualities</a></li>
+          <li><a href="#ch5">Motivation for this role</a></li>
+          <li><a href="#ch6">Why Sonar?</a></li>
+          <li><a href="#ch7">Your contribution</a></li>
+          <li><a href="#ch8">Why hire you?</a></li>
+          <li><a href="#ch9">Java experience</a></li>
+          <li><a href="#ch10">React experience</a></li>
+          <li><a href="#ch11">AWS experience</a></li>
+          <li><a href="#ch12">Team collaboration</a></li>
+          <li><a href="#ch13">Conflict resolution</a></li>
+          <li><a href="#ch14">Leadership</a></li>
+          <li><a href="#ch15">Your strengths</a></li>
+          <li><a href="#ch16">Your weaknesses</a></li>
+          <li><a href="#ch17">Professional plans</a></li>
+          <li><a href="#ch18">Where in 5 years?</a></li>
+          <li><a href="#ch19">Salary expectations</a></li>
+          <li><a href="#ch20">Questions for them</a></li>
+        </ol>
+        <a href="index.html" class="back-link">Back to Home</a>
+      </nav>
+
+      <main>
+
+        <!-- Chapter 1 -->
+        <section id="ch1">
+          <h2>Chapter 1 - Tell me about yourself</h2>
+          <div class="script">
+            <p>Hello, my name is <span class="hl">Haythem Rehouma</span>.</p>
+            <p>Thank you very much for this opportunity to speak with you today.</p>
+            <p>I am a <span class="kw">Canadian citizen</span> living in Montreal.</p>
+            <p>I have <span class="hl">18 years</span> of engineering experience.</p>
+            <p>I have a <span class="kw">Ph.D.</span> in Applied Engineering from ETS Montreal.</p>
+            <p>I also have a <span class="kw">Master's degree in Artificial Intelligence</span> from UQAM.</p>
+            <p>And a <span class="kw">Master's in Communication Systems</span> from Tunisia.</p>
+            <p>For my technical skills, I have a <span class="hl">multidisciplinary profile</span>.</p>
+            <p>I work with <span class="kw">Java</span> and <span class="kw">Spring Boot</span> for backend development.</p>
+            <p>I build frontends with <span class="kw">React</span> and <span class="kw">TypeScript</span>.</p>
+            <p>I deploy applications on <span class="kw">AWS</span> with full CI/CD pipelines.</p>
+            <p>I am also an <span class="hl">AWS-Authorized Instructor</span>.</p>
+            <p>I have <span class="kw">4 AWS certifications</span> including Solutions Architect Professional.</p>
+            <p>I am passionate about <span class="hl">code quality</span> and <span class="hl">clean code</span> practices.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 2 -->
+        <section id="ch2">
+          <h2>Chapter 2 - Technical Vision</h2>
+          <div class="script">
+            <p>I have a <span class="hl">full-stack vision</span> of software development.</p>
+            <p>I believe that good software starts with <span class="kw">clean architecture</span>.</p>
+            <p>I focus on writing <span class="kw">maintainable</span> and <span class="kw">testable</span> code.</p>
+            <p>I follow <span class="kw">SOLID principles</span> and design patterns in my work.</p>
+            <p>I believe in <span class="hl">automation</span> for testing and deployment.</p>
+            <p>Code reviews are essential to maintain <span class="kw">quality standards</span>.</p>
+            <p>I use tools like <span class="hl">SonarQube</span> to detect issues early.</p>
+            <p>My goal is to deliver software that is <span class="kw">reliable</span> and <span class="kw">secure</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 3 -->
+        <section id="ch3">
+          <h2>Chapter 3 - Code Quality Vision</h2>
+          <div class="script">
+            <p>I believe that <span class="hl">code quality</span> is not optional.</p>
+            <p>It is a <span class="kw">fundamental requirement</span> for successful software.</p>
+            <p>Quality code reduces <span class="kw">technical debt</span> over time.</p>
+            <p>It makes the codebase <span class="kw">easier to maintain</span> and extend.</p>
+            <p>I have used <span class="hl">SonarQube</span> in my projects for years.</p>
+            <p>I integrate it into my <span class="kw">CI/CD pipelines</span> from day one.</p>
+            <p>I track metrics like <span class="kw">code coverage</span>, <span class="kw">bugs</span>, and <span class="kw">vulnerabilities</span>.</p>
+            <p>I believe in fixing issues at the source, not just treating symptoms.</p>
+            <p>This aligns perfectly with <span class="hl">Sonar's mission</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 4 -->
+        <section id="ch4">
+          <h2>Chapter 4 - What makes a good engineer?</h2>
+          <div class="script">
+            <p>A good engineer has <span class="hl">strong technical skills</span>.</p>
+            <p>But also <span class="kw">good communication abilities</span>.</p>
+            <p>They write <span class="kw">clean</span> and <span class="kw">readable</span> code.</p>
+            <p>They think about the <span class="kw">next developer</span> who will read their code.</p>
+            <p>They take <span class="hl">ownership</span> of their work.</p>
+            <p>They are <span class="kw">curious</span> and always learning.</p>
+            <p>They collaborate well with <span class="kw">Product Managers</span> and <span class="kw">UX designers</span>.</p>
+            <p>They give and receive <span class="kw">constructive feedback</span> in code reviews.</p>
+            <p>They understand the <span class="hl">business impact</span> of their decisions.</p>
+            <p>They deploy and <span class="kw">monitor</span> their features in production.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 5 -->
+        <section id="ch5">
+          <h2>Chapter 5 - Motivation for this role</h2>
+          <div class="script">
+            <p>I am excited about this <span class="hl">Staff Engineer</span> role.</p>
+            <p>I have been a developer for <span class="kw">18 years</span>.</p>
+            <p>I am ready to take on more <span class="kw">technical leadership</span>.</p>
+            <p>I want to <span class="hl">mentor</span> other engineers and help them grow.</p>
+            <p>I enjoy <span class="kw">defining architecture</span> for complex systems.</p>
+            <p>I like working on products that <span class="kw">millions of developers</span> use.</p>
+            <p>This role combines <span class="hl">hands-on coding</span> with <span class="hl">technical leadership</span>.</p>
+            <p>That is exactly what I am looking for.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 6 -->
+        <section id="ch6">
+          <h2>Chapter 6 - Why Sonar?</h2>
+          <div class="script">
+            <p>I am genuinely excited about <span class="hl">Sonar</span>.</p>
+            <p>I have been using <span class="kw">SonarQube</span> for years in my projects.</p>
+            <p>I believe in the mission: help developers write <span class="kw">better code</span>.</p>
+            <p>Your products are used by <span class="hl">7 million developers</span> worldwide.</p>
+            <p>Companies like <span class="kw">Microsoft</span>, <span class="kw">NASA</span>, and <span class="kw">MasterCard</span> use Sonar.</p>
+            <p>I love that you are rooted in the <span class="kw">open source community</span>.</p>
+            <p>Your <span class="hl">CODE culture</span> resonates with me deeply.</p>
+            <p>I believe in <span class="kw">Smarter Together</span> - no one is as smart as all of us.</p>
+            <p>I strive for <span class="kw">Excellence</span> in everything I do.</p>
+            <p>I value <span class="kw">Innovation</span> and thinking outside the box.</p>
+            <p>And I focus on <span class="kw">Delivery</span> - turning ideas into concrete achievements.</p>
+            <p>Sonar wants to be a <span class="hl">human enterprise</span>.</p>
+            <p>That is the kind of company I want to work for.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 7 -->
+        <section id="ch7">
+          <h2>Chapter 7 - Your contribution to Sonar</h2>
+          <div class="script">
+            <p>My contribution to Sonar will be in <span class="hl">five areas</span>.</p>
+            <p>First, <span class="kw">technical development</span>: I will build new features for SonarQube.</p>
+            <p>I will write clean, tested code with the <span class="kw">end user</span> in mind.</p>
+            <p>Second, <span class="kw">architecture</span>: I will help design cloud-native solutions on AWS.</p>
+            <p>I have deep experience with <span class="kw">AWS services</span> and best practices.</p>
+            <p>Third, <span class="kw">mentorship</span>: I will help junior engineers grow.</p>
+            <p>I have been teaching for years and I love sharing knowledge.</p>
+            <p>Fourth, <span class="kw">code quality leadership</span>: I will drive quality practices.</p>
+            <p>I will lead by example in code reviews and testing.</p>
+            <p>Fifth, <span class="kw">experimentation</span>: I will help implement and track experiments.</p>
+            <p>I understand the importance of <span class="hl">data-driven decisions</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 8 -->
+        <section id="ch8">
+          <h2>Chapter 8 - Why should we hire you?</h2>
+          <div class="script">
+            <p>You should hire me because I bring a <span class="hl">unique combination</span> of skills.</p>
+            <p>I have <span class="kw">4+ years of Java</span> experience as required.</p>
+            <p>I have <span class="kw">3+ years of React</span> and TypeScript experience.</p>
+            <p>I have <span class="kw">deep AWS expertise</span> with 4 certifications.</p>
+            <p>I am an <span class="hl">AWS-Authorized Instructor</span> - a restricted certification.</p>
+            <p>Only qualified professionals can obtain this certification.</p>
+            <p>I have experience with <span class="kw">PostgreSQL</span> and SQL databases.</p>
+            <p>I understand <span class="kw">code quality</span> practices deeply.</p>
+            <p>I have used <span class="kw">SonarQube</span> extensively in my projects.</p>
+            <p>I have <span class="hl">teaching experience</span> which helps with mentorship.</p>
+            <p>And I am committed to <span class="kw">excellence</span> and <span class="kw">delivery</span>.</p>
+            <p>I am ready to make a strong commitment to Sonar.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 9 -->
+        <section id="ch9">
+          <h2>Chapter 9 - Java / Spring Boot Experience</h2>
+          <div class="script">
+            <p>I have been working with <span class="hl">Java</span> for many years.</p>
+            <p>I use <span class="kw">Spring Boot</span> for backend development.</p>
+            <p>I build <span class="kw">REST APIs</span> with clean architecture.</p>
+            <p>I follow <span class="kw">design patterns</span> like Repository, Service, Controller.</p>
+            <p>I write <span class="kw">unit tests</span> with JUnit and Mockito.</p>
+            <p>I write <span class="kw">integration tests</span> for my APIs.</p>
+            <p>I use <span class="kw">Maven</span> and <span class="kw">Gradle</span> for build management.</p>
+            <p>I integrate <span class="kw">SonarQube</span> into my Java projects.</p>
+            <p>I follow <span class="hl">clean code</span> principles in all my work.</p>
+            <p>I have built <span class="kw">microservices</span> architectures with Spring Boot.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 10 -->
+        <section id="ch10">
+          <h2>Chapter 10 - React / Frontend Experience</h2>
+          <div class="script">
+            <p>I have <span class="hl">3+ years</span> of React experience.</p>
+            <p>I work with <span class="kw">TypeScript</span> for type safety.</p>
+            <p>I build <span class="kw">responsive</span> and <span class="kw">accessible</span> user interfaces.</p>
+            <p>I use modern React features like <span class="kw">hooks</span> and <span class="kw">context</span>.</p>
+            <p>I follow <span class="kw">component-based</span> architecture.</p>
+            <p>I write <span class="kw">unit tests</span> for my React components.</p>
+            <p>I understand <span class="kw">state management</span> patterns.</p>
+            <p>I work closely with <span class="kw">UX designers</span> to implement features.</p>
+            <p>I focus on <span class="hl">user experience</span> in everything I build.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 11 -->
+        <section id="ch11">
+          <h2>Chapter 11 - AWS / Cloud Experience</h2>
+          <div class="script">
+            <p>I have <span class="hl">deep experience</span> with AWS.</p>
+            <p>I have <span class="kw">4 AWS certifications</span>.</p>
+            <p>Solutions Architect Professional, DevOps Professional, and two Associate level.</p>
+            <p>I am an <span class="hl">AWS-Authorized Instructor</span>.</p>
+            <p>This is a <span class="kw">restricted certification</span> from Amazon.</p>
+            <p>Only qualified professionals can teach official AWS courses.</p>
+            <p>I built a complete platform using <span class="kw">EC2</span>, <span class="kw">VPC</span>, and <span class="kw">RDS</span>.</p>
+            <p>I use <span class="kw">S3</span> for storage and <span class="kw">Lambda</span> for serverless.</p>
+            <p>I implement <span class="kw">SQS</span> and <span class="kw">SNS</span> for messaging.</p>
+            <p>I use <span class="kw">CloudFormation</span> for infrastructure as code.</p>
+            <p>I set up <span class="kw">CI/CD pipelines</span> with CodePipeline.</p>
+            <p>I implement <span class="kw">security best practices</span> with IAM and KMS.</p>
+            <p>I monitor applications with <span class="kw">CloudWatch</span>.</p>
+            <p>I teach a <span class="hl">60-hour AWS course</span> at college level.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 12 -->
+        <section id="ch12">
+          <h2>Chapter 12 - Team Collaboration</h2>
+          <div class="script">
+            <p>I am a <span class="hl">collaborative</span> person.</p>
+            <p>I believe that <span class="kw">no one is as smart as all of us</span>.</p>
+            <p>I work well with <span class="kw">Product Managers</span> to define features.</p>
+            <p>I collaborate with <span class="kw">UX designers</span> on user experience.</p>
+            <p>I participate actively in <span class="kw">code reviews</span>.</p>
+            <p>I give <span class="kw">constructive feedback</span> to help others improve.</p>
+            <p>I am open to receiving feedback on my own work.</p>
+            <p>I communicate clearly and <span class="kw">listen first</span>.</p>
+            <p>I believe in <span class="hl">transparency</span> and <span class="hl">honesty</span>.</p>
+            <p>I contribute to <span class="kw">team goals</span> and sprint completion.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 13 -->
+        <section id="ch13">
+          <h2>Chapter 13 - Conflict Resolution</h2>
+          <div class="script">
+            <p>I have encountered <span class="kw">differences of opinion</span> with colleagues.</p>
+            <p>This is normal in any professional environment.</p>
+            <p>I have learned that it is easier to find solutions when you <span class="hl">listen first</span>.</p>
+            <p>I try to understand the <span class="kw">other person's point of view</span>.</p>
+            <p>I focus on the <span class="kw">problem</span>, not the person.</p>
+            <p>I look for <span class="kw">win-win solutions</span> whenever possible.</p>
+            <p>I believe in <span class="hl">consensus</span> and <span class="hl">compromise</span>.</p>
+            <p>The goal is always to achieve the <span class="kw">common objectives</span> of the team.</p>
+            <p>I communicate <span class="kw">frankly</span> but with respect.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 14 -->
+        <section id="ch14">
+          <h2>Chapter 14 - Leadership</h2>
+          <div class="script">
+            <p>I adopt a <span class="hl">servant leadership</span> style.</p>
+            <p>I believe in <span class="kw">empowering</span> team members.</p>
+            <p>I help others <span class="kw">grow</span> and develop their skills.</p>
+            <p>I take <span class="kw">ownership</span> of the team's work.</p>
+            <p>I drive sprints to <span class="kw">completion</span>.</p>
+            <p>I remove <span class="kw">blockers</span> for other engineers.</p>
+            <p>I lead by <span class="hl">example</span> in code quality and testing.</p>
+            <p>I contribute to the definition of <span class="kw">short and long-term goals</span>.</p>
+            <p>I am comfortable making <span class="kw">technical decisions</span>.</p>
+            <p>But I also seek <span class="kw">input</span> from the team.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 15 -->
+        <section id="ch15">
+          <h2>Chapter 15 - Your Strengths</h2>
+          <div class="script">
+            <p>My main strengths are:</p>
+            <p><span class="hl">Technical expertise</span> across the full stack.</p>
+            <p><span class="kw">Deep AWS knowledge</span> with certifications and teaching experience.</p>
+            <p><span class="kw">Strong communication</span> skills from years of teaching.</p>
+            <p><span class="kw">Rigor</span> and attention to detail in my work.</p>
+            <p><span class="kw">Creativity</span> in solving complex problems.</p>
+            <p>A <span class="hl">positive attitude</span> and willingness to learn.</p>
+            <p>The ability to work well under <span class="kw">deadlines</span>.</p>
+            <p>A genuine passion for <span class="kw">code quality</span>.</p>
+            <p>And a strong sense of <span class="kw">ownership</span> and commitment.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 16 -->
+        <section id="ch16">
+          <h2>Chapter 16 - Your Weaknesses</h2>
+          <div class="script">
+            <p>I am sometimes <span class="hl">too direct</span> in my communication.</p>
+            <p>I have learned to balance honesty with <span class="kw">diplomacy</span>.</p>
+            <p>I also have a strong <span class="kw">need for autonomy</span>.</p>
+            <p>But I understand the importance of <span class="kw">team alignment</span>.</p>
+            <p>I can be <span class="kw">impatient</span> when things move slowly.</p>
+            <p>I channel this into <span class="hl">driving progress</span> constructively.</p>
+            <p>I am aware of these tendencies and work on them continuously.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 17 -->
+        <section id="ch17">
+          <h2>Chapter 17 - Professional Plans</h2>
+          <div class="script">
+            <p>Joining Sonar would be a great opportunity for me.</p>
+            <p>I want to expand my skills in <span class="hl">code quality tools</span>.</p>
+            <p>I want to work on products used by <span class="kw">millions of developers</span>.</p>
+            <p>I have ideas for features I would like to implement.</p>
+            <p>I want to contribute to Sonar's growth and success.</p>
+            <p>I aspire to become a <span class="hl">technical leader</span> in code quality.</p>
+            <p>I want to collaborate with brilliant colleagues.</p>
+            <p>And I want to keep learning and improving every day.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 18 -->
+        <section id="ch18">
+          <h2>Chapter 18 - Where do you see yourself in 5 years?</h2>
+          <div class="script">
+            <p>In 5 years, I see myself as a <span class="hl">senior technical leader</span> at Sonar.</p>
+            <p>I want to be deeply involved in <span class="kw">product development</span>.</p>
+            <p>I want to have mentored several <span class="kw">junior engineers</span>.</p>
+            <p>I want to have contributed to <span class="kw">major features</span> in SonarQube.</p>
+            <p>I want to be recognized for my expertise in <span class="kw">code quality</span>.</p>
+            <p>My priority is to do my job as well as possible.</p>
+            <p>I want to be fully involved and have opportunities for <span class="hl">growth</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 19 -->
+        <section id="ch19">
+          <h2>Chapter 19 - Salary Expectations</h2>
+          <div class="script">
+            <p>I am open to a <span class="hl">fair offer</span>.</p>
+            <p>One that is consistent with my experience and skills.</p>
+            <p>I have looked at market rates for <span class="kw">Staff Engineers</span> in Geneva.</p>
+            <p>I understand that Sonar offers <span class="kw">competitive compensation</span>.</p>
+            <p>I am also interested in the <span class="kw">total package</span>.</p>
+            <p>Including benefits, pension, and growth opportunities.</p>
+            <p>I am flexible and open to discussion.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <!-- Chapter 20 -->
+        <section id="ch20">
+          <h2>Chapter 20 - Questions for them</h2>
+          <div class="script">
+            <p>What are the <span class="hl">biggest challenges</span> for the Storefront team right now?</p>
+            <p>How does Sonar measure <span class="kw">success</span> for this role?</p>
+            <p>What does the <span class="kw">onboarding process</span> look like?</p>
+            <p>How does the team approach <span class="kw">experimentation</span>?</p>
+            <p>What is the <span class="kw">tech stack</span> for the enterprise features?</p>
+            <p>How do you balance <span class="kw">innovation</span> with <span class="kw">stability</span>?</p>
+            <p>What opportunities are there for <span class="hl">professional growth</span>?</p>
+            <p>What do you enjoy most about working at Sonar?</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="topbtn" id="topbtn">
+    <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("topbtn");
+      const showAfter = 300;
+      const onScroll = () => {
+        if (window.scrollY > showAfter) btn.classList.add("show");
+        else btn.classList.remove("show");
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
+
+

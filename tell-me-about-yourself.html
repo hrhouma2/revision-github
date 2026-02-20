@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tell Me About Yourself - Haythem Rehouma</title>
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#1f2937;
+      --accent:#60a5fa;
+      --accent2:#34d399;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:linear-gradient(180deg, #070a12 0%, var(--bg) 55%, #070a12 100%);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 16px 80px;
+    }
+    header{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.6);
+      backdrop-filter: blur(10px);
+      border-radius:16px;
+      padding:20px 18px;
+    }
+    header h1{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    header p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    nav{
+      position:sticky;
+      top:12px;
+      align-self:start;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.55);
+      border-radius:16px;
+      padding:14px 12px;
+    }
+    nav .title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:0 0 10px;
+      padding:6px 8px;
+      border-radius:12px;
+      background:rgba(31,41,55,.55);
+      border:1px solid rgba(31,41,55,.9);
+    }
+    nav .title strong{font-size:14px}
+    nav .title span{color:var(--muted); font-size:12px}
+    nav ol{
+      margin:0;
+      padding-left:18px;
+    }
+    nav li{margin:8px 0}
+    nav a{display:inline-block; padding:2px 0}
+    nav .back-link{
+      display:block;
+      margin-top:16px;
+      padding-top:12px;
+      border-top:1px solid var(--line);
+      font-size:13px;
+    }
+
+    main{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.45);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    .question-box{
+      border:1px solid rgba(96,165,250,.5);
+      background:rgba(96,165,250,.08);
+      border-radius:12px;
+      padding:16px;
+      margin-bottom:16px;
+    }
+    .question-box h2{
+      margin:0;
+      font-size:17px;
+      color:var(--accent);
+    }
+
+    section{
+      border:1px solid rgba(31,41,55,.9);
+      background:rgba(17,24,39,.65);
+      border-radius:16px;
+      padding:16px 16px 14px;
+      margin:0 0 14px;
+    }
+    section:last-child{margin-bottom:0}
+    section h3{
+      margin:0 0 12px;
+      font-size:16px;
+      color:var(--accent);
+    }
+
+    .script{
+      font-size:18px;
+      line-height:2.1;
+    }
+    .script p{
+      margin:0 0 16px;
+    }
+    .script p:last-child{
+      margin-bottom:0;
+    }
+    .hl{
+      color:var(--accent);
+      font-weight:600;
+    }
+    .kw{
+      color:var(--accent2);
+      font-weight:500;
+    }
+
+    .back{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:flex-end;
+      margin-top:12px;
+      font-size:13px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(96,165,250,.35);
+      background:rgba(96,165,250,.10);
+      color:var(--text);
+      text-decoration:none;
+    }
+    .pill:hover{background:rgba(96,165,250,.16); text-decoration:none}
+
+    .topbtn{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:50;
+      opacity:0;
+      transform:translateY(10px);
+      transition: opacity .2s ease, transform .2s ease;
+      pointer-events:none;
+    }
+    .topbtn.show{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .topbtn button{
+      cursor:pointer;
+      border:1px solid rgba(52,211,153,.35);
+      background:rgba(52,211,153,.12);
+      color:var(--text);
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:600;
+    }
+    .topbtn button:hover{background:rgba(52,211,153,.18)}
+  </style>
+</head>
+
+<body>
+  <a id="top"></a>
+
+  <div class="wrap">
+    <header>
+      <h1>Tell Me About Yourself</h1>
+      <p>Sonar Interview - Full Script</p>
+    </header>
+
+    <div class="grid">
+      <nav>
+        <div class="title">
+          <strong>Sections</strong>
+          <span>Click to jump</span>
+        </div>
+        <ol>
+          <li><a href="#greeting">Greeting</a></li>
+          <li><a href="#background">Background</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#technical">Technical Skills</a></li>
+          <li><a href="#aws">AWS Experience</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#sonar">Why Sonar</a></li>
+          <li><a href="#closing">Closing</a></li>
+        </ol>
+        <a href="index.html" class="back-link">Back to Home</a>
+      </nav>
+
+      <main>
+        <div class="question-box">
+          <h2>"Tell me about yourself"</h2>
+        </div>
+
+        <section id="greeting">
+          <h3>Greeting</h3>
+          <div class="script">
+            <p>Hello, thank you for this opportunity.</p>
+            <p>My name is <span class="hl">Haythem Rehouma</span>.</p>
+            <p>I am very happy to speak with you today.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="background">
+          <h3>Background</h3>
+          <div class="script">
+            <p>I am a <span class="kw">Canadian citizen</span>.</p>
+            <p>I live in <span class="kw">Montreal</span>.</p>
+            <p>I have <span class="hl">18 years</span> of engineering experience.</p>
+            <p>I have been working in Canada for <span class="hl">10 years</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="education">
+          <h3>Education</h3>
+          <div class="script">
+            <p>I have a <span class="hl">Ph.D.</span> from ETS Montreal.</p>
+            <p>My research was in <span class="kw">Computer Vision</span> and <span class="kw">AI</span>.</p>
+            <p>I also have a <span class="kw">Master's in Artificial Intelligence</span>.</p>
+            <p>And a <span class="kw">Bachelor's in Telecommunications</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="technical">
+          <h3>Technical Skills</h3>
+          <div class="script">
+            <p>For backend, I work with <span class="hl">Java</span> and <span class="hl">Spring Boot</span>.</p>
+            <p>I build <span class="kw">REST APIs</span> and <span class="kw">microservices</span>.</p>
+            <p>For frontend, I use <span class="kw">React</span> and <span class="kw">TypeScript</span>.</p>
+            <p>I work with <span class="kw">PostgreSQL</span> and <span class="kw">MySQL</span>.</p>
+            <p>I use <span class="kw">Docker</span> and <span class="kw">Kubernetes</span> for deployment.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="aws">
+          <h3>AWS Experience</h3>
+          <div class="script">
+            <p>I have strong experience with <span class="hl">AWS</span>.</p>
+            <p>I built a full platform using <span class="kw">EC2</span>, <span class="kw">S3</span>, and <span class="kw">RDS</span>.</p>
+            <p>I use <span class="kw">Lambda</span> and <span class="kw">SQS</span> for serverless.</p>
+            <p>I have <span class="hl">4 AWS certifications</span>.</p>
+            <p>I am an <span class="hl">AWS-Authorized Instructor</span>.</p>
+            <p>This is a restricted certification from Amazon.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="teaching">
+          <h3>Teaching Experience</h3>
+          <div class="script">
+            <p>I teach <span class="kw">cloud computing</span> at college level.</p>
+            <p>I deliver the official <span class="hl">AWS re/Start</span> program.</p>
+            <p>This is a <span class="kw">60-hour</span> intensive course.</p>
+            <p>Only certified instructors can teach this program.</p>
+            <p>I prepare students for <span class="kw">AWS certification exams</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="sonar">
+          <h3>Why Sonar</h3>
+          <div class="script">
+            <p>I am excited about <span class="hl">Sonar</span>.</p>
+            <p>I believe in <span class="kw">code quality</span> and <span class="kw">clean code</span>.</p>
+            <p>I have used <span class="kw">SonarQube</span> in my projects.</p>
+            <p>I love the mission: help developers write better code.</p>
+            <p>Your values match mine: <span class="hl">excellence</span> and <span class="hl">delivery</span>.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+        <section id="closing">
+          <h3>Closing</h3>
+          <div class="script">
+            <p>I am ready to contribute to <span class="hl">Sonar</span>.</p>
+            <p>I bring strong <span class="kw">Java</span> and <span class="kw">React</span> skills.</p>
+            <p>I have deep <span class="kw">AWS</span> experience.</p>
+            <p>And I understand the importance of <span class="kw">code quality</span>.</p>
+            <p>Thank you for listening.</p>
+            <p>I am happy to answer your questions.</p>
+          </div>
+          <div class="back"><a class="pill" href="#top">Back to top</a></div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div class="topbtn" id="topbtn">
+    <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("topbtn");
+      const showAfter = 300;
+      const onScroll = () => {
+        if (window.scrollY > showAfter) btn.classList.add("show");
+        else btn.classList.remove("show");
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
+
+

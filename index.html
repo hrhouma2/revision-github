@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interview Prep - Haythem Rehouma</title>
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#1f2937;
+      --accent:#60a5fa;
+      --accent2:#34d399;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:linear-gradient(180deg, #070a12 0%, var(--bg) 55%, #070a12 100%);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .hidden{display:none !important}
+
+    /* Password Screen */
+    #password-screen{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .password-box{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.6);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:40px 32px;
+      text-align:center;
+      max-width:380px;
+      width:100%;
+    }
+    .password-box .lock{
+      font-size:48px;
+      margin-bottom:16px;
+      color:var(--accent);
+    }
+    .password-box h2{
+      margin:0 0 8px;
+      font-size:20px;
+    }
+    .password-box p{
+      margin:0 0 20px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .password-box input{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.8);
+      color:var(--text);
+      border-radius:10px;
+      font-size:15px;
+      margin-bottom:12px;
+    }
+    .password-box input:focus{
+      outline:none;
+      border-color:var(--accent);
+    }
+    .password-box button{
+      width:100%;
+      padding:12px;
+      border:1px solid rgba(52,211,153,.4);
+      background:rgba(52,211,153,.15);
+      color:var(--text);
+      border-radius:10px;
+      font-size:15px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .password-box button:hover{
+      background:rgba(52,211,153,.25);
+    }
+    .password-error{
+      color:#f87171;
+      font-size:13px;
+      margin-top:12px;
+      display:none;
+    }
+
+    /* Main Content */
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 16px 80px;
+    }
+    header{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.6);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:20px 18px;
+    }
+    header h1{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    header p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    nav{
+      position:sticky;
+      top:12px;
+      align-self:start;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.55);
+      border-radius:16px;
+      padding:14px 12px;
+    }
+    nav .title{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin:0 0 10px;
+      padding:6px 8px;
+      border-radius:12px;
+      background:rgba(31,41,55,.55);
+      border:1px solid rgba(31,41,55,.9);
+    }
+    nav .title strong{font-size:14px}
+    nav .title span{color:var(--muted);font-size:12px}
+    nav ol{
+      margin:0;
+      padding-left:18px;
+    }
+    nav li{margin:8px 0}
+    nav a{display:inline-block;padding:2px 0}
+
+    main{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.45);
+      border-radius:16px;
+      padding:16px;
+    }
+
+    section{
+      border:1px solid rgba(31,41,55,.9);
+      background:rgba(17,24,39,.65);
+      border-radius:16px;
+      padding:16px 16px 14px;
+      margin:0 0 14px;
+    }
+    section:last-child{margin-bottom:0}
+    section h3{
+      margin:0 0 12px;
+      font-size:16px;
+      color:var(--accent);
+    }
+
+    .script{
+      font-size:18px;
+      line-height:2;
+    }
+    .script p{
+      margin:0 0 14px;
+    }
+    .script p:last-child{
+      margin-bottom:0;
+    }
+    .hl{
+      color:var(--accent);
+      font-weight:600;
+    }
+    .kw{
+      color:var(--accent2);
+      font-weight:500;
+    }
+
+    .links-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:12px;
+      margin-top:16px;
+    }
+    .link-card{
+      display:block;
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.65);
+      border-radius:12px;
+      padding:16px;
+      text-decoration:none;
+      transition:border-color .2s, background .2s;
+    }
+    .link-card:hover{
+      border-color:var(--accent);
+      background:rgba(17,24,39,.85);
+      text-decoration:none;
+    }
+    .link-card h4{
+      margin:0 0 6px;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .link-card p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Password Screen -->
+  <div id="password-screen">
+    <div class="password-box">
+      <div class="lock">&#128274;</div>
+      <h2>Access Protected</h2>
+      <p>Enter password to continue</p>
+      <input type="password" id="password-input" placeholder="Password..." onkeypress="if(event.key==='Enter')checkPassword()">
+      <button onclick="checkPassword()">Unlock</button>
+      <p class="password-error" id="error-msg">Incorrect password</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" class="hidden">
+    <div class="wrap">
+      <header>
+        <h1>Interview Preparation</h1>
+        <p>Haythem Rehouma, Ph.D. | Senior Full Stack Engineer | Java, React, AWS</p>
+      </header>
+
+      <div class="grid">
+        <nav>
+          <div class="title">
+            <strong>Quick Intro</strong>
+            <span>Read aloud</span>
+          </div>
+          <ol>
+            <li><a href="#who">Who I Am</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Key Skills</a></li>
+            <li><a href="#pages">Documents</a></li>
+          </ol>
+        </nav>
+
+        <main>
+          <section id="who">
+            <h3>Who I Am</h3>
+            <div class="script">
+              <p>Hello, my name is <span class="hl">Haythem Rehouma</span>.</p>
+              <p>Thank you for this opportunity.</p>
+              <p>I am a <span class="kw">Canadian citizen</span>.</p>
+              <p>I live in <span class="kw">Montreal</span>.</p>
+              <p>I have <span class="hl">18 years</span> of experience.</p>
+            </div>
+          </section>
+
+          <section id="education">
+            <h3>Education</h3>
+            <div class="script">
+              <p>I have a <span class="hl">Ph.D.</span> from ETS Montreal.</p>
+              <p>I also have a <span class="kw">Master's in AI</span> from UQAM.</p>
+              <p>And a <span class="kw">Master's in Communication Systems</span>.</p>
+              <p>My first degree is in <span class="kw">Telecommunications</span>.</p>
+            </div>
+          </section>
+
+          <section id="experience">
+            <h3>Experience</h3>
+            <div class="script">
+              <p>I have been in Canada for <span class="hl">10 years</span>.</p>
+              <p>I build backend systems with <span class="kw">Spring Boot</span>.</p>
+              <p>I create frontends with <span class="kw">React</span>.</p>
+              <p>I deploy everything on <span class="kw">AWS</span>.</p>
+              <p>I am also an <span class="hl">AWS Instructor</span>.</p>
+              <p>I teach cloud computing at college.</p>
+            </div>
+          </section>
+
+          <section id="skills">
+            <h3>Key Skills</h3>
+            <div class="script">
+              <p>For backend, I use <span class="hl">Java</span> and <span class="hl">Spring Boot</span>.</p>
+              <p>For frontend, I use <span class="kw">React</span> and <span class="kw">TypeScript</span>.</p>
+              <p>For cloud, I use <span class="kw">AWS</span> services.</p>
+              <p>I also know <span class="kw">Docker</span> and <span class="kw">Kubernetes</span>.</p>
+              <p>I work with <span class="kw">PostgreSQL</span> and <span class="kw">MySQL</span>.</p>
+              <p>I have experience in <span class="kw">AI</span> and <span class="kw">Machine Learning</span>.</p>
+            </div>
+          </section>
+
+          <section id="pages">
+            <h3>Documents</h3>
+            <div class="links-grid">
+              <a href="my-introduction.html" class="link-card">
+                <h4>My Introduction (Flowing Text)</h4>
+                <p>Natural conversational phrases - Feb 16, 2026</p>
+              </a>
+              <a href="sonar-full-script.html" class="link-card">
+                <h4>Sonar Full Script (20 Chapters)</h4>
+                <p>Complete interview script with all questions</p>
+              </a>
+              <a href="tell-me-about-yourself.html" class="link-card">
+                <h4>Tell Me About Yourself</h4>
+                <p>Short script for the first question</p>
+              </a>
+              <a href="cv-complet.html" class="link-card">
+                <h4>Complete CV</h4>
+                <p>Full curriculum vitae with all details</p>
+              </a>
+              <a href="sonar-interview-prep.html" class="link-card">
+                <h4>Sonar Interview Prep</h4>
+                <p>Technical questions and answers</p>
+              </a>
+              <a href="sonarqube-setup.html" class="link-card">
+                <h4>SonarQube Setup Guide</h4>
+                <p>Step-by-step local installation for React</p>
+              </a>
+              <a href="sonar-interview-steps.html" class="link-card">
+                <h4>Sonar Interview Steps (6 Stages)</h4>
+                <p>Full breakdown of the Java Software Engineer interview pipeline with examples</p>
+              </a>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT_PASSWORD = 'fuckrita25$';
+    const STORAGE_KEY = 'interview_prep_auth';
+
+    function checkAuth() {
+      if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+      }
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('password-input');
+      const error = document.getElementById('error-msg');
+      if (input.value === CORRECT_PASSWORD) {
+        sessionStorage.setItem(STORAGE_KEY, 'true');
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+      } else {
+        error.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    checkAuth();
+  </script>
+</body>
+</html>

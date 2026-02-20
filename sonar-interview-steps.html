@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sonar Interview Steps — Java Software Engineer</title>
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#1f2937;
+      --accent:#60a5fa;
+      --accent2:#34d399;
+      --warn:#fbbf24;
+      --red:#f87171;
+      --purple:#a78bfa;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:linear-gradient(180deg, #070a12 0%, var(--bg) 55%, #070a12 100%);
+      color:var(--text);
+      line-height:1.8;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .hidden{display:none !important}
+
+    /* Password Screen */
+    #password-screen{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .password-box{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.6);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:40px 32px;
+      text-align:center;
+      max-width:380px;
+      width:100%;
+    }
+    .password-box .lock{font-size:48px;margin-bottom:16px;color:var(--accent)}
+    .password-box h2{margin:0 0 8px;font-size:20px}
+    .password-box p{margin:0 0 20px;color:var(--muted);font-size:14px}
+    .password-box input{
+      width:100%;padding:12px 14px;border:1px solid var(--line);
+      background:rgba(17,24,39,.8);color:var(--text);border-radius:10px;font-size:15px;margin-bottom:12px;
+    }
+    .password-box input:focus{outline:none;border-color:var(--accent)}
+    .password-box button{
+      width:100%;padding:12px;border:1px solid rgba(52,211,153,.4);
+      background:rgba(52,211,153,.15);color:var(--text);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;
+    }
+    .password-box button:hover{background:rgba(52,211,153,.25)}
+    .password-error{color:#f87171;font-size:13px;margin-top:12px;display:none}
+
+    /* Main Content */
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 16px 80px;
+    }
+    header{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.6);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:20px 18px;
+    }
+    header h1{margin:0 0 8px;font-size:22px;letter-spacing:.2px}
+    header p{margin:0;color:var(--muted);font-size:14px}
+    .back-link{
+      display:inline-block;margin-bottom:14px;font-size:14px;
+      color:var(--muted);
+    }
+    .back-link:hover{color:var(--accent)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+    nav{
+      position:sticky;top:12px;align-self:start;
+      border:1px solid var(--line);background:rgba(17,24,39,.55);
+      border-radius:16px;padding:14px 12px;max-height:90vh;overflow-y:auto;
+    }
+    nav .title{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      margin:0 0 10px;padding:6px 8px;border-radius:12px;
+      background:rgba(31,41,55,.55);border:1px solid rgba(31,41,55,.9);
+    }
+    nav .title strong{font-size:14px}
+    nav .title span{color:var(--muted);font-size:12px}
+    nav ol{margin:0;padding-left:18px}
+    nav li{margin:8px 0}
+    nav a{display:inline-block;padding:2px 0;font-size:13px}
+
+    main{
+      border:1px solid var(--line);background:rgba(17,24,39,.45);
+      border-radius:16px;padding:16px;
+    }
+
+    section{
+      border:1px solid rgba(31,41,55,.9);background:rgba(17,24,39,.65);
+      border-radius:16px;padding:18px 18px 16px;margin:0 0 14px;
+    }
+    section:last-child{margin-bottom:0}
+    section h3{margin:0 0 14px;font-size:17px;color:var(--accent)}
+
+    .badge{
+      display:inline-block;padding:3px 10px;border-radius:8px;
+      font-size:12px;font-weight:600;margin-bottom:10px;
+    }
+    .badge-time{background:rgba(96,165,250,.15);color:var(--accent);border:1px solid rgba(96,165,250,.3)}
+    .badge-goal{background:rgba(52,211,153,.12);color:var(--accent2);border:1px solid rgba(52,211,153,.3)}
+    .badge-warn{background:rgba(251,191,36,.12);color:var(--warn);border:1px solid rgba(251,191,36,.3)}
+    .badge-purple{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.3)}
+
+    .content{font-size:15px;line-height:1.9}
+    .content p{margin:0 0 12px}
+    .content ul,.content ol{margin:0 0 12px;padding-left:22px}
+    .content li{margin:4px 0}
+    .hl{color:var(--accent);font-weight:600}
+    .kw{color:var(--accent2);font-weight:500}
+    .warn{color:var(--warn);font-weight:500}
+    .purple{color:var(--purple);font-weight:500}
+
+    pre{
+      background:rgba(0,0,0,.4);border:1px solid var(--line);
+      border-radius:10px;padding:14px 16px;overflow-x:auto;
+      font-size:13.5px;line-height:1.7;margin:10px 0 14px;
+      color:#e2e8f0;font-family:'Cascadia Code','Fira Code',Consolas,monospace;
+    }
+    code{
+      font-family:'Cascadia Code','Fira Code',Consolas,monospace;
+      background:rgba(96,165,250,.1);padding:1px 5px;border-radius:4px;font-size:13px;
+    }
+
+    .example-block{
+      border-left:3px solid var(--accent2);
+      background:rgba(52,211,153,.05);
+      border-radius:0 10px 10px 0;
+      padding:12px 16px;margin:10px 0 14px;
+    }
+    .example-block h5{margin:0 0 6px;font-size:14px;color:var(--accent2)}
+
+    .bad-block{
+      border-left:3px solid var(--red);
+      background:rgba(248,113,113,.05);
+      border-radius:0 10px 10px 0;
+      padding:12px 16px;margin:10px 0 14px;
+    }
+    .bad-block h5{margin:0 0 6px;font-size:14px;color:var(--red)}
+
+    .good-block{
+      border-left:3px solid var(--accent2);
+      background:rgba(52,211,153,.05);
+      border-radius:0 10px 10px 0;
+      padding:12px 16px;margin:10px 0 14px;
+    }
+    .good-block h5{margin:0 0 6px;font-size:14px;color:var(--accent2)}
+
+    .eval-block{
+      border-left:3px solid var(--purple);
+      background:rgba(167,139,250,.05);
+      border-radius:0 10px 10px 0;
+      padding:12px 16px;margin:10px 0 14px;
+    }
+    .eval-block h5{margin:0 0 6px;font-size:14px;color:var(--purple)}
+
+    .prep-block{
+      border-left:3px solid var(--warn);
+      background:rgba(251,191,36,.05);
+      border-radius:0 10px 10px 0;
+      padding:12px 16px;margin:10px 0 14px;
+    }
+    .prep-block h5{margin:0 0 6px;font-size:14px;color:var(--warn)}
+
+    .question-block{
+      border-left:3px solid var(--accent);
+      background:rgba(96,165,250,.05);
+      border-radius:0 10px 10px 0;
+      padding:12px 16px;margin:10px 0 14px;
+    }
+    .question-block h5{margin:0 0 6px;font-size:14px;color:var(--accent)}
+
+    .star-box{
+      border:1px solid rgba(251,191,36,.3);background:rgba(251,191,36,.06);
+      border-radius:12px;padding:16px;margin:10px 0 14px;
+    }
+    .star-box h5{margin:0 0 8px;color:var(--warn);font-size:15px}
+
+    .plan-box{
+      border:1px solid rgba(96,165,250,.3);background:rgba(96,165,250,.06);
+      border-radius:12px;padding:16px;margin:10px 0 14px;
+    }
+    .plan-box h5{margin:0 0 8px;color:var(--accent);font-size:15px}
+
+    .divider{
+      border:none;border-top:1px solid var(--line);margin:18px 0;
+    }
+
+    .overview-table{
+      width:100%;border-collapse:collapse;font-size:14px;margin:12px 0;
+    }
+    .overview-table th,.overview-table td{
+      padding:10px 12px;text-align:left;border:1px solid var(--line);
+    }
+    .overview-table th{
+      background:rgba(96,165,250,.1);color:var(--accent);font-weight:600;
+    }
+    .overview-table td{vertical-align:top}
+
+    .day-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:12px;margin:12px 0;
+    }
+    .day-card{
+      border:1px solid var(--line);
+      background:rgba(17,24,39,.65);
+      border-radius:12px;
+      padding:14px;
+    }
+    .day-card h5{margin:0 0 8px;color:var(--accent);font-size:14px}
+    .day-card ul{margin:0;padding-left:18px;font-size:13px}
+    .day-card li{margin:3px 0}
+  </style>
+</head>
+
+<body>
+  <!-- Password Screen -->
+  <div id="password-screen">
+    <div class="password-box">
+      <div class="lock">&#128274;</div>
+      <h2>Access Protected</h2>
+      <p>Enter password to continue</p>
+      <input type="password" id="password-input" placeholder="Password..." onkeypress="if(event.key==='Enter')checkPassword()">
+      <button onclick="checkPassword()">Unlock</button>
+      <p class="password-error" id="error-msg">Incorrect password</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" class="hidden">
+    <div class="wrap">
+
+      <a href="index.html" class="back-link">&#8592; Back to Index</a>
+
+      <header>
+        <h1>Sonar — Java Software Engineer Interview Steps</h1>
+        <p>Complete breakdown of all 6 stages &bull; Geneva &bull; Nov 2025 &bull; With examples, evaluation criteria &amp; preparation tips</p>
+      </header>
+
+      <div class="grid">
+        <nav>
+          <div class="title">
+            <strong>Full Guide</strong>
+            <span>6 Steps + Bonus</span>
+          </div>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#step1">1 &mdash; Codility Test</a></li>
+            <li><a href="#step2">2 &mdash; HR Video (30 min)</a></li>
+            <li><a href="#step3">3 &mdash; Tech Screen (30 min)</a></li>
+            <li><a href="#step4">4 &mdash; Tech Deep (2 hours)</a></li>
+            <li><a href="#step5">5 &mdash; Cross-functional (30 min)</a></li>
+            <li><a href="#step6">6 &mdash; Eng Leader (20 min)</a></li>
+            <li><a href="#behavioral">Behavioral Questions</a></li>
+            <li><a href="#questions-to-ask">Questions to Ask</a></li>
+            <li><a href="#7day-plan">7-Day Prep Plan</a></li>
+            <li><a href="#sonar-loves">What Sonar Loves</a></li>
+          </ol>
+        </nav>
+
+        <main>
+
+          <!-- ==================== OVERVIEW ==================== -->
+          <section id="overview">
+            <h3>&#128640; Interview Pipeline &mdash; Overview</h3>
+            <div class="content">
+              <p><em>Source: Anonymous interview candidate &mdash; Java Software Engineer &mdash; Geneva &mdash; Nov 12, 2025</em></p>
+              <table class="overview-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Stage</th>
+                    <th>Duration</th>
+                    <th>Focus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Codility Test</td><td>60–120 min</td><td>Algorithms, code fixing, logic</td></tr>
+                  <tr><td>2</td><td>Initial Video Interview</td><td>30 min</td><td>HR fit, motivation, logistics</td></tr>
+                  <tr><td>3</td><td>Technical Interview (Screen)</td><td>30 min</td><td>Quick tech validation</td></tr>
+                  <tr><td>4</td><td>2-Hour Technical Interview</td><td>2 hours</td><td>Live coding, refactoring, API, scalability</td></tr>
+                  <tr><td>5</td><td>Cross-functional Interview</td><td>30 min</td><td>Collaboration with PM / QA / non-tech</td></tr>
+                  <tr><td>6</td><td>Final &mdash; Engineering Leader</td><td>20 min</td><td>Culture, seniority, leadership</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- ==================== STEP 1 ==================== -->
+          <section id="step1">
+            <h3>Step 1 &mdash; Codility Test (Online)</h3>
+            <span class="badge badge-time">&#9200; 60–120 min</span>
+            <span class="badge badge-goal">&#127919; Algorithms &amp; Code Reading</span>
+            <div class="content">
+              <p><strong>Goal:</strong> Quickly verify your <span class="hl">algorithmic foundations</span> and ability to <span class="kw">read/fix existing code</span>.</p>
+              <p><strong>Typical format:</strong> 2–3 exercises, sometimes "fix existing buggy code".</p>
+
+              <hr class="divider">
+              <p><strong>Actual questions reported (Nov 2025):</strong></p>
+
+              <div class="example-block">
+                <h5>Problem 1 &mdash; Nails &amp; Hammer</h5>
+                <p>Review code and make <span class="hl">max 4 fixes</span>. Hammer down at most K nails &mdash; maximize the number of nails that end up having the same length.</p>
+              </div>
+
+              <div class="example-block">
+                <h5>Problem 2 &mdash; Remove Adjacent Pairs</h5>
+                <p>Pairs are a/b and c/d. Example: <code>CBACD &rarr; CBA &rarr; C</code>. Stack-based approach.</p>
+              </div>
+
+              <div class="example-block">
+                <h5>Problem 3 &mdash; Binary Reduction to Zero</h5>
+                <p>If v is odd &rarr; subtract 1. If even &rarr; divide by 2. Count operations.</p>
+                <p>Example: <code>011100 (28) &rarr; 11100 (28) &rarr; 14 &rarr; 7 &rarr; 6 &rarr; 3 &rarr; 2 &rarr; 1 &rarr; 0</code> = <span class="hl">7 ops</span></p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="eval-block">
+                <h5>&#128269; What They Evaluate</h5>
+                <ul>
+                  <li><span class="purple">Quick understanding</span> of the problem statement</li>
+                  <li><span class="purple">Clean code</span>, edge case testing</li>
+                  <li><span class="purple">Reasonable complexity</span> (not naive if it blows up, but not necessarily ultra-optimal)</li>
+                </ul>
+              </div>
+
+              <div class="prep-block">
+                <h5>&#128218; Preparation</h5>
+                <ul>
+                  <li>Do <span class="warn">20–30 Codility/LeetCode exercises</span> (strings, stack, two pointers, binary)</li>
+                  <li>Practice <span class="warn">reading buggy code</span> and fixing it fast (minimal refactor)</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>&#10067; Questions to Ask (if applicable)</h5>
+                <p><em>Usually no interaction during Codility, but if there's a preamble:</em></p>
+                <ul>
+                  <li>"Is partial credit given for passing some test cases?"</li>
+                  <li>"Should I optimize for readability or performance?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== STEP 2 ==================== -->
+          <section id="step2">
+            <h3>Step 2 &mdash; Initial Video Interview (HR / Recruiter)</h3>
+            <span class="badge badge-time">&#9200; 30 min</span>
+            <span class="badge badge-goal">&#127919; Fit + Motivation + Logistics</span>
+            <div class="content">
+              <p><strong>Goal:</strong> Filter for <span class="hl">culture fit</span>, motivation, and logistics.</p>
+
+              <p><strong>Content:</strong></p>
+              <ul>
+                <li>Your background (2–3 minutes)</li>
+                <li>Why Sonar / why Geneva / why this role</li>
+                <li>Salary expectations, availability, visa, languages</li>
+              </ul>
+
+              <div class="eval-block">
+                <h5>&#128269; What They Evaluate</h5>
+                <ul>
+                  <li>A <span class="purple">clear story</span> &mdash; what you do, what you want, why them</li>
+                  <li><span class="purple">Professional attitude</span>, simple communication</li>
+                  <li><span class="purple">Enthusiasm</span> for the product and mission</li>
+                </ul>
+              </div>
+
+              <div class="prep-block">
+                <h5>&#128218; Preparation</h5>
+                <ul>
+                  <li><span class="warn">60-second pitch</span> + 2-minute version</li>
+                  <li><span class="warn">3 concrete reasons "for Sonar"</span>: code quality, dev tooling, product impact, engineering culture</li>
+                  <li>Know your <span class="warn">salary range</span>, availability, visa status</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>&#10067; Questions to Ask HR</h5>
+                <ul>
+                  <li>"What does the team structure look like for this role?"</li>
+                  <li>"What's the interview timeline after this call?"</li>
+                  <li>"What does Sonar value most in its engineering culture?"</li>
+                  <li>"Is this a new role or backfill?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== STEP 3 ==================== -->
+          <section id="step3">
+            <h3>Step 3 &mdash; Technical Interview (Quick Screen)</h3>
+            <span class="badge badge-time">&#9200; 30 min</span>
+            <span class="badge badge-goal">&#127919; Engineering Mindset Validation</span>
+            <div class="content">
+              <p><strong>Goal:</strong> Express technical validation before investing more time. They want to see <span class="hl">how you think</span>, how you explain, and your <span class="kw">Java/API/design basics</span>.</p>
+
+              <div class="eval-block">
+                <h5>&#128269; What They Evaluate</h5>
+                <ul>
+                  <li><span class="purple">Clear reasoning</span> &mdash; structured thought process</li>
+                  <li><span class="purple">Java best practices</span> &mdash; naming, patterns, OOP</li>
+                  <li><span class="purple">Ability to explain choices</span> &mdash; "why" not just "what"</li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 1 -->
+              <div class="example-block">
+                <h5>Example 1 &mdash; Quick Java Refactoring</h5>
+                <p>They give you:</p>
+              </div>
+              <div class="bad-block">
+                <h5>&#10060; Bad Code (Given)</h5>
+<pre>public void process(User u){
+   if(u != null){
+      if(u.getStatus() == 1){
+         if(u.getEmail()!=null){
+            sendMail(u.getEmail());
+         }
+      }
+   }
+}</pre>
+              </div>
+
+              <div class="good-block">
+                <h5>&#9989; Senior Answer &mdash; Guard Clauses</h5>
+<pre>public void process(User user){
+   if(user == null) return;
+   if(!user.isActive()) return;
+
+   String email = user.getEmail();
+   if(email == null) return;
+
+   sendMail(email);
+}</pre>
+                <p>Explain: fewer nested conditionals, more <span class="kw">readable</span>, more <span class="kw">testable</span>.</p>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 2 -->
+              <div class="example-block">
+                <h5>Example 2 &mdash; API Question</h5>
+                <p>They ask: <em>"Would you send data in a GET request?"</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <p><span class="hl">GET requests should not contain a body</span> according to REST conventions.</p>
+                <p>They should be <span class="kw">idempotent</span> and <span class="kw">cacheable</span>.</p>
+                <ul>
+                  <li><code>GET</code> = read only</li>
+                  <li><code>POST</code> = create</li>
+                  <li><code>PUT</code> = replace</li>
+                  <li><code>PATCH</code> = partial update</li>
+                  <li><code>DELETE</code> = remove</li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 3 -->
+              <div class="example-block">
+                <h5>Example 3 &mdash; Scalability</h5>
+                <p>They ask: <em>"What happens if 10,000 users call your API simultaneously?"</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <ul>
+                  <li><span class="kw">Thread pool</span> management</li>
+                  <li><span class="kw">Async processing</span></li>
+                  <li><span class="kw">Caching</span> with Redis</li>
+                  <li><span class="kw">Load balancing</span></li>
+                </ul>
+                <p><em>"I would first cache frequent reads, then ensure horizontal scaling behind a load balancer."</em></p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="prep-block">
+                <h5>&#128218; Preparation</h5>
+                <ul>
+                  <li>Practice explaining out loud: <span class="warn">"assumptions &rarr; approach &rarr; complexity &rarr; edge cases &rarr; tests"</span></li>
+                </ul>
+              </div>
+
+              <div class="star-box">
+                <h5>&#9888;&#65039; Warning</h5>
+                <p>In the reported experience, the candidate felt confident but was told "not moving forward" at the end. This can happen if:</p>
+                <ul>
+                  <li>Different expectations (level, stack, design)</li>
+                  <li>Communication not structured enough</li>
+                  <li>Internal decision (budget, role frozen, etc.)</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>&#10067; Questions to Ask the Interviewer</h5>
+                <ul>
+                  <li>"What does a typical day look like for this role?"</li>
+                  <li>"What's the tech stack for the team I'd be joining?"</li>
+                  <li>"How do you approach code reviews?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== STEP 4 ==================== -->
+          <section id="step4">
+            <h3>Step 4 &mdash; 2-Hour Technical Interview (The Real Battle)</h3>
+            <span class="badge badge-time">&#9200; 2 hours</span>
+            <span class="badge badge-goal">&#127919; Live Coding + Design + Scalability</span>
+            <span class="badge badge-warn">&#9889; Hardest Stage</span>
+            <div class="content">
+              <p><strong>Goal:</strong> See you <span class="hl">work like on the job</span>.</p>
+
+              <div class="eval-block">
+                <h5>&#128269; What They Evaluate</h5>
+                <ul>
+                  <li><span class="purple">Code quality</span> &mdash; readable, testable, clean</li>
+                  <li><span class="purple">Pragmatic design</span> &mdash; not "over-engineering"</li>
+                  <li><span class="purple">API/web basics</span> &mdash; HTTP, idempotence, caching headers</li>
+                  <li><span class="purple">Communication during exercises</span> &mdash; talk while coding</li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 1 -->
+              <div class="example-block">
+                <h5>Example 1 &mdash; Complete Refactoring (Strategy Pattern)</h5>
+              </div>
+              <div class="bad-block">
+                <h5>&#10060; Code Given</h5>
+<pre>if(order.type.equals("VIP")){
+   discount = price * 0.20;
+}
+else if(order.type.equals("NORMAL")){
+   discount = price * 0.10;
+}</pre>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Proposes &mdash; Strategy Pattern</h5>
+<pre>interface DiscountStrategy {
+   double compute(double price);
+}
+
+class VipDiscount implements DiscountStrategy {
+   public double compute(double price){
+      return price * 0.20;
+   }
+}
+
+class NormalDiscount implements DiscountStrategy {
+   public double compute(double price){
+      return price * 0.10;
+   }
+}</pre>
+                <p><strong>Why?</strong> <span class="kw">Extensible</span>. Follows <span class="hl">Open/Closed Principle</span>. They love this.</p>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 2 -->
+              <div class="example-block">
+                <h5>Example 2 &mdash; API Design</h5>
+                <p>Question: <em>"Design endpoint to upload student courses."</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+<pre>POST /students/{id}/courses
+
+Body:
+{
+   "courseId": 10
+}
+
+Response codes:
+  201 Created    &rarr; success
+  400 Bad Request &rarr; validation error
+  404 Not Found   &rarr; student not found
+  409 Conflict    &rarr; already enrolled</pre>
+                <p>Explain: <span class="kw">validation</span>, proper <span class="kw">HTTP status codes</span>, RESTful naming.</p>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 3 -->
+              <div class="example-block">
+                <h5>Example 3 &mdash; Nested Conditionals</h5>
+                <p>They give deeply nested code:</p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Techniques</h5>
+                <ul>
+                  <li><span class="kw">Early return</span> / guard clauses</li>
+                  <li><span class="kw">Extract methods</span> for clarity</li>
+                  <li><span class="kw">Polymorphism</span> when types diverge</li>
+                  <li><span class="kw">Strategy / Command pattern</span> for complex branching</li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 4 -->
+              <div class="example-block">
+                <h5>Example 4 &mdash; Scalability Architecture</h5>
+                <p>Question: <em>"Millions of requests?"</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Architecture</h5>
+<pre>Client &rarr; API Gateway &rarr; Service &rarr; Cache (Redis) &rarr; DB
+
+Key patterns:
+  &bull; Pagination (offset / cursor-based)
+  &bull; Rate limiting (token bucket)
+  &bull; Circuit breaker (Resilience4j)
+  &bull; Horizontal scaling + load balancer
+  &bull; Async messaging (Kafka / RabbitMQ)</pre>
+              </div>
+
+              <hr class="divider">
+
+              <!-- Example 5 -->
+              <div class="example-block">
+                <h5>Example 5 &mdash; Talk While Coding</h5>
+                <p>They evaluate your <span class="hl">thought process</span> &mdash; always verbalize:</p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; The Framework</h5>
+                <ol>
+                  <li><strong>"First I clarify assumptions."</strong></li>
+                  <li><strong>"Then I design a simple solution."</strong></li>
+                  <li><strong>"Then I optimize."</strong></li>
+                  <li><strong>"Then I discuss edge cases and tests."</strong></li>
+                </ol>
+                <p>This is <span class="warn">extremely important</span>. Silent coding = red flag.</p>
+              </div>
+
+              <hr class="divider">
+              <p><strong>Reported technical topics:</strong></p>
+              <ul>
+                <li>Refactoring Java: encapsulation, structure, alternative designs</li>
+                <li>API usage: which HTTP methods, sending data in GET requests</li>
+                <li>Scalability: handling multiple requests, caching, load balancing</li>
+                <li>Readability: reducing nested conditionals, naming, early returns, patterns</li>
+                <li>Explaining your approach, thought process, and code decisions throughout</li>
+              </ul>
+
+              <div class="prep-block">
+                <h5>&#128218; Preparation</h5>
+                <ul>
+                  <li>Do <span class="warn">guided refactoring "before/after"</span> exercises</li>
+                  <li>Review: <span class="warn">GET/POST/PUT/PATCH/DELETE</span>, idempotence, pagination, rate limiting</li>
+                  <li>Readability patterns: <span class="warn">guard clauses, method extraction, strategy/polymorphism</span></li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>&#10067; Questions to Ask the Tech Interviewer</h5>
+                <ul>
+                  <li>"How do you manage technical debt in the codebase?"</li>
+                  <li>"What's your CI/CD pipeline like?"</li>
+                  <li>"What testing strategy do you follow (unit, integration, E2E)?"</li>
+                  <li>"How do you handle breaking changes in the API?"</li>
+                  <li>"What's the biggest technical challenge the team is facing right now?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== STEP 5 ==================== -->
+          <section id="step5">
+            <h3>Step 5 &mdash; Cross-functional Interview</h3>
+            <span class="badge badge-time">&#9200; 30 min</span>
+            <span class="badge badge-goal">&#127919; Collaboration &mdash; PM / QA / UX</span>
+            <div class="content">
+              <p><strong>Goal:</strong> Are you <span class="hl">collaborative or arrogant</span>? Can you work with non-technical people?</p>
+
+              <div class="eval-block">
+                <h5>&#128269; What They Evaluate</h5>
+                <ul>
+                  <li><span class="purple">Explain technical topics</span> to non-tech people</li>
+                  <li><span class="purple">Manage trade-offs</span> (quality vs. deadline)</li>
+                  <li><span class="purple">Prioritize and clarify</span> requirements</li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q1 &mdash; Product wants quick feature but tech debt risk</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <p><em>"I explain risks clearly and propose a minimal safe solution."</em></p>
+                <p>Example: <span class="kw">"We could release MVP behind a feature flag."</span></p>
+                <p>They love this &mdash; pragmatic + safe.</p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q2 &mdash; QA finds bug before release</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <ol>
+                  <li><strong>Thank QA</strong> &mdash; show appreciation</li>
+                  <li><strong>Analyze root cause</strong> &mdash; not just fix the symptom</li>
+                  <li><strong>Add regression tests</strong> &mdash; prevent recurrence</li>
+                </ol>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q3 &mdash; Non-technical stakeholder asks "why it takes so long"</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <p><em>"I translate technical complexity into business language."</em></p>
+                <p>Example: <span class="kw">"This feature touches authentication and data integrity &mdash; two critical systems that need careful changes."</span></p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="prep-block">
+                <h5>&#128218; Preparation</h5>
+                <ul>
+                  <li>Prepare an example: <span class="warn">"I simplified a technical decision for non-tech stakeholders"</span></li>
+                  <li>Use a mini-framework: <span class="warn">Context &rarr; Options &rarr; Trade-offs &rarr; Decision &rarr; Result</span></li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>&#10067; Questions to Ask PM / QA / Cross-functional</h5>
+                <ul>
+                  <li>"How do engineering and product collaborate on priorities?"</li>
+                  <li>"How are bugs triaged &mdash; who decides severity?"</li>
+                  <li>"How do you handle scope changes mid-sprint?"</li>
+                  <li>"What's the feedback loop between QA and engineering?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== STEP 6 ==================== -->
+          <section id="step6">
+            <h3>Step 6 &mdash; Final Interview with Engineering Leader</h3>
+            <span class="badge badge-time">&#9200; 20 min</span>
+            <span class="badge badge-goal">&#127919; Culture + Seniority + Potential</span>
+            <div class="content">
+              <p><strong>Goal:</strong> Final decision &mdash; <span class="hl">level, impact, attitude, potential</span>.</p>
+
+              <div class="eval-block">
+                <h5>&#128269; What They Evaluate</h5>
+                <ul>
+                  <li><span class="purple">Seniority level</span> &mdash; do you match the expected level?</li>
+                  <li><span class="purple">Leadership</span> &mdash; influence, mentoring, ownership</li>
+                  <li><span class="purple">Mutual expectations</span> &mdash; culture, projection, alignment</li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q1 &mdash; "Why Sonar?"</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <p><em>"I appreciate an engineering culture focused on <span class="kw">code quality</span> and <span class="kw">developer experience</span>. Sonar's mission to help developers write cleaner, safer code aligns perfectly with how I approach software engineering."</em></p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q2 &mdash; "Biggest mistake?"</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <p><em>"I once deployed a change that affected performance in production. I <span class="hl">rolled back immediately</span>, set up <span class="kw">monitoring alerts</span>, and wrote a post-mortem to prevent recurrence."</em></p>
+                <p>Shows: <span class="kw">ownership</span>, rapid response, learning.</p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q3 &mdash; "How do you mentor juniors?"</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <ul>
+                  <li><span class="kw">Pair programming</span> sessions</li>
+                  <li>Thorough <span class="kw">code reviews</span> with teaching comments</li>
+                  <li>Creating internal documentation / wiki</li>
+                  <li>Setting up <span class="kw">learning paths</span></li>
+                </ul>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Example Q4 &mdash; "First 90 days plan?"</h5>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; Senior Answer</h5>
+                <ol>
+                  <li><strong>Days 1–30:</strong> Understand the architecture, read the codebase, onboard properly</li>
+                  <li><strong>Days 30–60:</strong> Gain trust, deliver small improvements, build relationships</li>
+                  <li><strong>Days 60–90:</strong> Start contributing to bigger features, identify improvement areas</li>
+                </ol>
+              </div>
+
+              <hr class="divider">
+
+              <div class="prep-block">
+                <h5>&#128218; Preparation</h5>
+                <ul>
+                  <li><span class="warn">2 strong stories</span> (measurable impact, quality/perf improvement, incident managed)</li>
+                  <li>Your <span class="warn">"senior questions"</span>: roadmap, code review standards, tech debt, onboarding, 90-day expectations</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>&#10067; Questions to Ask the Engineering Leader</h5>
+                <ul>
+                  <li>"What's the engineering roadmap for the next 6 months?"</li>
+                  <li>"What are the code review standards on the team?"</li>
+                  <li>"How do you handle technical debt?"</li>
+                  <li>"What does the onboarding process look like?"</li>
+                  <li>"What would success look like in the first 90 days?"</li>
+                  <li>"What's the team's biggest challenge right now?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== BEHAVIORAL ==================== -->
+          <section id="behavioral">
+            <h3>Behavioral / Situational Questions (STAR Method)</h3>
+            <div class="content">
+              <p>They want: <span class="hl">responsibility + communication + learning</span>.</p>
+              <p>Use <span class="kw">STAR</span>: <strong>S</strong>ituation &rarr; <strong>T</strong>ask &rarr; <strong>A</strong>ction &rarr; <strong>R</strong>esult</p>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Q1 &mdash; "A colleague raised a concern about your work"</h5>
+                <p><em>They want to see: listening + adjustment + team alignment</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; STAR Answer</h5>
+                <p><strong>S:</strong> During a code review, a teammate flagged my database query approach as potentially problematic at scale.</p>
+                <p><strong>T:</strong> I needed to evaluate if my approach was indeed risky.</p>
+                <p><strong>A:</strong> I set up a meeting, listened actively, ran performance benchmarks together, and we agreed on an indexed query with pagination.</p>
+                <p><strong>R:</strong> Query time dropped from 3s to 200ms. We turned this into a team guideline.</p>
+                <p>Shows: <span class="kw">listening</span>, <span class="kw">collaboration</span>, <span class="kw">team alignment</span>.</p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Q2 &mdash; "You introduced a bug &mdash; how did you handle it?"</h5>
+                <p><em>They want to see: ownership + methodical debugging + prevention</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; STAR Answer</h5>
+                <p><strong>S:</strong> A deployment I pushed caused incorrect calculations in the billing module.</p>
+                <p><strong>T:</strong> Fix the issue, minimize impact, prevent recurrence.</p>
+                <p><strong>A:</strong> I immediately rolled back, traced the root cause (edge case in currency conversion), added regression tests and monitoring alerts.</p>
+                <p><strong>R:</strong> Resolved in 45 min. Zero customer impact due to rollback. Added automated checks in CI pipeline.</p>
+                <p>Shows: <span class="kw">ownership</span>, <span class="kw">methodical debugging</span>, <span class="kw">prevention</span>.</p>
+              </div>
+
+              <hr class="divider">
+
+              <div class="example-block">
+                <h5>Q3 &mdash; "A challenging situation and how you managed it"</h5>
+                <p><em>They want to see: stress management + prioritization + communication</em></p>
+              </div>
+              <div class="good-block">
+                <h5>&#9989; STAR Answer</h5>
+                <p><strong>S:</strong> Mid-sprint, requirements changed drastically &mdash; the client wanted real-time notifications instead of batch emails.</p>
+                <p><strong>T:</strong> Deliver the feature on time with the new requirements.</p>
+                <p><strong>A:</strong> I proposed WebSocket integration with a fallback to polling, broke it into sub-tasks, communicated the trade-offs to PM, and pair-programmed the critical parts with a teammate.</p>
+                <p><strong>R:</strong> Delivered on time. Feature became the most-used by clients. PM praised the transparent communication.</p>
+                <p>Shows: <span class="kw">stress management</span>, <span class="kw">prioritization</span>, <span class="kw">communication</span>.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== QUESTIONS TO ASK ==================== -->
+          <section id="questions-to-ask">
+            <h3>&#10067; Questions to Ask at Each Stage</h3>
+            <div class="content">
+              <p>Always prepare <span class="hl">2–3 questions per stage</span>. It shows engagement and seniority.</p>
+
+              <div class="question-block">
+                <h5>Stage 2 &mdash; HR / Recruiter</h5>
+                <ul>
+                  <li>"What does the team structure look like?"</li>
+                  <li>"What's the interview timeline?"</li>
+                  <li>"Is this a new position or a backfill?"</li>
+                  <li>"What does Sonar value most in engineering culture?"</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>Stage 3 &mdash; Tech Screen</h5>
+                <ul>
+                  <li>"What does a typical day look like for this role?"</li>
+                  <li>"What's the tech stack for the team?"</li>
+                  <li>"How do you approach code reviews?"</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>Stage 4 &mdash; 2h Technical</h5>
+                <ul>
+                  <li>"How do you manage technical debt?"</li>
+                  <li>"What's the CI/CD pipeline like?"</li>
+                  <li>"What testing strategy do you follow?"</li>
+                  <li>"How do you handle breaking API changes?"</li>
+                  <li>"Biggest technical challenge right now?"</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>Stage 5 &mdash; Cross-functional</h5>
+                <ul>
+                  <li>"How do engineering and product collaborate?"</li>
+                  <li>"How are bugs triaged?"</li>
+                  <li>"How do you handle scope changes mid-sprint?"</li>
+                </ul>
+              </div>
+
+              <div class="question-block">
+                <h5>Stage 6 &mdash; Engineering Leader</h5>
+                <ul>
+                  <li>"What's the engineering roadmap for the next 6 months?"</li>
+                  <li>"What are the code review standards?"</li>
+                  <li>"What does success look like in the first 90 days?"</li>
+                  <li>"What's the onboarding process?"</li>
+                  <li>"Team's biggest challenge right now?"</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== 7 DAY PLAN ==================== -->
+          <section id="7day-plan">
+            <h3>&#128197; 7-Day Preparation Plan</h3>
+            <div class="content">
+              <p>A focused <span class="hl">7-day plan</span> covering Codility, refactoring, API/scalability, behavioral, and final polish.</p>
+
+              <div class="day-grid">
+
+                <div class="day-card">
+                  <h5>Day 1 &mdash; Codility Warm-up</h5>
+                  <ul>
+                    <li>5 easy LeetCode (strings, arrays)</li>
+                    <li>2 medium (stack, two pointers)</li>
+                    <li>Practice fixing buggy code snippets</li>
+                    <li>Review Big-O basics</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <h5>Day 2 &mdash; Codility Deep</h5>
+                  <ul>
+                    <li>3 medium LeetCode (binary, bitwise)</li>
+                    <li>Simulate timed Codility test (90 min, 3 problems)</li>
+                    <li>Practice "Nails &amp; Hammer" type problems</li>
+                    <li>Review stack-based pair removal</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <h5>Day 3 &mdash; Java Refactoring</h5>
+                  <ul>
+                    <li>Guard clauses practice (5 examples)</li>
+                    <li>Strategy Pattern implementation</li>
+                    <li>Open/Closed Principle exercises</li>
+                    <li>Extract method refactoring</li>
+                    <li>Before/after code comparisons</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <h5>Day 4 &mdash; API &amp; REST</h5>
+                  <ul>
+                    <li>HTTP methods deep review</li>
+                    <li>Idempotence &amp; caching headers</li>
+                    <li>Design 3 RESTful endpoints from scratch</li>
+                    <li>Status codes: 200, 201, 400, 401, 403, 404, 409, 500</li>
+                    <li>Pagination &amp; rate limiting concepts</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <h5>Day 5 &mdash; Scalability &amp; Architecture</h5>
+                  <ul>
+                    <li>Draw: Client &rarr; Gateway &rarr; Service &rarr; Cache &rarr; DB</li>
+                    <li>Redis caching patterns</li>
+                    <li>Load balancing strategies</li>
+                    <li>Circuit breaker (Resilience4j)</li>
+                    <li>Kafka / async messaging basics</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <h5>Day 6 &mdash; Behavioral &amp; Cross-functional</h5>
+                  <ul>
+                    <li>Write 3 STAR stories (colleague concern, bug intro, challenge)</li>
+                    <li>Practice "explain to non-tech" exercise</li>
+                    <li>Prepare: feature flag, QA bug, PM trade-off answers</li>
+                    <li>First 90 days plan</li>
+                    <li>"Why Sonar?" answer polished</li>
+                  </ul>
+                </div>
+
+                <div class="day-card">
+                  <h5>Day 7 &mdash; Final Polish</h5>
+                  <ul>
+                    <li>60-second &amp; 2-minute pitch out loud</li>
+                    <li>Mock interview: refactor + explain (30 min)</li>
+                    <li>Review all questions to ask at each stage</li>
+                    <li>Quick Codility timed run (3 problems)</li>
+                    <li>Rest, sleep well, be confident</li>
+                  </ul>
+                </div>
+
+              </div>
+
+              <div class="star-box">
+                <h5>&#128161; Daily Habit (All 7 Days)</h5>
+                <ul>
+                  <li>Talk out loud while solving any problem (practice verbalizing)</li>
+                  <li>Always think: <span class="kw">"assumptions &rarr; approach &rarr; complexity &rarr; edge cases &rarr; tests"</span></li>
+                  <li>Connect every answer back to <span class="hl">clean code</span> and <span class="hl">quality</span> (Sonar DNA)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- ==================== SONAR LOVES ==================== -->
+          <section id="sonar-loves">
+            <h3>&#11088; What Sonar Loves</h3>
+            <div class="content">
+              <div class="star-box">
+                <h5>The Sonar DNA</h5>
+                <ul>
+                  <li>&#128161; <span class="hl">Clean Code</span> &mdash; their entire product is about this</li>
+                  <li>&#128295; <span class="hl">Refactoring</span> &mdash; show you naturally improve code</li>
+                  <li>&#128172; <span class="hl">Communication</span> &mdash; not just coding, explaining WHY</li>
+                  <li>&#127919; <span class="hl">Quality Mindset</span> &mdash; tests, reviews, standards</li>
+                  <li>&#129309; <span class="hl">Collaboration</span> &mdash; team player, not lone wolf</li>
+                  <li>&#128200; <span class="hl">Impact</span> &mdash; measurable improvements, not just features</li>
+                </ul>
+              </div>
+              <p>At every stage, connect your answers back to <span class="kw">code quality</span>, <span class="kw">clean code</span>, and <span class="kw">developer experience</span> &mdash; that's what Sonar is about.</p>
+            </div>
+          </section>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CORRECT_PASSWORD = 'fuckrita25$';
+    const STORAGE_KEY = 'interview_prep_auth';
+
+    function checkAuth() {
+      if (sessionStorage.getItem(STORAGE_KEY) === 'true') {
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+      }
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('password-input');
+      const error = document.getElementById('error-msg');
+      if (input.value === CORRECT_PASSWORD) {
+        sessionStorage.setItem(STORAGE_KEY, 'true');
+        document.getElementById('password-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.remove('hidden');
+      } else {
+        error.style.display = 'block';
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    checkAuth();
+  </script>
+</body>
+</html>

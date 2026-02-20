@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SonarQube Setup for React Application - Step by Step Guide</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --heading: #58a6ff;
+      --accent: #238636;
+      --accent2: #f78166;
+      --highlight: #ffa657;
+      --sonar-orange: #fd3456;
+      --sonar-blue: #4e9bcd;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Navigation */
+    nav {
+      width: 260px;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    nav h2 {
+      color: var(--sonar-orange);
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    nav ol {
+      list-style: none;
+      padding: 0 10px;
+    }
+    nav li {
+      margin: 2px 0;
+    }
+    nav a {
+      display: block;
+      padding: 8px 15px;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    nav a:hover {
+      background: #21262d;
+      color: var(--heading);
+    }
+    
+    /* Main content */
+    .content {
+      flex: 1;
+      margin-left: 260px;
+      padding: 30px 50px;
+      max-width: 900px;
+    }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--sonar-orange);
+    }
+    .header h1 {
+      color: var(--sonar-orange);
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: var(--text);
+    }
+    
+    /* Steps */
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+    .step h2 {
+      color: var(--accent);
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step h2::before {
+      content: "✅";
+    }
+    .step p {
+      margin: 10px 0;
+    }
+    
+    /* Code blocks */
+    .code {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.95rem;
+      overflow-x: auto;
+    }
+    .code-title {
+      color: var(--highlight);
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+    }
+    .code code {
+      color: var(--sonar-blue);
+    }
+    
+    /* File content */
+    .file {
+      background: #0d1117;
+      border: 1px solid var(--sonar-blue);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .file-name {
+      color: var(--sonar-orange);
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .file-name::before {
+      content: "📄";
+    }
+    .file pre {
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+    .file .comment {
+      color: #6a737d;
+    }
+    .file .key {
+      color: var(--sonar-blue);
+    }
+    .file .value {
+      color: var(--accent);
+    }
+    
+    /* Info boxes */
+    .info {
+      background: linear-gradient(135deg, rgba(78, 155, 205, 0.1) 0%, rgba(13, 17, 23, 0.5) 100%);
+      border: 1px solid var(--sonar-blue);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    .warning {
+      background: linear-gradient(135deg, rgba(253, 52, 86, 0.1) 0%, rgba(13, 17, 23, 0.5) 100%);
+      border: 1px solid var(--sonar-orange);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    /* Success output */
+    .success {
+      background: linear-gradient(135deg, rgba(35, 134, 54, 0.2) 0%, rgba(13, 17, 23, 0.5) 100%);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+      font-family: monospace;
+      color: var(--accent);
+    }
+    
+    /* List */
+    ul {
+      padding-left: 25px;
+      margin: 10px 0;
+    }
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Keywords */
+    .kw {
+      color: var(--sonar-orange);
+      font-weight: 600;
+    }
+    .hl {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    /* Back to top */
+    .back {
+      text-align: right;
+      margin-top: 15px;
+    }
+    .pill {
+      display: inline-block;
+      background: var(--border);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .pill:hover {
+      background: var(--sonar-orange);
+      color: white;
+    }
+    
+    /* Floating button */
+    .topbtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+    }
+    .topbtn button {
+      background: var(--sonar-orange);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 15px rgba(253, 52, 86, 0.4);
+    }
+    
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .content { margin-left: 0; padding: 20px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="container">
+    <nav>
+      <h2>SonarQube Setup</h2>
+      <ol>
+        <li><a href="#step1">Step 1: Install Java 17</a></li>
+        <li><a href="#step2">Step 2: Download SonarQube</a></li>
+        <li><a href="#step3">Step 3: Generate Token</a></li>
+        <li><a href="#step4">Step 4: Clone React App</a></li>
+        <li><a href="#step5">Step 5: Install Sonar Scanner</a></li>
+        <li><a href="#step6">Step 6: Create Config File</a></li>
+        <li><a href="#step7">Step 7: Install Dependencies</a></li>
+        <li><a href="#step8">Step 8: Run Scanner</a></li>
+        <li><a href="#step9">Step 9: View Results</a></li>
+      </ol>
+    </nav>
+
+    <div class="content">
+      <!-- Header -->
+      <header class="header">
+        <h1>SonarQube Setup for React Application</h1>
+        <p>Local Installation - Step by Step Guide</p>
+      </header>
+
+      <!-- Step 1 -->
+      <section class="step" id="step1">
+        <h2>Step 1: Install Java 17</h2>
+        <p>SonarQube requires Java to run.</p>
+        
+        <div class="info">
+          <p><strong>Download:</strong> <a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" style="color: var(--sonar-blue);">Install Java JDK 17</a></p>
+        </div>
+        
+        <p>Verify installation:</p>
+        <div class="code">
+          <code>java -version</code>
+        </div>
+        
+        <p>You should see <span class="hl">Java 17</span> in the output.</p>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 2 -->
+      <section class="step" id="step2">
+        <h2>Step 2: Download and Start SonarQube</h2>
+        
+        <div class="info">
+          <p><strong>Download:</strong> <a href="https://www.sonarsource.com/products/sonarqube/downloads/" style="color: var(--sonar-blue);">SonarQube Community Edition</a></p>
+        </div>
+        
+        <ol>
+          <li>Extract the zip file</li>
+          <li>Navigate to:</li>
+        </ol>
+        
+        <div class="code">
+          <code>sonarqube/bin/windows-x86-64</code>
+        </div>
+        
+        <p>Start SonarQube:</p>
+        <div class="code">
+          <code>StartSonar.bat</code>
+        </div>
+        
+        <p>Open browser:</p>
+        <div class="code">
+          <code>http://localhost:9000</code>
+        </div>
+        
+        <div class="info">
+          <p><strong>Login credentials:</strong></p>
+          <ul>
+            <li>Username: <span class="kw">admin</span></li>
+            <li>Password: <span class="kw">admin</span></li>
+          </ul>
+          <p><em>(Change password on first login)</em></p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 3 -->
+      <section class="step" id="step3">
+        <h2>Step 3: Generate SonarQube Token</h2>
+        
+        <ol>
+          <li>Go to <span class="kw">Profile</span> (top-right corner)</li>
+          <li>Click <span class="kw">My Account</span> → <span class="kw">Security</span></li>
+          <li>Generate a new token</li>
+          <li>Copy and save the token securely</li>
+        </ol>
+        
+        <div class="warning">
+          <p><strong>⚠️ Important:</strong> Save your token! You won't be able to see it again.</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 4 -->
+      <section class="step" id="step4">
+        <h2>Step 4: Clone React Application from Git</h2>
+        
+        <div class="code">
+          <code>git clone &lt;your-react-repository-url&gt;</code>
+        </div>
+        
+        <div class="code">
+          <code>cd your-react-project</code>
+        </div>
+        
+        <div class="info">
+          <p>Make sure <span class="kw">package.json</span> exists in the project root.</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 5 -->
+      <section class="step" id="step5">
+        <h2>Step 5: Download and Configure Sonar Scanner</h2>
+        
+        <div class="info">
+          <p><strong>Download:</strong> <a href="https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/" style="color: var(--sonar-blue);">Sonar Scanner</a></p>
+        </div>
+        
+        <ol>
+          <li>Extract it</li>
+          <li>Add the <span class="kw">bin</span> directory to the system PATH</li>
+        </ol>
+        
+        <p>Verify:</p>
+        <div class="code">
+          <code>sonar-scanner -v</code>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 6 -->
+      <section class="step" id="step6">
+        <h2>Step 6: Create sonar-project.properties File</h2>
+        
+        <p>Create a file in the project root directory:</p>
+        
+        <div class="file">
+          <div class="file-name">sonar-project.properties</div>
+          <pre><span class="key">sonar.projectKey</span>=<span class="value">react-todo-app</span>
+<span class="key">sonar.projectName</span>=<span class="value">React Todo App</span>
+<span class="key">sonar.projectVersion</span>=<span class="value">1.0</span>
+
+<span class="key">sonar.sources</span>=<span class="value">src</span>
+<span class="key">sonar.language</span>=<span class="value">js</span>
+
+<span class="key">sonar.host.url</span>=<span class="value">http://localhost:9000</span>
+<span class="key">sonar.login</span>=<span class="value">YOUR_SONAR_TOKEN</span></pre>
+        </div>
+        
+        <div class="warning">
+          <p><strong>🔹 Important:</strong> Replace <span class="kw">YOUR_SONAR_TOKEN</span> with your actual token from Step 3.</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 7 -->
+      <section class="step" id="step7">
+        <h2>Step 7: Install Project Dependencies (Recommended)</h2>
+        
+        <div class="code">
+          <code>npm install</code>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 8 -->
+      <section class="step" id="step8">
+        <h2>Step 8: Run Sonar Scanner</h2>
+        
+        <p>Open terminal or VS Code terminal in the project root and run:</p>
+        
+        <div class="code">
+          <code>sonar-scanner</code>
+        </div>
+        
+        <p>If successful, you will see:</p>
+        
+        <div class="success">
+          EXECUTION SUCCESS
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Step 9 -->
+      <section class="step" id="step9">
+        <h2>Step 9: View Results in SonarQube UI</h2>
+        
+        <p>Open:</p>
+        <div class="code">
+          <code>http://localhost:9000</code>
+        </div>
+        
+        <p>You can now see:</p>
+        <ul>
+          <li><span class="kw">Bugs</span> - Potential bugs in your code</li>
+          <li><span class="kw">Vulnerabilities</span> - Security issues</li>
+          <li><span class="kw">Code Smells</span> - Maintainability issues</li>
+          <li><span class="kw">Security Hotspots</span> - Security-sensitive code to review</li>
+        </ul>
+        
+        <div class="info">
+          <p><strong>🎉 Congratulations!</strong> Your React application is now analyzed by SonarQube!</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Floating back to top button -->
+  <div class="topbtn">
+    <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+  </div>
+</body>
+</html>
+

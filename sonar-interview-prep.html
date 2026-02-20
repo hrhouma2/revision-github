@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonar Interview Prep - Senior Full Stack Engineer (Java, React)</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --heading: #58a6ff;
+      --accent: #238636;
+      --accent2: #f78166;
+      --highlight: #ffa657;
+      --link: #58a6ff;
+      --nav-bg: #0d1117;
+      --nav-hover: #21262d;
+      --sonar-orange: #fd3456;
+      --sonar-blue: #4e9bcd;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Navigation */
+    nav {
+      width: 280px;
+      background: var(--nav-bg);
+      border-right: 1px solid var(--border);
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    nav h2 {
+      color: var(--sonar-orange);
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    nav ol {
+      list-style: none;
+      padding: 0 10px;
+    }
+    nav li {
+      margin: 2px 0;
+    }
+    nav a {
+      display: block;
+      padding: 8px 15px;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    nav a:hover {
+      background: var(--nav-hover);
+      color: var(--heading);
+    }
+    nav a.active {
+      background: var(--accent);
+      color: white;
+    }
+    
+    /* Main content */
+    .content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 30px 50px;
+      max-width: 1000px;
+    }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--sonar-orange);
+    }
+    .header h1 {
+      color: var(--sonar-orange);
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+    .header .subtitle {
+      color: var(--sonar-blue);
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .header .info {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .header .info strong {
+      color: var(--highlight);
+    }
+    
+    /* Sections */
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+    section h2 {
+      color: var(--heading);
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--sonar-orange);
+    }
+    section h3 {
+      color: var(--accent2);
+      font-size: 1.1rem;
+      margin: 20px 0 10px 0;
+    }
+    
+    /* Question blocks */
+    .question {
+      background: var(--bg);
+      border-left: 3px solid var(--sonar-blue);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .question h4 {
+      color: var(--heading);
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .question .answer {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .question .tips {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border);
+      font-size: 0.9rem;
+      color: var(--highlight);
+    }
+    
+    /* Keywords */
+    .kw {
+      color: var(--sonar-orange);
+      font-weight: 600;
+    }
+    .hl {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .tech {
+      color: var(--sonar-blue);
+      font-weight: 600;
+    }
+    
+    /* Lists */
+    ul, ol {
+      padding-left: 25px;
+      margin: 10px 0;
+    }
+    li {
+      margin: 8px 0;
+    }
+    
+    /* Highlight box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(253, 52, 86, 0.1) 0%, rgba(13, 17, 23, 0.5) 100%);
+      border: 1px solid var(--sonar-orange);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    /* Company info box */
+    .company-box {
+      background: linear-gradient(135deg, rgba(78, 155, 205, 0.1) 0%, rgba(13, 17, 23, 0.5) 100%);
+      border: 1px solid var(--sonar-blue);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    
+    /* Back to top */
+    .back {
+      text-align: right;
+      margin-top: 15px;
+    }
+    .pill {
+      display: inline-block;
+      background: var(--border);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .pill:hover {
+      background: var(--sonar-orange);
+      color: white;
+    }
+    
+    /* Floating button */
+    .topbtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+    }
+    .topbtn button {
+      background: var(--sonar-orange);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 15px rgba(253, 52, 86, 0.4);
+      transition: all 0.3s;
+    }
+    .topbtn button:hover {
+      background: #e62e4d;
+      transform: translateY(-2px);
+    }
+    
+    /* Script text for teleprompter */
+    .script {
+      font-size: 1.15rem;
+      line-height: 2;
+    }
+    .script p {
+      margin: 12px 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .content { margin-left: 0; padding: 20px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="container">
+    <nav>
+      <h2>Sonar Interview Prep</h2>
+      <ol>
+        <li><a href="#overview">Job Overview</a></li>
+        <li><a href="#differentiator">AWS Authorized Instructor</a></li>
+        <li><a href="#company">About Sonar</a></li>
+        <li><a href="#vision">Vision & Mission</a></li>
+        <li><a href="#values">4 Core Values</a></li>
+        <li><a href="#culture">CODE Mindset</a></li>
+        <li><a href="#intro">Tell Me About Yourself</a></li>
+        <li><a href="#why-sonar">Why Sonar?</a></li>
+        <li><a href="#why-you">Why Should We Hire You?</a></li>
+        <li><a href="#java">Java Questions</a></li>
+        <li><a href="#react">React/Frontend Questions</a></li>
+        <li><a href="#aws">AWS/Cloud Questions</a></li>
+        <li><a href="#code-quality">Code Quality Questions</a></li>
+        <li><a href="#staff">Staff Engineer Questions</a></li>
+        <li><a href="#experimentation">Experimentation Questions</a></li>
+        <li><a href="#behavioral">Behavioral Questions</a></li>
+        <li><a href="#goals">Career Goals</a></li>
+        <li><a href="#questions-to-ask">Questions to Ask Them</a></li>
+      </ol>
+    </nav>
+
+    <div class="content">
+      <!-- Header -->
+      <header class="header" id="overview">
+        <h1>Sonar - Senior Full Stack Engineer (Java, React)</h1>
+        <div class="subtitle">Product Development – Storefront | Geneva, Switzerland | On-site (3 days office + 2 WFH)</div>
+        <div class="info">
+          <p><strong>Interview Type:</strong> 30-minute initial video call with Tania Argeles (Recruiter)</p>
+          <p><strong>Purpose:</strong> Get to know you, your goals, and introduce Sonar's culture</p>
+          <p><strong>Key Requirements:</strong> 4+ years Java | 3+ years React/TypeScript | 1+ year Staff Engineer | AWS | PostgreSQL</p>
+        </div>
+      </header>
+
+      <!-- Key Differentiator -->
+      <section id="differentiator" style="border-left: 4px solid var(--accent);">
+        <h2>Your Key Differentiator - AWS Authorized Instructor</h2>
+        
+        <div class="highlight-box">
+          <p style="font-size: 1.15rem;"><strong>Important Point to Mention:</strong></p>
+          <p style="margin-top: 10px;">I am an <span class="kw">AWS-Authorized Instructor</span> delivering the official <span class="tech">AWS re/Start program</span> at Collège de Bois-de-Boulogne in Montreal.</p>
+        </div>
+        
+        <div class="question">
+          <h4>Script: My AWS Investment</h4>
+          <div class="script">
+            <p>I have <span class="kw">invested heavily</span> in learning AWS and CI/CD culture over the years.</p>
+            
+            <p>This is not just about certifications. I teach in a program with <span class="hl">strict requirements</span>.</p>
+            
+            <p>To teach the <span class="tech">AWS re/Start program</span>, you must be <span class="kw">AWS-certified</span>.</p>
+            
+            <p>Only instructors who have been <span class="hl">validated and approved by AWS</span> can deliver this training.</p>
+            
+            <p>AWS reviews your credentials, experience, and teaching abilities before granting authorization.</p>
+            
+            <p>I completed the <span class="tech">AWS Preparedness Course</span> and I'm part of the official AWS re/Start cohort.</p>
+            
+            <p>This means <span class="hl">AWS itself has certified my expertise</span> in cloud services.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Script: What I Teach (420-N11-BB - Service de calcul infonuagique)</h4>
+          <div class="script">
+            <p>I currently teach <span class="kw">cloud computing services</span> at Collège de Bois-de-Boulogne.</p>
+            
+            <p>The course covers the full AWS compute stack: <span class="tech">EC2, VPC, Load Balancing, Auto Scaling, Lambda, CloudFormation</span>.</p>
+            
+            <p>Students learn to deploy, configure, and optimize <span class="kw">production-grade cloud infrastructure</span>.</p>
+            
+            <p>I teach <span class="tech">Infrastructure as Code</span> with CloudFormation for reproducible deployments.</p>
+            
+            <p>I emphasize <span class="kw">security, monitoring, and cost optimization</span> - real enterprise practices.</p>
+            
+            <p>This aligns perfectly with Sonar's need for <span class="hl">cloud-native architecture on AWS</span>.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Script: How I Teach (Relevant for Sonar Interview)</h4>
+          <div class="script">
+            <p>My teaching approach is very <span class="kw">hands-on and production-oriented</span>.</p>
+            
+            <p>I use the official <span class="tech">AWS re/Start labs</span> - about 19 practical labs over 15 weeks.</p>
+            
+            <p>Students don't just learn theory. They <span class="kw">deploy, validate, and troubleshoot</span> real infrastructure.</p>
+            
+            <p>I emphasize what I call <span class="hl">"production culture"</span>: document, justify, measure, correct.</p>
+            
+            <p>Every lab has <span class="kw">checkpoints</span> - mandatory validation points before moving forward.</p>
+            
+            <p>This is similar to how engineering teams work: <span class="tech">code review, testing, and deployment gates</span>.</p>
+            
+            <p>My students learn to think like <span class="kw">professionals</span>, not just pass exams.</p>
+            
+            <p>This approach aligns with Sonar's values of <span class="hl">Excellence</span> and <span class="hl">Delivery</span>.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Script: Why This Makes Me a Strong Candidate</h4>
+          <div class="script">
+            <p>Teaching AWS at this level requires <span class="kw">deep understanding</span>, not surface knowledge.</p>
+            
+            <p>I have to explain complex concepts in <span class="hl">simple terms</span>.</p>
+            
+            <p>I troubleshoot student issues across <span class="tech">EC2, VPC, Lambda, CloudFormation</span>.</p>
+            
+            <p>This keeps my skills <span class="kw">sharp and current</span>.</p>
+            
+            <p>The AWS re/Start curriculum is <span class="hl">constantly updated</span> by AWS.</p>
+            
+            <p>So I'm always learning the <span class="kw">latest AWS features</span> and best practices.</p>
+            
+            <p>This hands-on teaching experience translates directly to <span class="hl">building cloud-native systems</span> at Sonar.</p>
+          </div>
+        </div>
+        
+        <div class="company-box">
+          <h4>AWS re/Start Program Requirements (Why This Is Special)</h4>
+          <ul>
+            <li>Instructors <span class="kw">must be AWS-certified</span> to teach</li>
+            <li>Must complete the official <span class="tech">AWS Preparedness Course</span></li>
+            <li>Only <span class="hl">validated instructors</span> can be added to a cohort</li>
+            <li>Must teach the <span class="kw">official AWS curriculum</span> in its entirety</li>
+            <li>Uses the official <span class="tech">AWS re/Start Canvas platform</span> with AWS labs</li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>My AWS Credentials Summary</h4>
+          <ul>
+            <li><span class="hl">AWS Certified Solutions Architect – Professional</span></li>
+            <li><span class="hl">AWS Certified DevOps Engineer – Professional</span></li>
+            <li>AWS Certified Developer – Associate</li>
+            <li>AWS Certified Solutions Architect – Associate</li>
+            <li><span class="kw">AWS-Authorized Instructor</span> (AWS re/Start Program)</li>
+            <li>Completed <span class="tech">AWS Preparedness Course</span></li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>Course Content I Deliver (15 weeks - 60 hours)</h4>
+          <ul>
+            <li><span class="tech">EC2</span> - Virtual machines, AMIs, instance types, security groups</li>
+            <li><span class="tech">VPC</span> - Networking, subnets, routing, IGW, security</li>
+            <li><span class="tech">EBS</span> - Storage, snapshots, performance optimization</li>
+            <li><span class="tech">Load Balancing & Auto Scaling</span> - High availability, health checks</li>
+            <li><span class="tech">Route 53</span> - DNS, failover routing</li>
+            <li><span class="tech">Lambda</span> - Serverless computing, permissions, logging</li>
+            <li><span class="tech">CloudWatch</span> - Monitoring, metrics, alerts, observability</li>
+            <li><span class="tech">CloudFormation</span> - Infrastructure as Code, reproducible deployments</li>
+            <li><span class="tech">FinOps</span> - Cost optimization, tagging, governance</li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>Competencies I Develop in Students</h4>
+          <ul>
+            <li>Describe fundamental concepts of <span class="kw">cloud computing services</span></li>
+            <li>Analyze organizational needs to identify <span class="hl">appropriate cloud computing services</span></li>
+            <li>Deploy and configure <span class="tech">virtual machines and containers</span></li>
+            <li>Manage the <span class="kw">lifecycle of cloud resources</span> (create, modify, scale, delete)</li>
+            <li>Apply <span class="hl">security, monitoring, and access control</span> measures</li>
+            <li>Optimize resource usage based on <span class="kw">performance, cost, and best practices</span></li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>Official AWS re/Start Labs I Deliver</h4>
+          <ul>
+            <li>Lab 168 - Install and configure <span class="tech">AWS CLI</span></li>
+            <li>Lab 171 - Creating <span class="tech">Amazon EC2</span> instances</li>
+            <li>Lab 173 - <span class="kw">Troubleshooting</span> EC2 instance creation</li>
+            <li>Lab 182 - Using <span class="tech">Amazon EBS</span></li>
+            <li>Lab 180 - Configuring <span class="tech">Amazon VPC</span></li>
+            <li>Lab 181 - <span class="kw">Troubleshooting a VPC</span></li>
+            <li>Lab 267 - Create your VPC and launch a <span class="tech">web server</span></li>
+            <li>Lab 174 - <span class="tech">Scaling and load balancing</span> your architecture</li>
+            <li>Lab 175 - Using <span class="tech">Auto Scaling</span> in AWS</li>
+            <li>Lab 176 - <span class="tech">Route 53</span> failover routing</li>
+            <li>Lab 178 - Using <span class="tech">AWS Lambda</span></li>
+            <li>Lab 177 - <span class="kw">[Challenge]</span> AWS Lambda exercise</li>
+            <li>Lab 281 - Monitoring an <span class="tech">EC2 instance</span></li>
+            <li>Lab 186 - <span class="tech">Infrastructure monitoring</span></li>
+            <li>Lab 188 - Resource management using <span class="kw">tagging</span></li>
+            <li>Lab 189 - <span class="kw">Optimizing</span> resource usage</li>
+            <li>Lab 190 - Automating deployments with <span class="tech">CloudFormation</span></li>
+            <li>Lab 191 - <span class="kw">Troubleshooting</span> CloudFormation deployments</li>
+            <li>Lab 192 - <span class="kw">[Challenge]</span> CloudFormation</li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>My Pedagogical Approach (Relevant for Sonar's Culture)</h4>
+          <ul>
+            <li><span class="kw">Active learning</span>: Students learn by deploying, validating, and troubleshooting</li>
+            <li><span class="kw">Targeted theory</span>: Short explanations focused on decisions and common errors</li>
+            <li><span class="kw">Project-based learning</span>: Progressive work toward final IaC deliverable</li>
+            <li><span class="kw">Checkpoint method</span>: Each lab has mandatory validation points</li>
+            <li><span class="kw">"Production culture"</span>: Document, justify, measure, correct</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>This aligns with Sonar's values:</strong></p>
+          <ul>
+            <li><span class="hl">Excellence</span> - Going the extra mile, digging into root causes</li>
+            <li><span class="hl">Delivery</span> - Incremental steps, continuous improvement</li>
+            <li><span class="hl">Innovation</span> - Hands-on problem solving</li>
+          </ul>
+        </div>
+        
+        <div class="warning" style="background: linear-gradient(135deg, rgba(255, 166, 87, 0.15) 0%, rgba(13, 17, 23, 0.5) 100%); border-color: var(--highlight);">
+          <h4 style="color: var(--highlight);">⚠️ Note: About Your Company (Gneurone Inc.)</h4>
+          <p style="margin-top: 10px;"><strong>Recommendation: Do NOT mention your company unless specifically asked.</strong></p>
+          <p style="margin-top: 10px;">Why:</p>
+          <ul>
+            <li>May raise questions about your <span class="kw">commitment to a full-time role</span></li>
+            <li>Focus on your <span class="hl">institutional teaching experience</span> which is more relevant and verifiable</li>
+            <li>The AWS re/Start program credentials are <span class="kw">stronger proof</span> of your expertise</li>
+            <li>If asked about side projects, you can mention it briefly as "personal consulting"</li>
+          </ul>
+          <p style="margin-top: 10px;"><strong>Better approach:</strong> Emphasize your teaching at <span class="hl">Collège de Bois-de-Boulogne</span> where being AWS-certified is mandatory.</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- About Sonar -->
+      <section id="company">
+        <h2>About Sonar - Key Facts to Know</h2>
+        
+        <div class="company-box">
+          <h3>What Sonar Does</h3>
+          <ul>
+            <li>Helps prevent <span class="kw">code quality</span> and <span class="kw">code security</span> issues from reaching production</li>
+            <li>Amplifies developers' productivity in concert with <span class="tech">AI assistants</span></li>
+            <li>Analyzes ALL code: internal team, <span class="kw">genAI-generated</span>, or third-party</li>
+            <li>Results in more <span class="hl">secure, reliable, and maintainable</span> applications</li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h3>Key Numbers</h3>
+          <ul>
+            <li><span class="kw">7M+ developers</span> use Sonar worldwide</li>
+            <li><span class="kw">400K+ organizations</span> trust Sonar</li>
+            <li>Supports <span class="tech">30+ programming languages</span>, frameworks, and infrastructure technologies</li>
+            <li>Notable customers: <span class="hl">DoD, Microsoft, NASA, MasterCard, Siemens, T-Mobile</span></li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h3>Products</h3>
+          <ul>
+            <li><span class="tech">SonarQube Server</span> - Self-hosted code quality platform</li>
+            <li><span class="tech">SonarQube Cloud</span> - Cloud-based solution</li>
+            <li>Rooted in <span class="kw">open source community</span></li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h3>Global Presence</h3>
+          <ul>
+            <li>Hub offices in: <span class="hl">USA, Switzerland (Geneva), UK, Singapore, Germany</span></li>
+            <li>Employees in 20+ countries, 35+ nationalities</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Sonar Vision & Mission -->
+      <section id="vision">
+        <h2>Sonar's Vision & Mission</h2>
+        
+        <div class="highlight-box">
+          <p style="font-size: 1.15rem;"><strong>Mission:</strong> We are on a mission to <span class="kw">genuinely change the development world</span>. We want to do it right and with the right people.</p>
+        </div>
+        
+        <div class="company-box">
+          <h4>Vision</h4>
+          <p>To have <span class="kw">every developer and development team</span> use our products to achieve a state of <span class="hl">Code Quality</span>.</p>
+        </div>
+        
+        <div class="company-box">
+          <h4>The Sonar Story</h4>
+          <p>It all started in <span class="kw">2008</span> with three dev guys and a project.</p>
+          <p style="margin-top: 10px;">From the very beginning, they agreed they wanted a <span class="hl">strong culture</span> to guide their work and interaction.</p>
+          <p style="margin-top: 10px;">They wanted everyone at Sonar to have an <span class="kw">opportunity to impact the company</span>.</p>
+          <p style="margin-top: 10px;">Today, Sonar believes in people and works hard to ensure SonarSourcers feel <span class="hl">empowered and fulfilled</span>.</p>
+          <p style="margin-top: 10px;">Sonar wants to be a <span class="kw">human enterprise</span>.</p>
+        </div>
+        
+        <div class="company-box">
+          <h4>What Sonar Believes In</h4>
+          <ul>
+            <li><span class="kw">People</span> - We believe in people</li>
+            <li><span class="kw">Excellence</span> - We achieve the highest standards</li>
+            <li><span class="kw">Delivery</span> - We consistently deliver excellent products</li>
+          </ul>
+          <p style="margin-top: 10px;">Sonar is a <span class="hl">team-based organization</span> with minimal hierarchical structure.</p>
+          <p style="margin-top: 10px;">Teams are <span class="kw">autonomous, self-organized, mission-driven, cohesive</span>, and perform in a healthy environment.</p>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Sonar Core Values -->
+      <section id="values">
+        <h2>Sonar's 4 Core Values</h2>
+        
+        <div class="question">
+          <h4>1. Smarter Together</h4>
+          <div class="answer">
+            <p><span class="kw">No one is as smart as all of us working as one.</span></p>
+            <ul>
+              <li>Embrace the power of <span class="hl">collective intelligence</span> and diversity</li>
+              <li><span class="kw">Trust</span> each other, listen first, communicate frankly</li>
+              <li>Deliver <span class="kw">candid feedback</span></li>
+              <li>Every SonarSourcer is <span class="hl">co-responsible</span> for decisions and relations</li>
+              <li>High-quality, <span class="kw">equal relationships</span> regardless of tenure, age, origin, position</li>
+              <li>SonarSourcers can be their <span class="hl">true self</span></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>2. Excellence</h4>
+          <div class="answer">
+            <p><span class="kw">Go the extra mile and always strive for the highest standards.</span></p>
+            <ul>
+              <li>Solve problems by <span class="hl">digging into their roots</span></li>
+              <li>Understand the <span class="kw">big picture</span></li>
+              <li>Continuously <span class="kw">challenge the status quo</span></li>
+              <li>Try to <span class="hl">better ourselves</span></li>
+              <li>We do not intend to preserve our culture - we seek to <span class="kw">improve it</span></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>3. Innovation</h4>
+          <div class="answer">
+            <p><span class="kw">Dream without limits about where we want to go.</span></p>
+            <ul>
+              <li>Readily <span class="hl">take risks</span> to achieve our dreams</li>
+              <li>Think <span class="kw">outside of the box</span> to come up with new ideas</li>
+              <li>Develop solutions to <span class="kw">hard problems</span></li>
+              <li>Believe that <span class="hl">simple solutions</span> can solve problems</li>
+              <li>Team-based organization and collective intelligence tools <span class="kw">support innovation</span></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>4. Delivery</h4>
+          <div class="answer">
+            <p><span class="kw">Consistently deliver excellent products and services.</span></p>
+            <ul>
+              <li>Set <span class="hl">challenging objectives</span> to transform great ideas into concrete achievements</li>
+              <li>Believe in taking <span class="kw">incremental baby steps</span></li>
+              <li>Establish clear <span class="kw">timeboxes</span></li>
+              <li>Get <span class="hl">feedback to deliver often</span></li>
+              <li><span class="kw">Continuous improvement</span></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- CODE Culture -->
+      <section id="culture">
+        <h2>Sonar's CODE Mindset (Job Posting)</h2>
+        
+        <div class="highlight-box">
+          <p style="font-size: 1.1rem;"><strong>CODE is not just an acronym – it's a mindset that defines daily operations at Sonar.</strong></p>
+        </div>
+        
+        <div class="question">
+          <h4>C - Committed</h4>
+          <div class="answer">
+            <p>Highly <span class="kw">committed and obsessed</span> with the company, users, each other, and the open source community.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>O - Obsessed</h4>
+          <div class="answer">
+            <p>High standards. Hold each other accountable for acting with <span class="kw">positivity, dedication, thoughtfulness, empathy, and passion</span> daily.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>D - Deliberate</h4>
+          <div class="answer">
+            <p><span class="kw">Deliberate with decisions</span> with high clarity of intention. At the same time, feel <span class="hl">extreme urgency and move forward quickly</span>.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>E - Effective</h4>
+          <div class="answer">
+            <p>Highly <span class="kw">effective and operationally efficient</span>. Operate collectively as <span class="hl">One Team</span> to accomplish goals.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Tell Me About Yourself -->
+      <section id="intro">
+        <h2>Tell Me About Yourself</h2>
+        
+        <div class="question">
+          <h4>Script - Full Introduction</h4>
+          <div class="script">
+            <p>I'm <span class="kw">Haythem Rehouma</span>.</p>
+            
+            <p>I have a <span class="tech">Ph.D. in Applied Engineering</span> from <span class="hl">École de technologie supérieure (ÉTS)</span> in Montreal.</p>
+            
+            <p>My PhD focused on <span class="kw">computer vision</span> and <span class="kw">clinical AI systems</span> for pediatric intensive care.</p>
+            
+            <p>I also have a <span class="tech">Master's degree in Artificial Intelligence</span> from <span class="hl">UQAM</span> - Université du Québec à Montréal.</p>
+            
+            <p>And a <span class="tech">Master's in Communication Systems</span> from the <span class="hl">National Engineering School of Tunis</span>.</p>
+            
+            <p>I also hold a <span class="tech">Bachelor's in Telecommunications Engineering</span> with a focus on <span class="kw">Network Security and Cybersecurity</span>.</p>
+            
+            <p>I'm a <span class="hl">Canadian citizen</span> with <span class="kw">18 years of engineering experience</span>.</p>
+            
+            <p>11 of those years are <span class="kw">Canadian experience</span>.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Script - Professional Experience (Tailored for Sonar)</h4>
+          <div class="script">
+            <p>For the past several years, I've been working extensively with <span class="tech">Java and Spring Boot</span>.</p>
+            
+            <p>I build <span class="kw">production-grade backend systems</span>, RESTful APIs, and microservices.</p>
+            
+            <p>I design and deploy <span class="kw">cloud-native applications</span> on <span class="tech">AWS</span>.</p>
+            
+            <p>I'm <span class="hl">AWS certified at the Professional level</span> for both Solutions Architect and DevOps Engineer.</p>
+            
+            <p>I'm also an <span class="kw">AWS-Authorized Instructor</span> delivering the official <span class="tech">AWS re/Start program</span>.</p>
+            
+            <p>This is a <span class="hl">restricted certification</span> - only qualified professionals validated by AWS can teach it.</p>
+            
+            <p>I also have strong experience with <span class="tech">React and TypeScript</span> for frontend development.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Script - Platform I Built with Spring Boot + AWS</h4>
+          <div class="script">
+            <p>I built a <span class="kw">complete backend platform</span> using <span class="tech">Spring Boot</span> and AWS services.</p>
+            
+            <p>The architecture follows <span class="kw">microservices design patterns</span> with clean separation of concerns.</p>
+            
+            <p>For <span class="hl">compute</span>, I use <span class="tech">Amazon EC2</span> instances running in a <span class="tech">VPC</span> with proper subnet isolation.</p>
+            
+            <p>I implemented <span class="tech">Auto Scaling groups</span> with <span class="tech">Elastic Load Balancers</span> for high availability.</p>
+            
+            <p>For <span class="hl">storage</span>, I use <span class="tech">Amazon S3</span> for static assets and file uploads.</p>
+            
+            <p>The database layer uses <span class="tech">Amazon RDS</span> with <span class="tech">PostgreSQL</span> for relational data.</p>
+            
+            <p>I also integrated <span class="tech">Amazon DynamoDB</span> for high-throughput, low-latency data access.</p>
+            
+            <p>For <span class="hl">messaging</span>, I use <span class="tech">Amazon SQS</span> for asynchronous task processing.</p>
+            
+            <p>I implemented <span class="tech">Amazon SNS</span> for notifications and event-driven workflows.</p>
+            
+            <p>For <span class="hl">serverless</span> functions, I use <span class="tech">AWS Lambda</span> triggered by events.</p>
+            
+            <p>The API layer is exposed through <span class="tech">Amazon API Gateway</span> with proper authentication.</p>
+            
+            <p>For <span class="hl">security</span>, I implemented <span class="tech">AWS IAM</span> roles with least privilege access.</p>
+            
+            <p>I use <span class="tech">AWS Secrets Manager</span> to securely store credentials and API keys.</p>
+            
+            <p>For <span class="hl">monitoring</span>, I configured <span class="tech">Amazon CloudWatch</span> with custom metrics and alarms.</p>
+            
+            <p>The entire infrastructure is deployed using <span class="tech">AWS CloudFormation</span> for Infrastructure as Code.</p>
+            
+            <p>I also set up <span class="tech">CI/CD pipelines</span> with GitHub Actions deploying to AWS.</p>
+          </div>
+        </div>
+        
+        <div class="company-box">
+          <h4>AWS Services I Used in My Spring Boot Platform</h4>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px; color: var(--highlight);"><strong>Category</strong></td>
+              <td style="padding: 8px; color: var(--highlight);"><strong>AWS Services</strong></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Compute</span></td>
+              <td style="padding: 8px;"><span class="tech">EC2, Auto Scaling, Elastic Load Balancer, Lambda</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Networking</span></td>
+              <td style="padding: 8px;"><span class="tech">VPC, Subnets, Security Groups, Route 53, API Gateway</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Storage</span></td>
+              <td style="padding: 8px;"><span class="tech">S3, EBS</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Database</span></td>
+              <td style="padding: 8px;"><span class="tech">RDS (PostgreSQL), DynamoDB</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Messaging</span></td>
+              <td style="padding: 8px;"><span class="tech">SQS, SNS</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Security</span></td>
+              <td style="padding: 8px;"><span class="tech">IAM, Secrets Manager, KMS</span></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 8px;"><span class="kw">Monitoring</span></td>
+              <td style="padding: 8px;"><span class="tech">CloudWatch (Logs, Metrics, Alarms)</span></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px;"><span class="kw">DevOps / IaC</span></td>
+              <td style="padding: 8px;"><span class="tech">CloudFormation, CodePipeline, GitHub Actions</span></td>
+            </tr>
+          </table>
+        </div>
+        
+        <div class="company-box">
+          <h4>Spring Boot Components I Implemented</h4>
+          <ul>
+            <li><span class="tech">Spring Web</span> - RESTful API endpoints with proper validation</li>
+            <li><span class="tech">Spring Data JPA</span> - Database access with Hibernate ORM</li>
+            <li><span class="tech">Spring Security</span> - JWT authentication, OAuth2, RBAC</li>
+            <li><span class="tech">Spring Cloud AWS</span> - Integration with AWS services (S3, SQS, SNS)</li>
+            <li><span class="tech">Spring Actuator</span> - Health checks, metrics, monitoring endpoints</li>
+            <li><span class="tech">Spring Validation</span> - Input validation with custom validators</li>
+            <li><span class="tech">Spring Cache</span> - Caching layer with Redis/ElastiCache</li>
+          </ul>
+        </div>
+        
+        <div class="question">
+          <h4>Script - Why Sonar</h4>
+          <div class="script">
+            <p>What excites me about Sonar is your mission to help developers <span class="hl">build better, faster</span>.</p>
+            
+            <p>As someone who teaches <span class="kw">code quality practices</span> to students, I deeply understand the value of catching issues <span class="kw">at the source</span>.</p>
+            
+            <p>I've used <span class="tech">SonarQube</span> in my projects and I've seen how it helps catch issues early.</p>
+            
+            <p>I'm also very interested in how Sonar integrates with <span class="tech">AI-generated code</span>.</p>
+            
+            <p>With AI assistants generating more code, having tools to analyze <span class="kw">all code regardless of origin</span> is critical.</p>
+            
+            <p>I want to be part of shaping that future.</p>
+          </div>
+        </div>
+        
+        <div class="company-box">
+          <h4>Quick Facts Card</h4>
+          <ul>
+            <li><strong>Name:</strong> <span class="kw">Haythem Rehouma</span></li>
+            <li><strong>Citizenship:</strong> <span class="hl">Canadian</span></li>
+            <li><strong>Location:</strong> Montreal, Quebec, Canada</li>
+            <li><strong>Total Experience:</strong> <span class="kw">18 years</span></li>
+            <li><strong>Canadian Experience:</strong> <span class="kw">11 years</span></li>
+            <li><strong>Languages:</strong> English (Fluent) | French (Fluent) | Arabic (Native)</li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>Academic Credentials</h4>
+          <ul>
+            <li><span class="tech">Ph.D. in Applied Engineering</span> - École de technologie supérieure (ÉTS), Montreal</li>
+            <li><span class="tech">M.Sc. in Computer Science, AI Concentration</span> - UQAM, Montreal</li>
+            <li><span class="tech">M.Sc. in Communication Systems</span> - ENIT, Tunisia</li>
+            <li><span class="tech">B.Eng. in Telecommunications Engineering</span> (Network Security) - ENIT, Tunisia</li>
+            <li><span class="tech">Certificate in Machine Learning Methods</span> - UC San Diego</li>
+          </ul>
+        </div>
+        
+        <div class="company-box">
+          <h4>Key Certifications</h4>
+          <ul>
+            <li><span class="hl">AWS Certified Solutions Architect – Professional</span></li>
+            <li><span class="hl">AWS Certified DevOps Engineer – Professional</span></li>
+            <li>AWS Certified Developer – Associate</li>
+            <li>AWS Certified Solutions Architect – Associate</li>
+            <li><span class="kw">AWS-Authorized Instructor</span> (AWS re/Start)</li>
+            <li>Deep Learning Specialization (DeepLearning.AI / Andrew Ng)</li>
+            <li>Machine Learning (Stanford / Andrew Ng)</li>
+            <li>Microsoft Certified Solutions Developer (MCSD)</li>
+            <li>Cisco Certified Specialist – Network Security VPN</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Why Sonar -->
+      <section id="why-sonar">
+        <h2>Why Sonar?</h2>
+        
+        <div class="question">
+          <h4>Script</h4>
+          <div class="script">
+            <p>There are <span class="kw">four main reasons</span> why I want to join Sonar.</p>
+            
+            <p><span class="hl">First</span>, I believe in your mission to <span class="kw">genuinely change the development world</span>.</p>
+            
+            <p>Code quality and security are fundamental to software development.</p>
+            
+            <p>I've used SonarQube in my projects and I've seen how it helps catch issues early.</p>
+            
+            <p>As a teacher, I always tell my students: <span class="kw">"Fix issues at the source, not in production."</span></p>
+            
+            <p><span class="hl">Second</span>, your core values align with mine.</p>
+            
+            <p>I strongly believe in <span class="kw">Smarter Together</span> - collective intelligence and teamwork.</p>
+            
+            <p>I value <span class="kw">Excellence</span> - digging into root causes and challenging the status quo.</p>
+            
+            <p>I embrace <span class="kw">Innovation</span> - thinking outside the box and taking calculated risks.</p>
+            
+            <p>And I'm committed to <span class="kw">Delivery</span> - incremental steps and continuous improvement.</p>
+            
+            <p><span class="hl">Third</span>, your technology stack aligns perfectly with my expertise.</p>
+            
+            <p>I work daily with <span class="tech">Java, Spring Boot, React</span>, and <span class="tech">AWS</span>.</p>
+            
+            <p>I love building scalable systems and helping large enterprise customers succeed.</p>
+            
+            <p><span class="hl">Fourth</span>, I'm excited about the AI integration aspect.</p>
+            
+            <p>With AI assistants generating more code, having tools to analyze <span class="kw">all code regardless of origin</span> is critical.</p>
+            
+            <p>I want to be part of shaping that future.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Why Should We Hire You -->
+      <section id="why-you">
+        <h2>Why Should We Hire You?</h2>
+        
+        <div class="question">
+          <h4>Script</h4>
+          <div class="script">
+            <p>I bring a <span class="kw">unique combination</span> of skills that match what you're looking for.</p>
+            
+            <p><span class="hl">Technical depth</span>: I have extensive experience with Java, Spring Boot, and React.</p>
+            
+            <p>I've built production systems that serve real users with <span class="kw">real-time requirements</span>.</p>
+            
+            <p><span class="hl">Cloud expertise</span>: I'm <span class="tech">AWS certified at the Professional level</span> for both Solutions Architect and DevOps.</p>
+            
+            <p>I'm also an <span class="kw">AWS-Authorized Instructor</span> delivering the official AWS re/Start program.</p>
+            
+            <p>This certification is <span class="hl">only given to qualified professionals</span> validated by AWS.</p>
+            
+            <p>I can architect and deploy cloud-native applications.</p>
+            
+            <p><span class="hl">Leadership experience</span>: As a senior instructor and researcher, I mentor teams and drive projects to completion.</p>
+            
+            <p>I have strong ownership and I help others grow.</p>
+            
+            <p><span class="hl">Code quality mindset</span>: I teach testing practices, code reviews, and clean architecture.</p>
+            
+            <p>This aligns directly with Sonar's mission.</p>
+            
+            <p>Finally, I'm <span class="kw">passionate about continuous improvement</span> and I thrive in fast-moving environments.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Java Questions -->
+      <section id="java">
+        <h2>Java Technical Questions</h2>
+        
+        <div class="question">
+          <h4>Q: Tell me about your Java experience.</h4>
+          <div class="script">
+            <p>I've been working with <span class="tech">Java</span> for over <span class="kw">10 years</span>.</p>
+            
+            <p>Most recently, I build backend services using <span class="tech">Spring Boot</span> and <span class="tech">Spring Data JPA</span>.</p>
+            
+            <p>I design <span class="kw">RESTful APIs</span> following clean architecture principles.</p>
+            
+            <p>I use <span class="tech">Hibernate</span> for ORM and optimize SQL queries for performance.</p>
+            
+            <p>I write unit tests with <span class="tech">JUnit</span> and <span class="tech">Mockito</span>.</p>
+            
+            <p>I also use integration tests with <span class="tech">Testcontainers</span> for database testing.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you ensure code quality in Java projects?</h4>
+          <div class="script">
+            <p>I follow several practices to maintain <span class="kw">high code quality</span>.</p>
+            
+            <p><span class="hl">First</span>, I write <span class="tech">unit tests</span> for all business logic with good coverage.</p>
+            
+            <p><span class="hl">Second</span>, I use <span class="tech">SonarQube</span> to detect bugs, vulnerabilities, and code smells.</p>
+            
+            <p><span class="hl">Third</span>, I do thorough <span class="kw">code reviews</span> and provide constructive feedback.</p>
+            
+            <p><span class="hl">Fourth</span>, I follow <span class="tech">SOLID principles</span> and design patterns.</p>
+            
+            <p>I also use <span class="tech">Maven</span> for dependency management and build automation.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: Describe your experience with Spring Boot.</h4>
+          <div class="script">
+            <p>I use <span class="tech">Spring Boot</span> daily for building microservices.</p>
+            
+            <p>I configure <span class="tech">Spring Web</span> for REST endpoints with proper validation.</p>
+            
+            <p>I use <span class="tech">Spring Data JPA</span> for database access with custom queries when needed.</p>
+            
+            <p>I implement <span class="tech">Spring Security</span> with JWT and OAuth2 for authentication.</p>
+            
+            <p>I use <span class="tech">Spring Actuator</span> for health checks and monitoring.</p>
+            
+            <p>I also work with <span class="tech">Spring Cloud</span> for service discovery and configuration.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- React Questions -->
+      <section id="react">
+        <h2>React / Frontend Questions</h2>
+        
+        <div class="question">
+          <h4>Q: Tell me about your React experience.</h4>
+          <div class="script">
+            <p>I've been working with <span class="tech">React</span> for over <span class="kw">3 years</span>.</p>
+            
+            <p>I build modern frontends using <span class="tech">TypeScript</span> for type safety.</p>
+            
+            <p>I use <span class="tech">functional components</span> with hooks like useState, useEffect, and custom hooks.</p>
+            
+            <p>I manage state with <span class="tech">Redux</span> or <span class="tech">Context API</span> depending on complexity.</p>
+            
+            <p>I write component tests with <span class="tech">Jest</span> and <span class="tech">React Testing Library</span>.</p>
+            
+            <p>I follow <span class="kw">responsive design</span> principles for mobile-friendly UIs.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you handle API integration in React?</h4>
+          <div class="script">
+            <p>I use <span class="tech">Axios</span> or <span class="tech">Fetch API</span> for HTTP requests.</p>
+            
+            <p>I create <span class="kw">custom hooks</span> to encapsulate API logic and handle loading states.</p>
+            
+            <p>I implement <span class="kw">error handling</span> with proper user feedback.</p>
+            
+            <p>For complex data fetching, I use <span class="tech">React Query</span> for caching and synchronization.</p>
+            
+            <p>I ensure <span class="kw">type safety</span> with TypeScript interfaces for API responses.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- AWS Questions -->
+      <section id="aws">
+        <h2>AWS / Cloud Architecture Questions</h2>
+        
+        <div class="question">
+          <h4>Q: Describe your AWS experience.</h4>
+          <div class="script">
+            <p>I'm <span class="tech">AWS certified</span> at the Professional level for both <span class="kw">Solutions Architect</span> and <span class="kw">DevOps Engineer</span>.</p>
+            
+            <p>But more importantly, I'm an <span class="kw">AWS-Authorized Instructor</span>.</p>
+            
+            <p>I deliver the official <span class="tech">AWS re/Start program</span> at Collège de Bois-de-Boulogne.</p>
+            
+            <p>This is a <span class="hl">restricted certification</span> that only qualified professionals can obtain from AWS.</p>
+            
+            <p>It means AWS has validated my expertise to teach their official curriculum.</p>
+            
+            <p>I design and deploy cloud-native applications on AWS.</p>
+            
+            <p>I use <span class="tech">EC2</span> for compute, <span class="tech">S3</span> for storage, and <span class="tech">RDS</span> for databases.</p>
+            
+            <p>I implement serverless solutions with <span class="tech">Lambda</span> and <span class="tech">API Gateway</span>.</p>
+            
+            <p>I set up <span class="tech">CI/CD pipelines</span> with GitHub Actions deploying to AWS.</p>
+            
+            <p>I also work with <span class="tech">Docker</span> and <span class="tech">Kubernetes</span> for containerized deployments.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How would you architect a cloud-native application?</h4>
+          <div class="script">
+            <p>I follow <span class="kw">microservices architecture</span> for scalability.</p>
+            
+            <p>Each service has its own <span class="tech">database</span> following the database-per-service pattern.</p>
+            
+            <p>I use <span class="tech">API Gateway</span> for routing and authentication.</p>
+            
+            <p>Services communicate via <span class="tech">REST APIs</span> or <span class="tech">message queues</span> like Kafka or RabbitMQ.</p>
+            
+            <p>I implement <span class="kw">observability</span> with logging, monitoring, and tracing.</p>
+            
+            <p>I design for <span class="kw">high availability</span> with multiple availability zones.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Code Quality Questions -->
+      <section id="code-quality">
+        <h2>Code Quality Questions</h2>
+        
+        <div class="question">
+          <h4>Q: How do you approach code quality in your projects?</h4>
+          <div class="script">
+            <p>Code quality is <span class="kw">fundamental</span> to sustainable software development.</p>
+            
+            <p>I use <span class="tech">static analysis tools</span> like SonarQube to detect issues early.</p>
+            
+            <p>I write <span class="kw">comprehensive tests</span>: unit tests, integration tests, and end-to-end tests.</p>
+            
+            <p>I enforce <span class="kw">code review practices</span> where every change is reviewed before merging.</p>
+            
+            <p>I follow <span class="tech">clean code principles</span>: meaningful names, small functions, single responsibility.</p>
+            
+            <p>I also maintain <span class="kw">technical documentation</span> for complex systems.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you handle code reviews?</h4>
+          <div class="script">
+            <p>I see code reviews as a <span class="kw">learning opportunity</span> for everyone involved.</p>
+            
+            <p>When <span class="hl">reviewing</span>, I focus on: correctness, readability, performance, and security.</p>
+            
+            <p>I provide <span class="kw">constructive feedback</span> with explanations, not just criticisms.</p>
+            
+            <p>I suggest improvements and share knowledge.</p>
+            
+            <p>When <span class="hl">receiving</span> feedback, I stay open-minded and learn from suggestions.</p>
+            
+            <p>I believe code reviews improve both the code and the team's skills.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Staff Engineer Questions -->
+      <section id="staff">
+        <h2>Staff Engineer / Leadership Questions</h2>
+        
+        <div class="question">
+          <h4>Q: Describe your experience as a Staff Engineer or team lead.</h4>
+          <div class="script">
+            <p>I've led technical teams in both <span class="kw">academic and industry</span> settings.</p>
+            
+            <p>I take <span class="hl">strong ownership</span> of the team's work and drive sprints to completion.</p>
+            
+            <p>I <span class="kw">mentor engineers</span> to help them grow in their technical responsibilities.</p>
+            
+            <p>I work with Product Managers and UX designers to <span class="kw">specify features</span>.</p>
+            
+            <p>I lead the <span class="tech">architecture definition</span> of our applications.</p>
+            
+            <p>I <span class="kw">remove blockers</span> to enable team autonomy and productivity.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you mentor junior engineers?</h4>
+          <div class="script">
+            <p>I take a <span class="kw">structured approach</span> to mentorship.</p>
+            
+            <p>I start by understanding their <span class="hl">current skill level</span> and goals.</p>
+            
+            <p>I assign tasks that <span class="kw">challenge but don't overwhelm</span> them.</p>
+            
+            <p>I provide <span class="kw">regular feedback</span> through code reviews and one-on-ones.</p>
+            
+            <p>I encourage them to <span class="hl">ask questions</span> and explain my reasoning.</p>
+            
+            <p>I share resources and guide them toward <span class="kw">continuous learning</span>.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Experimentation Questions -->
+      <section id="experimentation">
+        <h2>Experimentation Questions</h2>
+        
+        <div class="question">
+          <h4>Q: Describe your experience with experimentation and A/B testing.</h4>
+          <div class="script">
+            <p>I have experience with <span class="kw">experimentation</span> from my research background.</p>
+            
+            <p>In my projects, I implement <span class="tech">feature flags</span> to enable gradual rollouts.</p>
+            
+            <p>I design experiments with <span class="kw">clear hypotheses</span> and success metrics.</p>
+            
+            <p>I track results using <span class="tech">analytics tools</span> and monitoring dashboards.</p>
+            
+            <p>I make <span class="kw">data-driven decisions</span> based on experiment outcomes.</p>
+            
+            <p>I understand the importance of <span class="kw">statistical significance</span> before drawing conclusions.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you handle fast-evolving environments with prototyping?</h4>
+          <div class="script">
+            <p>I'm comfortable working in <span class="kw">fast-paced environments</span>.</p>
+            
+            <p>I use <span class="tech">rapid prototyping</span> to validate ideas quickly.</p>
+            
+            <p>I balance <span class="kw">speed with quality</span>: quick iterations but clean code.</p>
+            
+            <p>I communicate clearly about <span class="hl">trade-offs</span> between speed and technical debt.</p>
+            
+            <p>I use <span class="tech">CI/CD pipelines</span> to deploy changes frequently and safely.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Behavioral Questions -->
+      <section id="behavioral">
+        <h2>Behavioral Questions</h2>
+        
+        <div class="question">
+          <h4>Q: Tell me about a challenging project you worked on.</h4>
+          <div class="script">
+            <p>During my Ph.D., I built a <span class="kw">real-time respiratory monitoring system</span> for pediatric ICU.</p>
+            
+            <p>The challenge was integrating <span class="tech">multiple depth sensors</span> with ML models.</p>
+            
+            <p>I designed <span class="tech">Java backend services</span> for data ingestion and real-time processing.</p>
+            
+            <p>I built <span class="tech">REST APIs</span> for clinician dashboards to display respiratory metrics.</p>
+            
+            <p>The system was deployed in <span class="kw">clinical settings</span> for multi-day evaluation.</p>
+            
+            <p>This work resulted in publications and a <span class="hl">US patent application</span>.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you handle production issues?</h4>
+          <div class="script">
+            <p>I follow a <span class="kw">structured approach</span> to incident response.</p>
+            
+            <p><span class="hl">First</span>, I assess the impact and communicate with stakeholders.</p>
+            
+            <p><span class="hl">Second</span>, I investigate using <span class="tech">logs, monitoring, and metrics</span>.</p>
+            
+            <p><span class="hl">Third</span>, I implement a fix or rollback if needed.</p>
+            
+            <p><span class="hl">Fourth</span>, I conduct a <span class="kw">post-mortem</span> to prevent future occurrences.</p>
+            
+            <p>I document everything and improve our monitoring based on learnings.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: How do you stay updated with new technologies?</h4>
+          <div class="script">
+            <p>I have a <span class="kw">growth mindset</span> and love continuous learning.</p>
+            
+            <p>I follow <span class="tech">tech blogs</span>, podcasts, and official documentation.</p>
+            
+            <p>I take <span class="tech">online courses</span> and earn certifications.</p>
+            
+            <p>I build <span class="kw">side projects</span> to experiment with new technologies.</p>
+            
+            <p>As an instructor, I stay updated to teach the latest practices.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Career Goals -->
+      <section id="goals">
+        <h2>Career Goals</h2>
+        
+        <div class="question">
+          <h4>Q: What are your career goals?</h4>
+          <div class="script">
+            <p>My goal is to grow as a <span class="kw">technical leader</span> in software engineering.</p>
+            
+            <p>I want to work on <span class="hl">products that impact millions of developers</span>.</p>
+            
+            <p>Sonar's mission aligns perfectly with this goal.</p>
+            
+            <p>In the <span class="kw">short term</span>, I want to contribute to building great features for enterprise customers.</p>
+            
+            <p>In the <span class="kw">long term</span>, I want to lead technical initiatives and shape product direction.</p>
+            
+            <p>I also want to continue <span class="kw">mentoring</span> and helping engineers grow.</p>
+          </div>
+        </div>
+        
+        <div class="question">
+          <h4>Q: Why are you looking for a new opportunity?</h4>
+          <div class="script">
+            <p>I'm looking for a role where I can have <span class="kw">high impact</span> on a product I believe in.</p>
+            
+            <p>Sonar's mission resonates deeply with my experience teaching <span class="hl">code quality</span>.</p>
+            
+            <p>I want to work with a <span class="kw">world-class team</span> on challenging technical problems.</p>
+            
+            <p>The opportunity to work on features for <span class="kw">large enterprise customers</span> excites me.</p>
+            
+            <p>I'm also attracted to Sonar's <span class="hl">CODE culture</span> and commitment to excellence.</p>
+          </div>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+      <!-- Questions to Ask -->
+      <section id="questions-to-ask">
+        <h2>Questions to Ask Them</h2>
+        
+        <div class="highlight-box">
+          <p><strong>About the Role:</strong></p>
+          <ul>
+            <li>Can you tell me more about the <span class="kw">Storefront team</span> and the features you're building for enterprise customers?</li>
+            <li>What does a <span class="kw">typical day</span> look like for a Senior Full Stack Engineer at Sonar?</li>
+            <li>What are the <span class="kw">biggest technical challenges</span> the team is currently facing?</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          <p><strong>About the Team:</strong></p>
+          <ul>
+            <li>How is the team <span class="kw">structured</span>? How many engineers, PMs, designers?</li>
+            <li>How do you balance <span class="kw">feature development vs technical debt</span>?</li>
+            <li>What's the <span class="kw">code review process</span> like at Sonar?</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          <p><strong>About Growth:</strong></p>
+          <ul>
+            <li>How does Sonar support <span class="kw">professional development</span> and continuous learning?</li>
+            <li>What are the <span class="kw">growth paths</span> for senior engineers at Sonar?</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          <p><strong>About Culture:</strong></p>
+          <ul>
+            <li>How does the <span class="kw">CODE culture</span> manifest in day-to-day work?</li>
+            <li>Can you share an example of how the team handles <span class="kw">experimentation</span>?</li>
+            <li>What do you personally enjoy most about working at Sonar?</li>
+          </ul>
+        </div>
+        
+        <div class="highlight-box">
+          <p><strong>About Next Steps:</strong></p>
+          <ul>
+            <li>What are the <span class="kw">next steps</span> in the interview process?</li>
+            <li>Is there anything about my background you'd like me to <span class="kw">clarify</span>?</li>
+          </ul>
+        </div>
+        
+        <div class="back"><a class="pill" href="#top">Back to top</a></div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Floating back to top button -->
+  <div class="topbtn" id="topbtn">
+    <button type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Top</button>
+  </div>
+
+  <script>
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('nav a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
