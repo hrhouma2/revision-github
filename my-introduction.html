@@ -378,7 +378,7 @@
         <div class="script">
           <p>I was working on a <span class="hl">platform built with Java and Spring Boot</span>. Some pages were only for <span class="kw">paying users</span>. If you didn't pay, the system should block you and say "access denied".</p>
           <p>During testing, I noticed something wrong. I was able to <span class="hl">access a paid page without paying</span>. The door was supposed to be locked, but it let me in. That was a <span class="kw">security problem</span>.</p>
-          <p>I looked into it and found that the <span class="hl">security check was missing</span> on that specific page. Most pages were protected, but this one was added later and nobody set up the lock for it.</p>
+          <p>I looked into it and found that the <span class="hl">protection was only on the client side</span>. It was easy to bypass — anyone with basic knowledge could skip it and access the paid content. The real security check on the server side was missing for that page.</p>
           <p>I <span class="kw">fixed it right away</span>. I added the security check, made sure unpaid users are now blocked, and verified all other paid pages to make sure nothing else was open.</p>
           <p>I also added <span class="hl">automatic checks</span> — so every time someone adds a new paid page, the system will verify it is properly protected. This way, the same mistake cannot happen again.</p>
           <p><span class="kw">No user was impacted</span> because I caught it before it went live.</p>
