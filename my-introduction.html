@@ -376,12 +376,12 @@
       <section id="bonus3">
         <h2>Bonus 3 — A Time I Introduced a Bug</h2>
         <div class="script">
-          <p>I was working on a <span class="hl">Geneva-based project</span>. We had an API with some endpoints that required a <span class="kw">paid subscription</span> to access. If a user didn't pay, they should get a <span class="kw">403 Forbidden</span> response.</p>
-          <p>During testing, I noticed something wrong. I was able to <span class="hl">access a protected endpoint without paying</span>. The endpoint was supposed to be blocked, but it let me through. That was a <span class="kw">security bug</span>.</p>
-          <p>I looked into it and found that the <span class="hl">authorization check was missing</span> on that specific route. The middleware was applied to most endpoints, but this one was added later and the security filter was not configured for it.</p>
-          <p>I <span class="kw">fixed it right away</span>. I added the proper authorization check, verified that unpaid users now get a <span class="kw">403</span>, and tested all other protected endpoints to make sure nothing else was exposed.</p>
-          <p>I also added <span class="hl">automated tests</span> — for every protected endpoint, a test tries to access it without a valid subscription and expects a 403. This way, if someone adds a new endpoint in the future, the test will catch it.</p>
-          <p><span class="kw">No user was impacted</span> because I caught it before production.</p>
+          <p>I was working on a <span class="hl">platform built with Java and Spring Boot</span>. Some pages were only for <span class="kw">paying users</span>. If you didn't pay, the system should block you and say "access denied".</p>
+          <p>During testing, I noticed something wrong. I was able to <span class="hl">access a paid page without paying</span>. The door was supposed to be locked, but it let me in. That was a <span class="kw">security problem</span>.</p>
+          <p>I looked into it and found that the <span class="hl">security check was missing</span> on that specific page. Most pages were protected, but this one was added later and nobody set up the lock for it.</p>
+          <p>I <span class="kw">fixed it right away</span>. I added the security check, made sure unpaid users are now blocked, and verified all other paid pages to make sure nothing else was open.</p>
+          <p>I also added <span class="hl">automatic checks</span> — so every time someone adds a new paid page, the system will verify it is properly protected. This way, the same mistake cannot happen again.</p>
+          <p><span class="kw">No user was impacted</span> because I caught it before it went live.</p>
           <p>What I learned: <span class="hl">bugs happen</span>, but what defines a senior engineer is how quickly you respond, how honestly you communicate, and what systems you put in place so it doesn't happen again.</p>
         </div>
       </section>
