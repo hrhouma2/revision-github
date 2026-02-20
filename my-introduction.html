@@ -199,6 +199,9 @@
         <li><a href="#sonar-impression">11. Why Sonar Impresses Me</a></li>
         <li><a href="#closing">12. Closing</a></li>
         <li><a href="#bonus1">Bonus 1 — Disagreement</a></li>
+        <li><a href="#bonus2">Bonus 2 — Colleague Concern</a></li>
+        <li><a href="#bonus3">Bonus 3 — I Introduced a Bug</a></li>
+        <li><a href="#bonus4">Bonus 4 — Challenging Situation</a></li>
       </ul>
       <div class="home-link">
         <a href="index.html">Back to Home</a>
@@ -354,6 +357,50 @@
           <p>I <span class="hl">acknowledged their perspective</span>, and we <span class="kw">adjusted the wording together</span>. Instead of insisting I was right, I focused on what would produce the best outcome for the team and the client.</p>
           <p>The final version had a <span class="hl">much better impact</span>. The client responded positively, and the communication was clearer for everyone. It was a good reminder that <span class="kw">collaboration</span> always leads to better results than working in isolation.</p>
           <p>What I learned from this experience is that <span class="kw">being open to feedback</span> is not a weakness — it's a strength. When we combine different perspectives, the result is always stronger.</p>
+        </div>
+      </section>
+
+      <!-- Bonus 2 -->
+      <section id="bonus2">
+        <h2>Bonus 2 — A Colleague Raised a Concern About My Work</h2>
+        <div class="script">
+          <p>During a project at the college where I teach, I was building a <span class="hl">student enrollment module</span> using Spring Boot. I designed the database queries to fetch all student records at once and filter them in Java. I thought it was clean and simple.</p>
+          <p>A colleague reviewed my pull request and <span class="kw">raised a concern</span>. He said that while the code worked fine with our current 200 students, it would become a serious performance problem if the system scaled to thousands of records. He suggested I move the filtering to the database level using indexed queries and pagination.</p>
+          <p>At first, I felt a bit defensive — I had spent time on that approach and it passed all tests. But I took a step back and <span class="hl">really listened</span> to what he was saying. He wasn't criticizing my work — he was thinking about the long-term health of the system.</p>
+          <p>So I set up a meeting with him. We <span class="kw">ran some benchmarks together</span> — my approach took about 3 seconds with a larger dataset, while the database-level filtering took around 200 milliseconds. The numbers spoke for themselves.</p>
+          <p>I <span class="hl">refactored the code</span> to use proper SQL queries with pagination, added appropriate indexes, and updated the tests. I also added a comment in the code explaining why we chose this approach, so future developers would understand the reasoning.</p>
+          <p>The result was much better — <span class="kw">faster, scalable, and cleaner</span>. We turned this into a team guideline: always push filtering to the database when possible. My colleague and I actually became closer after this — he appreciated that I listened, and I appreciated that he cared enough to raise the concern.</p>
+          <p>What I took away is that <span class="hl">code review is not about ego</span> — it's about building the best possible product together. A good engineer welcomes feedback because it makes the code better.</p>
+        </div>
+      </section>
+
+      <!-- Bonus 3 -->
+      <section id="bonus3">
+        <h2>Bonus 3 — A Time I Introduced a Bug</h2>
+        <div class="script">
+          <p>This happened during a project where I was building a <span class="hl">grade calculation module</span> for a college platform. The system needed to compute final grades based on weighted averages — assignments, midterms, and finals each had different weights.</p>
+          <p>I wrote the logic, tested it with several cases, and it all looked correct. I deployed it on a Friday afternoon — which, in hindsight, was my first mistake. <span class="kw">Never deploy on a Friday</span>.</p>
+          <p>On Monday morning, I received messages from colleagues saying that <span class="hl">some students' grades were wrong</span>. Specifically, students who had a zero on one component were getting inflated final grades. The bug was subtle — I was dividing by the number of submitted assignments instead of the total number of assignments, so missing work wasn't penalized correctly.</p>
+          <p>I immediately took <span class="kw">ownership</span>. I didn't wait for someone to assign it to me — I told the team I would fix it. First, I <span class="hl">rolled back</span> to the previous version so no more incorrect grades would be generated. Then I traced the root cause by writing additional test cases specifically for edge cases: zero scores, missing submissions, and partial completions.</p>
+          <p>I found the exact line where the error was — the denominator in my weighted average formula. I fixed it, added <span class="kw">15 new unit tests</span> covering all the edge cases I had missed, and added a validation layer that flagged any grade calculation that differed significantly from the expected range.</p>
+          <p>I also wrote a short <span class="hl">post-mortem document</span> for the team explaining what happened, why it happened, and what we changed to prevent it. I proposed a new rule: no deployments on Fridays, and all grade-related changes require a second pair of eyes before merging.</p>
+          <p>The fix was deployed on Monday afternoon, all affected grades were recalculated, and <span class="kw">zero students were impacted</span> because the grades hadn't been officially released yet. The team appreciated the transparency, and our testing process became stronger because of it.</p>
+          <p>What I learned: <span class="hl">bugs happen</span>, but what defines a senior engineer is how quickly you respond, how honestly you communicate, and what systems you put in place so it doesn't happen again.</p>
+        </div>
+      </section>
+
+      <!-- Bonus 4 -->
+      <section id="bonus4">
+        <h2>Bonus 4 — A Challenging Situation I Managed</h2>
+        <div class="script">
+          <p>One of the most challenging situations I faced was during a semester where I was simultaneously <span class="hl">teaching three courses</span>, developing course material for a new AWS curriculum, and building an internal tool for student progress tracking.</p>
+          <p>Midway through the semester, the college asked me to <span class="kw">completely redesign one of the courses</span> because the industry partner wanted to shift the focus from on-premises infrastructure to cloud-native development. The deadline was tight — I had four weeks to rebuild 12 weeks of content while still teaching the other two courses.</p>
+          <p>I felt overwhelmed at first. The scope was enormous, and I couldn't just drop my other responsibilities. But I took a breath and <span class="hl">broke the problem down</span> into manageable pieces.</p>
+          <p>First, I <span class="kw">prioritized ruthlessly</span>. I identified which parts of the old curriculum could be adapted versus which needed to be built from scratch. About 40% could be adapted, which saved significant time. For the remaining 60%, I created a week-by-week plan with specific deliverables.</p>
+          <p>Second, I <span class="kw">communicated transparently</span> with my department head. I explained the workload and proposed a realistic timeline. I asked for a teaching assistant to help with grading for my other courses, which freed up about 10 hours per week for curriculum development.</p>
+          <p>Third, I <span class="kw">leveraged my network</span>. I reached out to two colleagues who had AWS experience and asked them to review my new labs and exercises. Their feedback helped me improve the quality without spending extra time on trial and error.</p>
+          <p>I worked evenings and weekends for those four weeks, but I <span class="hl">delivered everything on time</span>. The new curriculum received excellent feedback from students — they loved the hands-on AWS labs. The industry partner was impressed with the depth of the content. And my other two courses continued running smoothly because I had planned ahead.</p>
+          <p>What I took away from this experience: when facing a challenging situation, the key is to <span class="hl">stay calm, break it down, communicate early, and ask for help</span> when you need it. No one succeeds alone, and being honest about your limits is a sign of maturity, not weakness.</p>
         </div>
       </section>
 
